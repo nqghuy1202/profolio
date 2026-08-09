@@ -9,37 +9,28 @@
     "projects": "Dự án",
     "about": "Giới thiệu",
     "contact": "Liên hệ",
-    "downloadCv": "Tải CV",
+    "downloadCv": "CV",
     "mainNavigation": "Điều hướng chính",
-    "openMenu": "Mở menu",
-    "closeMenu": "Đóng menu",
-    "switchLanguage": "Đổi ngôn ngữ"
+    "switchLanguage": "Đổi ngôn ngữ",
+    "menu": "Menu",
+    "close": "Đóng"
   },
   "hero": {
     "role": "Full Stack Developer",
-    "intro": "Full Stack Developer với hai năm kinh nghiệm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Mạnh nhất ở tầng database — thiết kế dữ liệu, xử lý nghiệp vụ bằng PL/SQL và tối ưu truy vấn — và tự viết tay phần JavaScript phía trình duyệt.",
+    "intro": "Hai năm kinh nghiệm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Mạnh nhất ở tầng database — thiết kế dữ liệu, xử lý nghiệp vụ bằng PL/SQL và tối ưu truy vấn — và tự viết tay phần JavaScript phía trình duyệt.",
     "ctaWork": "Xem dự án",
     "ctaContact": "Liên hệ",
-    "highlights": [
-      "Oracle · PL/SQL",
-      "Node.js · React",
-      "Tích hợp hệ thống"
+    "meta": [
+      { "label": "Kinh nghiệm", "value": "2 năm, từ 07/2024" },
+      {
+        "label": "Trọng tâm",
+        "value": "Hệ thống ERP · tích hợp hệ thống · dữ liệu thời gian thực"
+      },
+      { "label": "Công nghệ chính", "value": "Oracle · PL/SQL · Node.js · React" }
     ]
   },
-  "skills": {
-    "title": "Kỹ năng",
-    "lead": "Chia theo tầng. Mọi thứ liệt kê ở đây đều đã dùng trong một hệ thống chạy thật.",
-    "groups": {
-      "languages": "Ngôn ngữ",
-      "frontend": "Frontend",
-      "backend": "Backend & Nền tảng",
-      "databases": "Cơ sở dữ liệu",
-      "ai": "AI & Machine Learning",
-      "ops": "Công cụ & Vận hành"
-    }
-  },
-  "projects": {
-    "title": "Dự án",
+  "work": {
+    "title": "Dự án tiêu biểu",
     "lead": "Phần lớn công việc dưới đây làm trong công ty hoặc cho khách hàng của công ty, nên mã nguồn không công khai. Những dự án đó có sơ đồ kiến trúc thay cho link repo — dự án mã nguồn mở là nơi bạn đọc được code.",
     "layers": {
       "frontend": "Frontend",
@@ -60,108 +51,17 @@
       "live": "Vẫn đang được dùng"
     },
     "labels": {
-      "sourceNotPublic": "Không công khai mã nguồn",
+      "overview": "Tổng quan",
+      "results": "Kết quả",
+      "responsibilities": "Việc tôi làm",
+      "stack": "Công nghệ",
+      "sourceNotPublic": "Không công khai mã nguồn — code của công ty và khách hàng",
       "viewRepo": "Xem mã nguồn",
       "viewDemo": "Xem demo",
-      "responsibilities": "Việc tôi làm",
-      "results": "Kết quả",
-      "stack": "Công nghệ"
-    },
-    "items": {
-      "chat": {
-        "title": "Hệ thống chat thời gian thực cho ERP",
-        "context": "Gia Cát Technology Solutions · sản phẩm nội bộ · lập trình viên duy nhất",
-        "description": "Tầng chat thời gian thực dựng thẳng vào nền tảng ERP, phủ bốn loại hội thoại: cá nhân, nhóm, hội thoại gắn vào từng chứng từ ERP, và kênh thừa hưởng nhóm quyền có sẵn của ERP. Hai loại sau là thứ một ứng dụng chat có sẵn không làm được — hội thoại sống ngay trên một phiếu mua hàng, và quyền truy cập chạy theo dữ liệu phân quyền hệ thống đã có.",
-        "responsibilities": [
-          "Thiết kế kiến trúc và xây toàn bộ các tầng: backend Node.js, đẩy tin nhắn thời gian thực bằng SSE, và tầng dữ liệu PL/SQL",
-          "Tự viết tay client chat trên trình duyệt bằng JavaScript, đọc luồng sự kiện SSE và render tin nhắn đến mà không tải lại trang",
-          "Tích hợp Oracle CQN với thiết kế registry nhiều database để bắt thay đổi ở mức dòng và phát thông báo đi",
-          "Thiết kế đường tích hợp APEX ↔ Node qua AJAX callback PL/SQL và UTL_HTTP kèm xác thực bằng token, giữ server nội bộ nằm ngoài mạng công cộng",
-          "Phụ trách triển khai và vận hành production bằng PM2 cùng shell script start / stop tự viết",
-          "Viết script kiểm tra chạy bằng CLI phủ các REST endpoint, CQN callback, luồng SSE và registry kết nối"
-        ],
-        "metrics": [
-          "~1 tháng từ con số không tới production, một mình",
-          "20+ người dùng mỗi ngày",
-          "200+ tin nhắn mỗi ngày",
-          "Chạy production từ 08/2026"
-        ]
-      },
-      "heartRisk": {
-        "title": "Heart Risk Estimator",
-        "context": "Dự án cá nhân · lập trình viên duy nhất",
-        "description": "Công cụ sàng lọc nguy cơ bệnh tim. API Django dựng sao cho validation là đường duy nhất đi tới model, còn client React tự render từ schema do server gửi xuống — không hard-code tên field, khoảng giá trị hay lựa chọn nào ở phía trình duyệt.",
-        "responsibilities": [
-          "Huấn luyện mô hình AdaBoost trên tập UCI Heart Disease, đo lại với baseline một decision stump, và xuất mô hình bằng joblib",
-          "Xây API Django sao cho view bind JSON body vào form và chỉ đưa dữ liệu đã làm sạch tới classifier",
-          "Đưa định nghĩa form ra một schema endpoint rồi render client React từ chính schema đó",
-          "Viết giao diện bằng React và TypeScript, phủ bởi 15 test frontend cho render, submit, lỗi validation và xử lý focus",
-          "Giữ dữ liệu lâm sàng ra khỏi URL và log server bằng cách chỉ nhận POST body, kèm bảo vệ CSRF ở endpoint dự đoán"
-        ],
-        "metrics": [
-          "Accuracy 87,8%, recall 92,9% ở nhóm có bệnh",
-          "Tập test giữ riêng 205 bản ghi, cố định seed toàn bộ",
-          "Baseline một stump 74,6% — hơn 13,2 điểm phần trăm",
-          "15 test frontend (Vitest + React Testing Library)"
-        ]
-      },
-      "localAi": {
-        "title": "LLM self-hosted kèm tìm kiếm RAG",
-        "context": "Gia Cát Technology Solutions · sản phẩm nội bộ · lập trình viên duy nhất",
-        "description": "Mô hình ngôn ngữ chạy trên hạ tầng nội bộ không có GPU, kèm pipeline truy hồi trên chính kho tài liệu nghiệp vụ của công ty. Đang được vài nhóm ERP nội bộ dùng thử, chưa mở rộng toàn công ty.",
-        "responsibilities": [
-          "Cài đặt và cấu hình server LLM nội bộ, đánh giá ràng buộc phần cứng và inference trên hạ tầng không GPU",
-          "Chọn mô hình đã lượng tử hoá và tinh chỉnh tham số để inference chỉ bằng CPU dùng được",
-          "Xây pipeline RAG và kho tri thức tài liệu cho một chatbot nội bộ, kèm giao diện web gọn nhẹ dùng để đo tốc độ phản hồi và độ chính xác câu trả lời",
-          "So sánh phương án chạy trên cloud với chạy tại chỗ, rồi chọn tại chỗ theo ràng buộc hạ tầng"
-        ],
-        "metrics": [
-          "~50 token/giây trên phần cứng chỉ có CPU, đọc từ log server inference",
-          "20+ tài liệu nghiệp vụ nội bộ đã lập chỉ mục"
-        ]
-      },
-      "erpWarehouse": {
-        "title": "Phân hệ Kho & tích hợp hoá đơn ERP",
-        "context": "Gia Cát Technology Solutions · khách hàng ngành kế toán và kho vận · đội 6 người",
-        "description": "Tuỳ biến nền tảng ERP theo quy trình kho và kế toán của khách hàng, đồng thời nối nó với một dịch vụ hoá đơn bên ngoài theo cả hai chiều — kéo hoá đơn nhà cung cấp vào, và mở dữ liệu tồn kho cùng hoá đơn ra cho một phần mềm nội bộ khác đọc.",
-        "responsibilities": [
-          "Phụ trách phân hệ Kho và luồng chứng từ phải trả / phải thu",
-          "Xây tích hợp PL/SQL với API hoá đơn Bizzi qua UTL_HTTP để kéo dữ liệu hoá đơn về tự động",
-          "Tạo các ORDS REST endpoint mở dữ liệu hoá đơn và tồn kho cho một phần mềm nội bộ khác phía khách hàng",
-          "Ghi các lần gọi lỗi vào bảng log để xử lý lại"
-        ],
-        "metrics": [
-          "100+ hoá đơn nhà cung cấp mỗi tháng, không còn nhập tay",
-          "REST endpoint được một phần mềm nội bộ thứ hai gọi vào"
-        ]
-      },
-      "erpProduction": {
-        "title": "Phân hệ Sản xuất ERP",
-        "context": "Gia Cát Technology Solutions · khách hàng ngành sản xuất · lập trình viên chính",
-        "description": "Xây phân hệ Sản xuất từ đầu cho một hệ ERP ngành sản xuất và thiết kế lược đồ dữ liệu của nó từ yêu cầu khách hàng, sau đó làm tiếp trên phần còn lại của hệ thống để xử lý lỗi.",
-        "responsibilities": [
-          "Phát triển phân hệ Sản xuất trọn vẹn cả frontend lẫn backend, và thiết kế lược đồ database từ yêu cầu khách hàng",
-          "Phối hợp với BA để tuỳ biến các phân hệ có sẵn cho khớp quy trình nghiệp vụ của khách hàng",
-          "Sửa lỗi nghiệp vụ và lỗi code trên 10+ phân hệ có sẵn"
-        ],
-        "metrics": [
-          "Thay thế quy trình theo dõi sản xuất thủ công bằng Excel cho 10+ người dùng tại nhà máy",
-          "10+ báo cáo vận hành bàn giao cho xưởng sản xuất"
-        ]
-      },
-      "kpiSupplier": {
-        "title": "Phân hệ đánh giá KPI nhà cung cấp",
-        "context": "Gia Cát Technology Solutions · kỳ thực tập · khách hàng ngành xây dựng · đội 2 người",
-        "description": "Tiếp nhận một phân hệ đánh giá nhà cung cấp còn dang dở và đưa nó tới bản phát hành. Tiêu chí chấm điểm được khai báo trên một trang riêng thay vì hard-code, nên bộ phận nghiệp vụ đổi được thứ cần đo mà không phải sửa code.",
-        "responsibilities": [
-          "Tiếp nhận một phân hệ dang dở và đưa tới bản phát hành",
-          "Thiết kế và xây các trang mới cả frontend lẫn backend, và xử lý dứt điểm các lỗi còn tồn"
-        ],
-        "metrics": [
-          "5+ trang bàn giao, 20+ lỗi đã xử lý",
-          "500+ phiếu đánh giá đã ghi nhận, tới nay vẫn đang dùng"
-        ]
-      }
+      "allWork": "Tất cả dự án",
+      "nextProject": "Dự án tiếp theo",
+      "role": "Vai trò",
+      "type": "Loại"
     },
     "diagram": {
       "chatTitle": "Một tin nhắn đi tới trình duyệt bằng đường nào",
@@ -183,6 +83,122 @@
         "notify": "sự kiện CQN",
         "stream": "luồng sự kiện SSE"
       }
+    },
+    "items": {
+      "chat": {
+        "title": "Hệ thống chat thời gian thực cho ERP",
+        "tagline": "Tầng chat sống bên trong ERP, không phải đứng cạnh nó",
+        "context": "Gia Cát Technology Solutions · sản phẩm nội bộ · lập trình viên duy nhất",
+        "description": "Tầng chat thời gian thực dựng thẳng vào nền tảng ERP, phủ bốn loại hội thoại: cá nhân, nhóm, hội thoại gắn vào từng chứng từ ERP, và kênh thừa hưởng nhóm quyền có sẵn của ERP. Hai loại sau là thứ một ứng dụng chat có sẵn không làm được — hội thoại sống ngay trên một phiếu mua hàng, và quyền truy cập chạy theo dữ liệu phân quyền hệ thống đã có.",
+        "responsibilities": [
+          "Thiết kế kiến trúc và xây toàn bộ các tầng: backend Node.js, đẩy tin nhắn thời gian thực bằng SSE, và tầng dữ liệu PL/SQL",
+          "Tự viết tay client chat trên trình duyệt bằng JavaScript, đọc luồng sự kiện SSE và render tin nhắn đến mà không tải lại trang",
+          "Tích hợp Oracle CQN với thiết kế registry nhiều database để bắt thay đổi ở mức dòng và phát thông báo đi",
+          "Thiết kế đường tích hợp APEX ↔ Node qua AJAX callback PL/SQL và UTL_HTTP kèm xác thực bằng token, giữ server nội bộ nằm ngoài mạng công cộng",
+          "Phụ trách triển khai và vận hành production bằng PM2 cùng shell script start / stop tự viết",
+          "Viết script kiểm tra chạy bằng CLI phủ các REST endpoint, CQN callback, luồng SSE và registry kết nối"
+        ],
+        "metrics": [
+          { "value": "~1 tháng", "caption": "từ con số không tới production, làm một mình" },
+          { "value": "20+", "caption": "người dùng mỗi ngày" },
+          { "value": "200+", "caption": "tin nhắn mỗi ngày" },
+          { "value": "08/2026", "caption": "bắt đầu chạy production" }
+        ]
+      },
+      "heartRisk": {
+        "title": "Heart Risk Estimator",
+        "tagline": "Công cụ sàng lọc mà validation là đường duy nhất đi tới model",
+        "context": "Dự án cá nhân · lập trình viên duy nhất",
+        "description": "Công cụ sàng lọc nguy cơ bệnh tim. API Django dựng sao cho validation là đường duy nhất đi tới model, còn client React tự render từ schema do server gửi xuống — không hard-code tên field, khoảng giá trị hay lựa chọn nào ở phía trình duyệt.",
+        "responsibilities": [
+          "Huấn luyện mô hình AdaBoost trên tập UCI Heart Disease, đo lại với baseline một decision stump, và xuất mô hình bằng joblib",
+          "Xây API Django sao cho view bind JSON body vào form và chỉ đưa dữ liệu đã làm sạch tới classifier",
+          "Đưa định nghĩa form ra một schema endpoint rồi render client React từ chính schema đó",
+          "Viết giao diện bằng React và TypeScript, phủ bởi 15 test frontend cho render, submit, lỗi validation và xử lý focus",
+          "Giữ dữ liệu lâm sàng ra khỏi URL và log server bằng cách chỉ nhận POST body, kèm bảo vệ CSRF ở endpoint dự đoán"
+        ],
+        "metrics": [
+          { "value": "87,8%", "caption": "accuracy trên tập test giữ riêng" },
+          { "value": "92,9%", "caption": "recall ở nhóm có bệnh" },
+          { "value": "+13,2", "caption": "điểm phần trăm so với baseline một stump là 74,6%" },
+          { "value": "15", "caption": "test frontend, Vitest và React Testing Library" }
+        ]
+      },
+      "localAi": {
+        "title": "LLM self-hosted kèm tìm kiếm RAG",
+        "tagline": "Mô hình ngôn ngữ chạy trên máy công ty, không GPU và không dữ liệu nào rời khỏi toà nhà",
+        "context": "Gia Cát Technology Solutions · sản phẩm nội bộ · lập trình viên duy nhất",
+        "description": "Mô hình ngôn ngữ chạy trên hạ tầng nội bộ không có GPU, kèm pipeline truy hồi trên chính kho tài liệu nghiệp vụ của công ty. Đang được vài nhóm ERP nội bộ dùng thử, chưa mở rộng toàn công ty.",
+        "responsibilities": [
+          "Cài đặt và cấu hình server LLM nội bộ, đánh giá ràng buộc phần cứng và inference trên hạ tầng không GPU",
+          "Chọn mô hình đã lượng tử hoá và tinh chỉnh tham số để inference chỉ bằng CPU dùng được",
+          "Xây pipeline RAG và kho tri thức tài liệu cho một chatbot nội bộ, kèm giao diện web gọn nhẹ dùng để đo tốc độ phản hồi và độ chính xác câu trả lời",
+          "So sánh phương án chạy trên cloud với chạy tại chỗ, rồi chọn tại chỗ theo ràng buộc hạ tầng"
+        ],
+        "metrics": [
+          { "value": "~50", "caption": "token mỗi giây trên phần cứng chỉ có CPU, đọc từ log inference" },
+          { "value": "20+", "caption": "tài liệu nghiệp vụ nội bộ đã lập chỉ mục" }
+        ]
+      },
+      "erpWarehouse": {
+        "title": "Phân hệ Kho & tích hợp hoá đơn ERP",
+        "tagline": "Hoá đơn kéo vào, dữ liệu tồn kho mở ra — cả hai chiều qua REST",
+        "context": "Gia Cát Technology Solutions · khách hàng ngành kế toán và kho vận · đội 6 người",
+        "description": "Tuỳ biến nền tảng ERP theo quy trình kho và kế toán của khách hàng, đồng thời nối nó với một dịch vụ hoá đơn bên ngoài theo cả hai chiều — kéo hoá đơn nhà cung cấp vào, và mở dữ liệu tồn kho cùng hoá đơn ra cho một phần mềm nội bộ khác đọc.",
+        "responsibilities": [
+          "Phụ trách phân hệ Kho và luồng chứng từ phải trả / phải thu",
+          "Xây tích hợp PL/SQL với API hoá đơn Bizzi qua UTL_HTTP để kéo dữ liệu hoá đơn về tự động",
+          "Tạo các ORDS REST endpoint mở dữ liệu hoá đơn và tồn kho cho một phần mềm nội bộ khác phía khách hàng",
+          "Ghi các lần gọi lỗi vào bảng log để xử lý lại"
+        ],
+        "metrics": [
+          { "value": "100+", "caption": "hoá đơn nhà cung cấp mỗi tháng, không còn nhập tay" },
+          { "value": "ORDS", "caption": "REST endpoint được một phần mềm nội bộ thứ hai gọi vào" }
+        ]
+      },
+      "erpProduction": {
+        "title": "Phân hệ Sản xuất ERP",
+        "tagline": "Phân hệ Sản xuất xây từ con số không, từ lược đồ dữ liệu tới xưởng máy",
+        "context": "Gia Cát Technology Solutions · khách hàng ngành sản xuất · lập trình viên chính",
+        "description": "Xây phân hệ Sản xuất từ đầu cho một hệ ERP ngành sản xuất và thiết kế lược đồ dữ liệu của nó từ yêu cầu khách hàng, sau đó làm tiếp trên phần còn lại của hệ thống để xử lý lỗi.",
+        "responsibilities": [
+          "Phát triển phân hệ Sản xuất trọn vẹn cả frontend lẫn backend, và thiết kế lược đồ database từ yêu cầu khách hàng",
+          "Phối hợp với BA để tuỳ biến các phân hệ có sẵn cho khớp quy trình nghiệp vụ của khách hàng",
+          "Sửa lỗi nghiệp vụ và lỗi code trên 10+ phân hệ có sẵn"
+        ],
+        "metrics": [
+          { "value": "10+", "caption": "người dùng tại nhà máy bỏ được quy trình theo dõi thủ công bằng Excel" },
+          { "value": "10+", "caption": "báo cáo vận hành bàn giao cho xưởng sản xuất" },
+          { "value": "10+", "caption": "phân hệ có sẵn đã được sửa lỗi" }
+        ]
+      },
+      "kpiSupplier": {
+        "title": "Phân hệ đánh giá KPI nhà cung cấp",
+        "tagline": "Tiếp nhận một phân hệ dang dở và đưa tới bản phát hành — hai năm sau vẫn chạy",
+        "context": "Gia Cát Technology Solutions · kỳ thực tập · khách hàng ngành xây dựng · đội 2 người",
+        "description": "Tiếp nhận một phân hệ đánh giá nhà cung cấp còn dang dở và đưa nó tới bản phát hành. Tiêu chí chấm điểm được khai báo trên một trang riêng thay vì hard-code, nên bộ phận nghiệp vụ đổi được thứ cần đo mà không phải sửa code.",
+        "responsibilities": [
+          "Tiếp nhận một phân hệ dang dở và đưa tới bản phát hành",
+          "Thiết kế và xây các trang mới cả frontend lẫn backend, và xử lý dứt điểm các lỗi còn tồn"
+        ],
+        "metrics": [
+          { "value": "500+", "caption": "phiếu đánh giá đã ghi nhận, tới nay vẫn đang dùng" },
+          { "value": "20+", "caption": "lỗi đã xử lý" },
+          { "value": "5+", "caption": "trang đã bàn giao" }
+        ]
+      }
+    }
+  },
+  "skills": {
+    "title": "Kỹ năng",
+    "lead": "Chia theo tầng. Mọi thứ liệt kê ở đây đều đã dùng trong một hệ thống chạy thật — không có mục nào thêm vào cho dài danh sách.",
+    "groups": {
+      "languages": "Ngôn ngữ",
+      "frontend": "Frontend",
+      "backend": "Backend & Nền tảng",
+      "databases": "Cơ sở dữ liệu",
+      "ai": "AI & Machine Learning",
+      "ops": "Công cụ & Vận hành"
     }
   },
   "about": {
@@ -192,11 +208,13 @@
       "Phần lớn việc tôi làm nằm ở chỗ nối giữa các hệ thống. Kéo hoá đơn nhà cung cấp về từ API bên thứ ba, mở dữ liệu tồn kho ra ngoài qua REST, đẩy thay đổi dưới database lên một service Node.js theo thời gian thực. Bài toán thú vị thường nằm đúng ở các mối nối.",
       "Tôi cũng là người trong nhóm được giao khảo sát công nghệ mới rồi đưa vào hệ thống: push notification, thông báo thời gian thực, nền tảng chat real-time, và gần đây nhất là một LLM self-hosted kèm tìm kiếm truy hồi. Ba thứ đầu đang được dùng hằng ngày; thứ cuối đang trong giai đoạn thử nghiệm."
     ],
+    "portraitAlt": "Ảnh chân dung Nguyễn Quốc Gia Huy",
+    "portraitCaption": "TP. Hồ Chí Minh",
     "educationTitle": "Học vấn",
     "education": {
       "degree": "Cử nhân Công nghệ thông tin — chuyên ngành Khoa học dữ liệu",
       "school": "Trường Đại học Công Thương TP.HCM (HUIT)",
-      "year": "Tốt nghiệp 2025",
+      "year": "2021 — 2025",
       "gpa": "GPA 3,36 / 4,00"
     },
     "experienceTitle": "Kinh nghiệm",
@@ -227,7 +245,8 @@
   },
   "contact": {
     "title": "Liên hệ",
-    "lead": "Email là cách nhanh nhất để liên lạc với tôi. Biểu mẫu dưới đây gửi tin nhắn thẳng tới tôi.",
+    "statement": "Kể tôi nghe bạn đang xây gì.",
+    "lead": "Email là cách nhanh nhất để liên lạc với tôi. Biểu mẫu dưới đây gửi tin nhắn thẳng vào hộp thư của tôi.",
     "form": {
       "name": "Tên của bạn",
       "namePlaceholder": "Nguyễn Văn A",
@@ -236,7 +255,7 @@
       "message": "Nội dung",
       "messagePlaceholder": "Bạn muốn trao đổi về việc gì?",
       "submit": "Gửi tin nhắn",
-      "sending": "Đang gửi…",
+      "sending": "Đang gửi",
       "required": "bắt buộc"
     },
     "errors": {
@@ -257,7 +276,8 @@
     "linkedinLabel": "LinkedIn"
   },
   "footer": {
-    "builtWith": "Dựng bằng Next.js, TypeScript và Tailwind CSS. Mã nguồn trên GitHub.",
+    "availability": "Sẵn sàng cho vị trí full stack",
+    "builtWith": "Next.js · TypeScript · Tailwind CSS",
     "rights": "Bảo lưu mọi quyền."
   }
 }

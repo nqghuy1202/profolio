@@ -1,131 +1,108 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens
-   Toàn bộ màu, bo góc và font khai báo một lần ở :root dưới dạng CSS custom
-   property, rồi mới bắc cầu sang Tailwind ở khối @theme bên dưới.
-   Lợi ích: đổi một biến ở đây là đổi toàn site, kể cả những chỗ viết CSS tay
-   (SVG, scrollbar) mà utility class của Tailwind không với tới được.
+   DESIGN TOKENS
+
+   Ngôn ngữ thị giác: tạp chí in. Nền giấy, mực đen, phân vùng bằng kẻ chỉ,
+   một màu nhấn duy nhất.
+
+   Ba luật tuyệt đối, phá là hỏng cả hệ:
+     1. KHÔNG bo góc. Không một `rounded-*` nào.
+     2. KHÔNG đổ bóng. Chiều sâu tạo bằng kẻ chỉ và khoảng trắng.
+     3. Màu nhấn chỉ dùng để NHẤN. Nó không phải màu nền của nút.
 --------------------------------------------------------------------------- */
 :root {
-  /* Nền — đi từ tối nhất (nền trang) tới sáng dần (thẻ nổi lên trên) */
-  --canvas: #0a0e13;
-  --canvas-subtle: #0f141b;
-  --surface: #131a23;
-  --surface-2: #1a222d;
+  /* Giấy — trắng ngà một chút, trắng tinh #fff trên màn hình bị chói */
+  --paper: #fbfaf8;
+  --paper-pure: #ffffff;
+  --paper-tint: #f1eee9;
 
-  /* Đường kẻ */
-  --line: #212b37;
-  --line-strong: #32404f;
+  /* Mực — không dùng #000, đen tuyệt đối đọc lâu mỏi mắt */
+  --ink: #14110f;
+  --ink-2: #45403b;
+  --ink-3: #857e76;
 
-  /* Chữ — ba mức tương phản */
-  --ink: #e6edf3;
-  --ink-muted: #94a3b1;
-  --ink-faint: #64748b;
+  /* Kẻ chỉ */
+  --rule: #ddd8d1;
+  --rule-ink: #14110f;
 
-  /* Màu nhấn */
-  --accent: #2dd4bf;
-  --accent-strong: #14b8a6;
-  --accent-ink: #042f2a;
+  /* Màu nhấn: nâu sienna, lấy nguyên từ HL Company (#A0522D) */
+  --accent: #a0522d;
+  --accent-deep: #7a3d21;
 
-  /* Màu báo lỗi — chỉ dùng cho lỗi nhập liệu, không dùng để trang trí */
-  --danger: #f87171;
-
-  /* Bo góc */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-full: 999px;
-
-  /* Chiều rộng nội dung tối đa */
-  --content-width: 68rem;
+  /* Bề rộng */
+  --content: 78rem;
+  --measure: 36rem; /* độ dài dòng chữ dễ đọc, ~70 ký tự */
 }
 
-/* Bắc cầu token sang Tailwind v4: mỗi biến --color-* sinh ra một bộ utility
-   (bg-canvas, text-ink, border-line...). "inline" nghĩa là Tailwind nhúng
-   thẳng giá trị var() chứ không sao chép giá trị tĩnh — nên token vẫn là một
-   nguồn duy nhất. */
 @theme inline {
-  --color-canvas: var(--canvas);
-  --color-canvas-subtle: var(--canvas-subtle);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-
-  --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
+  --color-paper: var(--paper);
+  --color-paper-pure: var(--paper-pure);
+  --color-paper-tint: var(--paper-tint);
 
   --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
-  --color-ink-faint: var(--ink-faint);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+
+  --color-rule: var(--rule);
+  --color-rule-ink: var(--rule-ink);
 
   --color-accent: var(--accent);
-  --color-accent-strong: var(--accent-strong);
-  --color-accent-ink: var(--accent-ink);
-  --color-danger: var(--danger);
+  --color-accent-deep: var(--accent-deep);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-plex-mono);
+  --font-numeral: var(--font-instrument);
 }
 
 /* ---------------------------------------------------------------------------
-   Base
+   BASE
 --------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
-  /* Chừa chỗ cho header dính khi nhảy tới #section bằng anchor link */
-  scroll-padding-block-start: 5rem;
-  color-scheme: dark;
+  scroll-padding-block-start: 4.5rem;
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--canvas);
+  background-color: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Viền focus dùng chung cho mọi phần tử bấm được — điều hướng bằng bàn phím
-   phải nhìn thấy được, nhưng không hiện vòng sáng khi bấm chuột. */
-:where(a, button, input, textarea, select, [tabindex]):focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
 }
 
 ::selection {
   background-color: var(--accent);
-  color: var(--accent-ink);
+  color: var(--paper-pure);
 }
 
-/* Thanh cuộn: khai báo cả chuẩn mới (Firefox) lẫn tiền tố WebKit, vì mỗi bên
-   hiểu một cú pháp khác nhau và chưa trình duyệt nào hỗ trợ cả hai. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Thanh cuộn mảnh, cùng tông giấy. Khai báo cả chuẩn mới lẫn tiền tố WebKit
+   vì chưa trình duyệt nào hiểu cả hai. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--line-strong) transparent;
+  scrollbar-color: var(--ink-3) transparent;
 }
 
 ::-webkit-scrollbar {
-  inline-size: 10px;
-  block-size: 10px;
+  inline-size: 11px;
+  block-size: 11px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--paper-tint);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--line-strong);
-  border-radius: var(--radius-full, 999px);
-  border: 2px solid var(--canvas);
+  background-color: var(--ink-3);
+  border: 3px solid var(--paper-tint);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--ink-faint);
-}
-
-/* Tôn trọng cài đặt giảm chuyển động của hệ điều hành. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -141,48 +118,168 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
-   Tiện ích viết tay
+   PRIMITIVE VIẾT TAY
+
+   Những thứ dưới đây lặp lại khắp trang và mang bản sắc riêng, nên viết một
+   lần ở đây thay vì rải chuỗi utility dài dòng ở mọi component.
 --------------------------------------------------------------------------- */
 
-/* Link "nhảy tới nội dung" cho người dùng bàn phím và trình đọc màn hình:
-   ẩn khỏi mắt thường, chỉ hiện ra khi được focus. */
+/* Nhãn nhỏ chữ hoa giãn ký tự — dùng cho mọi tiêu đề phụ và siêu dữ liệu.
+   Đây là chi tiết định hình cả trang, kế thừa từ nhãn VEST / XEM THÊM. */
+.label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  line-height: 1;
+}
+
+/* Chữ hiển thị cỡ lớn, chữ hoa, giãn ký tự âm — ngôn ngữ của nhà mốt.
+   clamp() cho cỡ chữ co giãn liên tục theo bề rộng màn hình, thay vì nhảy
+   bậc ở từng breakpoint. */
+.display {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.94;
+  font-size: clamp(2.75rem, 9vw, 7.5rem);
+}
+
+.display-sm {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+  font-size: clamp(1.75rem, 4.4vw, 3.25rem);
+}
+
+/* Số thứ tự đặt bằng serif nghiêng, tương phản với grotesque chữ hoa.
+   Chỉ dùng cho CHỮ SỐ nên không cần bộ dấu tiếng Việt. */
+.numeral {
+  font-family: var(--font-numeral), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Gạch chân mọc từ trái sang — lấy nguyên kỹ thuật ::after + scaleX từ
+   HL Company, thêm transform-origin để khi rời chuột nó rút về bên phải
+   thay vì biến mất đột ngột. */
+/* Cố ý KHÔNG đặt `display` ở đây. Class này khai báo sau @import của Tailwind
+   nên nếu nó đặt display:inline-block thì nó sẽ thắng cả `hidden` — hai bên
+   cùng độ đặc hiệu, bên viết sau thắng — và phần tử đáng lẽ ẩn trên điện
+   thoại vẫn hiện ra. Chỗ nào cần inline-block thì thêm utility tại chỗ đó. */
+.underline-grow {
+  position: relative;
+}
+
+.underline-grow::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: -0.15em;
+  block-size: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.underline-grow:hover::after,
+.underline-grow:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Hàng dự án: cả hàng đảo màu khi rê chuột.
+   Thay cho hiệu ứng blur ảnh của HL Company — portfolio không có ảnh sản
+   phẩm để làm mờ, nên chuyển sức nặng sang việc đảo nền. */
+.row-invert {
+  transition:
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.row-invert:hover,
+.row-invert:focus-within {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+/* Chữ phụ bên trong hàng. Màu đặt Ở ĐÂY chứ không đặt bằng utility của
+   Tailwind: một phần tử có `text-ink-3` sẽ giữ nguyên màu đó khi hàng đảo
+   nền, vì màu khai báo thẳng thì không thừa kế từ cha. */
+.row-invert .row-mute {
+  color: var(--ink-3);
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.row-invert:hover .row-mute,
+.row-invert:focus-within .row-mute {
+  color: var(--paper-tint);
+}
+
+/* Số thứ tự: nâu sienna trên nền giấy, chuyển sang trắng khi hàng đảo nền.
+   Giữ nguyên màu nâu trên nền mực thì tỉ lệ tương phản chỉ còn ~2,5:1 —
+   không đọc được. */
+.row-invert .row-accent {
+  color: var(--accent);
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.row-invert:hover .row-accent,
+.row-invert:focus-within .row-accent {
+  color: var(--paper);
+}
+
+/* Mũi tên trượt sang phải khi hàng được rê chuột */
+.row-invert .row-arrow {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.row-invert:hover .row-arrow,
+.row-invert:focus-within .row-arrow {
+  transform: translateX(0.75rem);
+}
+
+/* Hiện dần khi cuộn tới. Trạng thái đầu đặt bằng CSS, class .is-visible do
+   IntersectionObserver gắn vào — xem src/components/ui/Reveal.tsx.
+   Nếu JavaScript hỏng thì @media dưới cùng vẫn cho chữ hiện ra bình thường. */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Link "nhảy tới nội dung" cho người dùng bàn phím */
 .skip-link {
   position: absolute;
-  inset-block-start: 0.5rem;
-  inset-inline-start: 0.5rem;
+  inset-block-start: 0;
+  inset-inline-start: 0;
   z-index: 100;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
-  background-color: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
-  transform: translateY(-150%);
-  transition: transform 150ms ease;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--ink);
+  color: var(--paper);
+  transform: translateY(-100%);
+  transition: transform 0.15s ease;
 }
 
 .skip-link:focus-visible {
   transform: translateY(0);
-}
-
-/* Lưới chấm mờ phía sau Hero. Dùng radial-gradient thay vì file ảnh —
-   không tốn thêm một request mạng nào. */
-.hero-grid {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    var(--line-strong) 1px,
-    transparent 0
-  );
-  background-size: 32px 32px;
-  /* Mask cho lưới mờ dần ở rìa. Safari vẫn cần tiền tố -webkit-, và thứ tự
-     phải là bản có tiền tố trước, bản chuẩn sau. */
-  -webkit-mask-image: radial-gradient(
-    ellipse 80% 60% at 50% 0%,
-    #000 20%,
-    transparent 75%
-  );
-  mask-image: radial-gradient(
-    ellipse 80% 60% at 50% 0%,
-    #000 20%,
-    transparent 75%
-  );
 }

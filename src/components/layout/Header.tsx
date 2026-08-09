@@ -5,13 +5,16 @@ import Link from "next/link";
 import { profile } from "@/data/profile";
 import { locales, localeLabels, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { CloseIcon, DownloadIcon, MenuIcon } from "@/components/ui/icons";
 import { Container } from "@/components/ui/Container";
 
 /**
- * Đây là Client Component vì menu trên điện thoại cần state đóng/mở.
- * Chữ nghĩa nhận qua props chứ không tự gọi getDictionary(), để hai file JSON
- * ngôn ngữ không bị kéo vào bundle gửi xuống trình duyệt.
+ * Client Component vì menu điện thoại cần state đóng/mở.
+ * Chữ nhận qua props để hai file JSON ngôn ngữ không bị gói vào bundle gửi
+ * xuống trình duyệt.
+ *
+ * Không dùng icon: nhãn chữ ("MENU", "ĐÓNG", "CV ↓") hợp với ngôn ngữ tạp chí
+ * hơn, đọc được bằng trình đọc màn hình mà không cần aria-label bù, và bớt đi
+ * một tệp tài nguyên phải tải.
  */
 export function Header({
   locale,
@@ -20,131 +23,134 @@ export function Header({
   locale: Locale;
   nav: Dictionary["nav"];
 }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const links = [
+    { href: "#work", label: nav.projects },
     { href: "#skills", label: nav.skills },
-    { href: "#projects", label: nav.projects },
     { href: "#about", label: nav.about },
     { href: "#contact", label: nav.contact },
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-canvas/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-rule-ink bg-paper">
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4">
+        <div className="flex h-16 items-center justify-between gap-6">
           <Link
             href={`/${locale}`}
-            className="font-mono text-sm font-semibold tracking-tight text-ink transition-colors hover:text-accent"
+            className="font-mono text-[0.8125rem] font-medium uppercase tracking-[0.2em] text-ink"
           >
-            {profile.shortName}
-            <span className="text-accent">.</span>
+            Huy Nguyen<span className="text-accent">.</span>
           </Link>
 
-          {/* Điều hướng cho màn hình rộng */}
           <nav
             aria-label={nav.mainNavigation}
-            className="hidden items-center gap-7 md:flex"
+            className="hidden items-center gap-9 md:flex"
           >
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-ink-muted transition-colors hover:text-ink"
+                className="label underline-grow text-ink-2 hover:text-ink"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-6">
             <LanguageSwitch locale={locale} label={nav.switchLanguage} />
 
             <a
               href={profile.cvPath}
               download
-              className="hidden items-center gap-2 rounded-md border border-line-strong px-3 py-1.5 text-sm text-ink transition-colors hover:border-accent hover:text-accent sm:inline-flex"
+              className="label underline-grow hidden text-accent sm:inline-block"
             >
-              <DownloadIcon />
-              {nav.downloadCv}
+              {nav.downloadCv} ↓
             </a>
 
             <button
               type="button"
-              onClick={() => setMenuOpen((open) => !open)}
-              aria-expanded={menuOpen}
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
               aria-controls="mobile-menu"
-              aria-label={menuOpen ? nav.closeMenu : nav.openMenu}
-              className="inline-flex items-center justify-center rounded-md border border-line-strong p-2 text-lg text-ink md:hidden"
+              className="label text-ink md:hidden"
             >
-              {menuOpen ? <CloseIcon /> : <MenuIcon />}
+              {open ? nav.close : nav.menu}
             </button>
           </div>
         </div>
       </Container>
 
-      {/* Menu điện thoại: chỉ render khi mở, để nội dung ẩn không lọt vào
-          thứ tự tab của bàn phím. */}
-      {menuOpen ? (
-        <div id="mobile-menu" className="border-t border-line md:hidden">
-          <Container>
-            <nav className="flex flex-col py-2">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="border-b border-line py-3 text-sm text-ink-muted transition-colors hover:text-ink"
-                >
-                  {link.label}
-                </a>
-              ))}
+      {/*
+        Menu luôn nằm trong DOM để trượt ra có chuyển động thật, nhưng khi đóng
+        thì gắn `inert` — thuộc tính này gỡ toàn bộ phần tử bên trong khỏi thứ
+        tự tab và khỏi trình đọc màn hình. Chỉ dùng `opacity: 0` thì link vẫn
+        bấm được bằng phím Tab dù mắt không thấy.
+      */}
+      <div
+        id="mobile-menu"
+        inert={!open}
+        className={`overflow-hidden border-t border-rule bg-paper transition-[max-height,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <Container>
+          <nav aria-label={nav.mainNavigation} className="flex flex-col py-2">
+            {links.map((link) => (
               <a
-                href={profile.cvPath}
-                download
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2 py-3 text-sm text-accent"
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="display-sm border-b border-rule py-4 text-ink"
               >
-                <DownloadIcon />
-                {nav.downloadCv}
+                {link.label}
               </a>
-            </nav>
-          </Container>
-        </div>
-      ) : null}
+            ))}
+            <a
+              href={profile.cvPath}
+              download
+              onClick={() => setOpen(false)}
+              className="label py-5 text-accent"
+            >
+              {nav.downloadCv} ↓
+            </a>
+          </nav>
+        </Container>
+      </div>
     </header>
   );
 }
 
 /**
- * Trang chỉ có đúng một route cho mỗi ngôn ngữ, nên đổi ngôn ngữ chỉ là đi
- * tới "/vi" hoặc "/en". Không cần đọc pathname hiện tại.
+ * Trang chỉ có một bộ route cho mỗi ngôn ngữ, nên đổi ngôn ngữ là đi tới
+ * "/vi" hoặc "/en". Hiển thị dạng "VI / EN" — ngôn ngữ đang xem in đậm màu
+ * mực, ngôn ngữ kia mờ đi.
  */
 function LanguageSwitch({ locale, label }: { locale: Locale; label: string }) {
   return (
-    <div
-      role="group"
-      aria-label={label}
-      className="flex items-center rounded-md border border-line-strong p-0.5"
-    >
-      {locales.map((code) => {
-        const isActive = code === locale;
-        return (
+    <div role="group" aria-label={label} className="label flex items-center">
+      {locales.map((code, position) => (
+        <span key={code} className="flex items-center">
+          {position > 0 ? (
+            <span aria-hidden="true" className="px-1.5 text-ink-3">
+              /
+            </span>
+          ) : null}
           <Link
-            key={code}
             href={`/${code}`}
             hrefLang={code}
-            aria-current={isActive ? "true" : undefined}
-            className={`rounded px-2 py-1 font-mono text-xs transition-colors ${
-              isActive
-                ? "bg-accent text-accent-ink"
-                : "text-ink-muted hover:text-ink"
-            }`}
+            aria-current={code === locale ? "true" : undefined}
+            className={
+              code === locale
+                ? "text-ink"
+                : "text-ink-3 transition-colors hover:text-ink"
+            }
           >
             {localeLabels[code]}
           </Link>
-        );
-      })}
+        </span>
+      ))}
     </div>
   );
 }

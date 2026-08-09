@@ -6,9 +6,9 @@ import { profile } from "@/data/profile";
 /**
  * Ảnh xem trước khi dán link vào LinkedIn, Zalo, Slack hay Messenger.
  *
- * Vẽ bằng code thay vì thiết kế sẵn một file PNG: sửa tên hay chức danh ở
- * một chỗ là ảnh tự đổi theo, và mỗi ngôn ngữ có một ảnh riêng mà không phải
- * xuất tay hai lần.
+ * Vẽ bằng code thay vì thiết kế sẵn một file PNG: sửa tên hay chức danh ở một
+ * chỗ là ảnh tự đổi theo, và mỗi ngôn ngữ có một ảnh riêng mà không phải xuất
+ * tay hai lần.
  *
  * Next tự dò thấy file này và tự chèn thẻ og:image — không phải khai báo thêm.
  */
@@ -33,6 +33,13 @@ export default async function OpengraphImage({
   const dict = getDictionary(locale);
   const name = locale === "vi" ? profile.fullNameVi : profile.fullName;
 
+  // Satori không đọc được var(), nên màu ở đây viết thẳng giá trị.
+  // Đổi token trong globals.css thì nhớ đổi cả ở đây.
+  const paper = "#fbfaf8";
+  const ink = "#14110f";
+  const inkFaint = "#857e76";
+  const accent = "#a0522d";
+
   return new ImageResponse(
     (
       <div
@@ -41,61 +48,69 @@ export default async function OpengraphImage({
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          backgroundColor: "#0a0e13",
-          padding: "80px",
-          // Satori không hiểu var(), nên màu ở đây viết thẳng giá trị.
-          // Đổi token trong globals.css thì nhớ đổi cả ở đây.
-          borderTop: "10px solid #2dd4bf",
+          justifyContent: "space-between",
+          backgroundColor: paper,
+          color: ink,
+          padding: "64px 72px",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            fontSize: 26,
-            color: "#2dd4bf",
-            fontFamily: "monospace",
-            letterSpacing: "0.08em",
-          }}
-        >
-          {dict.hero.role.toUpperCase()}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 22,
+              letterSpacing: "0.18em",
+              color: accent,
+            }}
+          >
+            {dict.hero.role.toUpperCase()}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 22,
+              letterSpacing: "0.18em",
+              color: inkFaint,
+            }}
+          >
+            {locale === "vi" ? "TP. HỒ CHÍ MINH" : "HO CHI MINH CITY"}
+          </div>
         </div>
 
         <div
           style={{
             display: "flex",
-            fontSize: 76,
+            fontSize: 108,
             fontWeight: 700,
-            color: "#e6edf3",
-            marginTop: 20,
+            letterSpacing: "-0.03em",
+            lineHeight: 1,
+            textTransform: "uppercase",
+            maxWidth: 1000,
           }}
         >
           {name}
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            fontSize: 30,
-            color: "#94a3b1",
-            marginTop: 28,
-            lineHeight: 1.4,
-            maxWidth: 900,
-          }}
-        >
-          Oracle · PL/SQL · Node.js · React
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            fontSize: 24,
-            color: "#64748b",
-            marginTop: "auto",
-            fontFamily: "monospace",
-          }}
-        >
-          github.com/{profile.githubUser}
+        {/* Đường kẻ chỉ chạy hết bề ngang — chi tiết định hình của cả trang */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", height: 1, backgroundColor: ink }} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              paddingTop: 24,
+              fontSize: 22,
+              letterSpacing: "0.14em",
+              color: inkFaint,
+            }}
+          >
+            <div style={{ display: "flex" }}>
+              ORACLE · PL/SQL · NODE.JS · REACT
+            </div>
+            <div style={{ display: "flex" }}>
+              GITHUB.COM/{profile.githubUser.toUpperCase()}
+            </div>
+          </div>
         </div>
       </div>
     ),

@@ -6,41 +6,32 @@
   },
   "nav": {
     "skills": "Skills",
-    "projects": "Projects",
+    "projects": "Work",
     "about": "About",
     "contact": "Contact",
-    "downloadCv": "Download CV",
+    "downloadCv": "CV",
     "mainNavigation": "Main navigation",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "menu": "Menu",
+    "close": "Close"
   },
   "hero": {
     "role": "Full Stack Developer",
-    "intro": "Full Stack Developer with two years of experience building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Deepest on the database side — data modelling, business logic in PL/SQL, and query tuning — and writes the front-end JavaScript by hand.",
-    "ctaWork": "View work",
+    "intro": "Two years of experience building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Deepest on the database side — data modelling, business logic in PL/SQL, and query tuning — and writes the front-end JavaScript by hand.",
+    "ctaWork": "See the work",
     "ctaContact": "Get in touch",
-    "highlights": [
-      "Oracle · PL/SQL",
-      "Node.js · React",
-      "System integration"
+    "meta": [
+      { "label": "Experience", "value": "2 years, since July 2024" },
+      {
+        "label": "Focus",
+        "value": "ERP systems · system integration · real-time data"
+      },
+      { "label": "Working in", "value": "Oracle · PL/SQL · Node.js · React" }
     ]
   },
-  "skills": {
-    "title": "Skills",
-    "lead": "Grouped by layer. Everything listed here has been used on a system that shipped.",
-    "groups": {
-      "languages": "Languages",
-      "frontend": "Frontend",
-      "backend": "Backend & Platforms",
-      "databases": "Databases",
-      "ai": "AI & Machine Learning",
-      "ops": "Tools & Operations"
-    }
-  },
-  "projects": {
-    "title": "Projects",
-    "lead": "Most of this work was built inside a company or for its clients, so the source is not public. Those entries carry an architecture sketch instead of a repository link — the open-source entry is where you can read the code.",
+  "work": {
+    "title": "Selected work",
+    "lead": "Most of this was built inside a company or for its clients, so the source is not public. Those entries carry an architecture sketch instead of a repository link — the open-source entry is where you can read the code.",
     "layers": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -60,108 +51,17 @@
       "live": "Still in use"
     },
     "labels": {
-      "sourceNotPublic": "Source not public",
+      "overview": "Overview",
+      "results": "Results",
+      "responsibilities": "What I did",
+      "stack": "Stack",
+      "sourceNotPublic": "Source not public — company and client code",
       "viewRepo": "View repository",
       "viewDemo": "Live demo",
-      "responsibilities": "What I did",
-      "results": "Results",
-      "stack": "Stack"
-    },
-    "items": {
-      "chat": {
-        "title": "Real-time Chat System for ERP",
-        "context": "Gia Cat Technology Solutions · internal product · sole developer",
-        "description": "A real-time chat layer built into the ERP platform, covering four kinds of conversation: one-to-one, group, threads attached to a specific ERP document, and channels that inherit the permission groups already defined in the ERP. The last two are the part an off-the-shelf messenger cannot do — a conversation that lives on a purchase order, and access that follows the permission data the system already holds.",
-        "responsibilities": [
-          "Architected and built the full stack: Node.js backend, SSE-based message push, and the PL/SQL data layer",
-          "Wrote the browser chat client by hand in JavaScript, consuming the SSE event stream and rendering incoming messages without page reloads",
-          "Integrated Oracle CQN with a multi-database registry to detect row-level changes and fan out notifications",
-          "Designed the APEX to Node integration path through PL/SQL AJAX callbacks and UTL_HTTP with token-based authentication, keeping the internal server off the public network",
-          "Owned production deployment and operations with PM2 and custom start / stop shell scripts",
-          "Built CLI verification scripts covering the REST endpoints, CQN callbacks, SSE streams and the connection registry"
-        ],
-        "metrics": [
-          "~1 month from zero to production, as sole developer",
-          "20+ daily users",
-          "200+ messages a day",
-          "In production since August 2026"
-        ]
-      },
-      "heartRisk": {
-        "title": "Heart Risk Estimator",
-        "context": "Personal project · sole developer",
-        "description": "A heart-disease risk screening tool. The Django API is built so validation is the only route to the model, and the React client renders itself from a schema the server sends — no field name, range or option is hard-coded in the browser.",
-        "responsibilities": [
-          "Trained an AdaBoost ensemble of decision stumps on the UCI Heart Disease dataset, measured it against a single-stump baseline, and exported the fitted model with joblib",
-          "Built the Django API so the view binds the JSON body to a form and passes nothing but cleaned data to the classifier",
-          "Served the form definition from a schema endpoint and rendered the React client from it",
-          "Wrote the interface in React and TypeScript, covered by 15 front-end tests across rendering, submission, validation errors and focus handling",
-          "Kept clinical inputs out of URLs and server logs by accepting POST bodies only, with CSRF protection on the prediction endpoint"
-        ],
-        "metrics": [
-          "87.8% accuracy, 92.9% recall on the disease class",
-          "205-record held-out test set, fixed seeds throughout",
-          "74.6% single-stump baseline — 13.2 points of gain",
-          "15 front-end tests (Vitest + React Testing Library)"
-        ]
-      },
-      "localAi": {
-        "title": "Self-hosted LLM with RAG Search",
-        "context": "Gia Cat Technology Solutions · internal product · sole developer",
-        "description": "A language model running on internal hardware with no GPU, with a retrieval pipeline over the company's own business documents. Piloted by internal ERP teams; not rolled out company-wide yet.",
-        "responsibilities": [
-          "Set up and configured the local LLM server, evaluating hardware and inference constraints on GPU-less infrastructure",
-          "Selected a quantized model and tuned its parameters to make CPU-only inference usable",
-          "Built a RAG pipeline and document knowledge base behind an internal chatbot, with a lightweight web UI used to test response speed and answer accuracy",
-          "Compared cloud and on-premise options for the workload, then chose on-premise given the infrastructure constraints"
-        ],
-        "metrics": [
-          "~50 tokens/s on CPU-only hardware, read from the inference server log",
-          "20+ internal business documents indexed"
-        ]
-      },
-      "erpWarehouse": {
-        "title": "ERP Warehouse & Invoice Integration",
-        "context": "Gia Cat Technology Solutions · client in accounting and warehousing · team of 6",
-        "description": "Fitted the ERP platform to the client's warehouse and accounting processes, and connected it to an external invoice service in both directions — pulling supplier invoices in, and exposing inventory and invoice data back out for another in-house system to read.",
-        "responsibilities": [
-          "Owned the Warehouse module and the accounts payable / receivable document flows",
-          "Built a PL/SQL integration with the Bizzi invoice API over UTL_HTTP to pull invoice data automatically",
-          "Built ORDS REST endpoints exposing invoice and inventory data to another in-house system on the client side",
-          "Logged failed calls to an error table for follow-up"
-        ],
-        "metrics": [
-          "100+ supplier invoices a month, no manual entry",
-          "REST endpoints consumed by a second in-house system"
-        ]
-      },
-      "erpProduction": {
-        "title": "ERP Production Module",
-        "context": "Gia Cat Technology Solutions · client in manufacturing · main developer",
-        "description": "Built the Production module from scratch for a manufacturing ERP and designed its database schema from the client's requirements, then worked across the rest of the system fixing defects.",
-        "responsibilities": [
-          "Developed the Production module end to end, front-end and back-end, and designed its database schema from client requirements",
-          "Worked with the BA to fit existing modules to the client's business processes",
-          "Fixed business-logic and code defects across 10+ existing modules"
-        ],
-        "metrics": [
-          "Replaced a manual Excel-based tracking process for 10+ factory users",
-          "10+ operational reports delivered for the production floor"
-        ]
-      },
-      "kpiSupplier": {
-        "title": "Supplier KPI Evaluation Module",
-        "context": "Gia Cat Technology Solutions · internship · client in construction · team of 2",
-        "description": "Took over an unfinished supplier-evaluation module and brought it to release. Scoring criteria are declared on their own page rather than hard-coded, so the business team can change what gets measured without a code change.",
-        "responsibilities": [
-          "Took over an unfinished module and brought it to release",
-          "Designed and built new pages, front-end and back-end, and resolved the outstanding defects"
-        ],
-        "metrics": [
-          "5+ pages shipped, 20+ bugs resolved",
-          "500+ evaluation forms recorded, still in use today"
-        ]
-      }
+      "allWork": "All projects",
+      "nextProject": "Next project",
+      "role": "Role",
+      "type": "Type"
     },
     "diagram": {
       "chatTitle": "How a message reaches the browser",
@@ -183,6 +83,122 @@
         "notify": "CQN change event",
         "stream": "SSE event stream"
       }
+    },
+    "items": {
+      "chat": {
+        "title": "Real-time Chat System for ERP",
+        "tagline": "A chat layer that lives inside the ERP, not beside it",
+        "context": "Gia Cat Technology Solutions · internal product · sole developer",
+        "description": "A real-time chat layer built into the ERP platform, covering four kinds of conversation: one-to-one, group, threads attached to a specific ERP document, and channels that inherit the permission groups already defined in the ERP. The last two are the part an off-the-shelf messenger cannot do — a conversation that lives on a purchase order, and access that follows the permission data the system already holds.",
+        "responsibilities": [
+          "Architected and built the full stack: Node.js backend, SSE-based message push, and the PL/SQL data layer",
+          "Wrote the browser chat client by hand in JavaScript, consuming the SSE event stream and rendering incoming messages without page reloads",
+          "Integrated Oracle CQN with a multi-database registry to detect row-level changes and fan out notifications",
+          "Designed the APEX to Node integration path through PL/SQL AJAX callbacks and UTL_HTTP with token-based authentication, keeping the internal server off the public network",
+          "Owned production deployment and operations with PM2 and custom start / stop shell scripts",
+          "Built CLI verification scripts covering the REST endpoints, CQN callbacks, SSE streams and the connection registry"
+        ],
+        "metrics": [
+          { "value": "~1 month", "caption": "from zero to production, as sole developer" },
+          { "value": "20+", "caption": "daily users" },
+          { "value": "200+", "caption": "messages a day" },
+          { "value": "08/2026", "caption": "in production since" }
+        ]
+      },
+      "heartRisk": {
+        "title": "Heart Risk Estimator",
+        "tagline": "A screening tool where validation is the only route to the model",
+        "context": "Personal project · sole developer",
+        "description": "A heart-disease risk screening tool. The Django API is built so validation is the only route to the model, and the React client renders itself from a schema the server sends — no field name, range or option is hard-coded in the browser.",
+        "responsibilities": [
+          "Trained an AdaBoost ensemble of decision stumps on the UCI Heart Disease dataset, measured it against a single-stump baseline, and exported the fitted model with joblib",
+          "Built the Django API so the view binds the JSON body to a form and passes nothing but cleaned data to the classifier",
+          "Served the form definition from a schema endpoint and rendered the React client from it",
+          "Wrote the interface in React and TypeScript, covered by 15 front-end tests across rendering, submission, validation errors and focus handling",
+          "Kept clinical inputs out of URLs and server logs by accepting POST bodies only, with CSRF protection on the prediction endpoint"
+        ],
+        "metrics": [
+          { "value": "87.8%", "caption": "accuracy on a held-out test set" },
+          { "value": "92.9%", "caption": "recall on the disease class" },
+          { "value": "+13.2", "caption": "points over the single-stump baseline of 74.6%" },
+          { "value": "15", "caption": "front-end tests, Vitest and React Testing Library" }
+        ]
+      },
+      "localAi": {
+        "title": "Self-hosted LLM with RAG Search",
+        "tagline": "A language model on company hardware, with no GPU and no data leaving the building",
+        "context": "Gia Cat Technology Solutions · internal product · sole developer",
+        "description": "A language model running on internal hardware with no GPU, with a retrieval pipeline over the company's own business documents. Piloted by internal ERP teams; not rolled out company-wide yet.",
+        "responsibilities": [
+          "Set up and configured the local LLM server, evaluating hardware and inference constraints on GPU-less infrastructure",
+          "Selected a quantized model and tuned its parameters to make CPU-only inference usable",
+          "Built a RAG pipeline and document knowledge base behind an internal chatbot, with a lightweight web UI used to test response speed and answer accuracy",
+          "Compared cloud and on-premise options for the workload, then chose on-premise given the infrastructure constraints"
+        ],
+        "metrics": [
+          { "value": "~50", "caption": "tokens per second on CPU-only hardware, read from the inference log" },
+          { "value": "20+", "caption": "internal business documents indexed" }
+        ]
+      },
+      "erpWarehouse": {
+        "title": "ERP Warehouse & Invoice Integration",
+        "tagline": "Supplier invoices in, inventory data out — both directions over REST",
+        "context": "Gia Cat Technology Solutions · client in accounting and warehousing · team of 6",
+        "description": "Fitted the ERP platform to the client's warehouse and accounting processes, and connected it to an external invoice service in both directions — pulling supplier invoices in, and exposing inventory and invoice data back out for another in-house system to read.",
+        "responsibilities": [
+          "Owned the Warehouse module and the accounts payable / receivable document flows",
+          "Built a PL/SQL integration with the Bizzi invoice API over UTL_HTTP to pull invoice data automatically",
+          "Built ORDS REST endpoints exposing invoice and inventory data to another in-house system on the client side",
+          "Logged failed calls to an error table for follow-up"
+        ],
+        "metrics": [
+          { "value": "100+", "caption": "supplier invoices a month, no manual entry" },
+          { "value": "ORDS", "caption": "REST endpoints consumed by a second in-house system" }
+        ]
+      },
+      "erpProduction": {
+        "title": "ERP Production Module",
+        "tagline": "A production module built from scratch, from schema to shop floor",
+        "context": "Gia Cat Technology Solutions · client in manufacturing · main developer",
+        "description": "Built the Production module from scratch for a manufacturing ERP and designed its database schema from the client's requirements, then worked across the rest of the system fixing defects.",
+        "responsibilities": [
+          "Developed the Production module end to end, front-end and back-end, and designed its database schema from client requirements",
+          "Worked with the BA to fit existing modules to the client's business processes",
+          "Fixed business-logic and code defects across 10+ existing modules"
+        ],
+        "metrics": [
+          { "value": "10+", "caption": "factory users moved off a manual Excel tracking process" },
+          { "value": "10+", "caption": "operational reports delivered for the production floor" },
+          { "value": "10+", "caption": "existing modules where defects were fixed" }
+        ]
+      },
+      "kpiSupplier": {
+        "title": "Supplier KPI Evaluation Module",
+        "tagline": "An unfinished module taken over and shipped — still running two years on",
+        "context": "Gia Cat Technology Solutions · internship · client in construction · team of 2",
+        "description": "Took over an unfinished supplier-evaluation module and brought it to release. Scoring criteria are declared on their own page rather than hard-coded, so the business team can change what gets measured without a code change.",
+        "responsibilities": [
+          "Took over an unfinished module and brought it to release",
+          "Designed and built new pages, front-end and back-end, and resolved the outstanding defects"
+        ],
+        "metrics": [
+          { "value": "500+", "caption": "evaluation forms recorded, still in use today" },
+          { "value": "20+", "caption": "bugs resolved" },
+          { "value": "5+", "caption": "pages shipped" }
+        ]
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "lead": "Grouped by layer. Everything listed here has been used on a system that shipped — nothing is here to fill a line.",
+    "groups": {
+      "languages": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend & Platforms",
+      "databases": "Databases",
+      "ai": "AI & Machine Learning",
+      "ops": "Tools & Operations"
     }
   },
   "about": {
@@ -192,11 +208,13 @@
       "Most of what I do sits between systems. Pulling supplier invoices in from a third-party API, exposing inventory data back out over REST, pushing database changes to a Node.js service in real time. The interesting problems are usually at the seams.",
       "I am also the person on the team who gets asked to evaluate new technology and bring it into the system: push notifications, real-time notifications, the real-time chat platform, and most recently a self-hosted LLM with retrieval search. The first three are in daily use; the last one is in pilot."
     ],
+    "portraitAlt": "Portrait of Huy Nguyen Quoc Gia",
+    "portraitCaption": "Ho Chi Minh City",
     "educationTitle": "Education",
     "education": {
       "degree": "Bachelor of Information Technology — Data Science",
       "school": "Ho Chi Minh City University of Industry and Trade (HUIT)",
-      "year": "Graduated 2025",
+      "year": "2021 — 2025",
       "gpa": "GPA 3.36 / 4.00"
     },
     "experienceTitle": "Experience",
@@ -227,7 +245,8 @@
   },
   "contact": {
     "title": "Contact",
-    "lead": "Email is the fastest way to reach me. The form below sends me a message directly.",
+    "statement": "Tell me what you're building.",
+    "lead": "Email is the fastest way to reach me. The form below sends a message straight to my inbox.",
     "form": {
       "name": "Your name",
       "namePlaceholder": "Jane Doe",
@@ -236,7 +255,7 @@
       "message": "Message",
       "messagePlaceholder": "What would you like to talk about?",
       "submit": "Send message",
-      "sending": "Sending…",
+      "sending": "Sending",
       "required": "required"
     },
     "errors": {
@@ -257,7 +276,8 @@
     "linkedinLabel": "LinkedIn"
   },
   "footer": {
-    "builtWith": "Built with Next.js, TypeScript and Tailwind CSS. Source on GitHub.",
+    "availability": "Open to full stack roles",
+    "builtWith": "Next.js · TypeScript · Tailwind CSS",
     "rights": "All rights reserved."
   }
 }

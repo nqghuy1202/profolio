@@ -1,17 +1,18 @@
 import type { Dictionary } from "@/i18n/dictionaries";
 
-type Diagram = Dictionary["projects"]["diagram"];
+type Diagram = Dictionary["work"]["diagram"];
 
 /**
  * Sơ đồ đường đi của một tin nhắn trong hệ chat.
  *
- * Vẽ bằng SVG viết tay thay vì ảnh chụp màn hình, vì hai lý do:
- * giao diện thật là sản phẩm nội bộ của công ty nên không chụp được, và một
- * sơ đồ nói được điều mà ảnh chụp không nói: vì sao trình duyệt không gọi
- * thẳng service Node.
+ * Vẽ bằng SVG viết tay thay vì ảnh chụp màn hình, vì hai lý do: giao diện
+ * thật là sản phẩm nội bộ của công ty nên không chụp được, và một sơ đồ nói
+ * được điều mà ảnh chụp không nói — vì sao trình duyệt không gọi thẳng
+ * service Node.
  *
- * Màu lấy từ chính design token qua var(), nên sơ đồ tự khớp với phần còn
- * lại của trang mà không phải khai báo màu lần thứ hai.
+ * Màu lấy từ chính design token qua var(), nên sơ đồ tự khớp với phần còn lại
+ * của trang mà không phải khai báo màu lần thứ hai. Hộp vẽ góc vuông (rx=0),
+ * cùng luật với toàn trang.
  *
  * Đường màu nhấn là chuỗi thời gian thực (CQN → Node → SSE → trình duyệt);
  * đường xám là chiều yêu cầu đi ra. Tách màu để mắt bắt được phần khó trước.
@@ -20,10 +21,11 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
   const { nodes, edges } = diagram;
 
   return (
-    <figure className="mt-6">
+    <figure className="mt-8">
       {/* Trên điện thoại sơ đồ hẹp lại thì chữ không đọc nổi, nên cho cuộn
-          ngang trong khung riêng thay vì bóp nhỏ. */}
-      <div className="min-w-0 overflow-x-auto rounded-lg border border-line bg-canvas-subtle p-4">
+          ngang trong khung riêng thay vì bóp nhỏ. min-w-0 để khung này chịu
+          co lại theo cột cha thay vì đẩy cả trang rộng ra. */}
+      <div className="min-w-0 overflow-x-auto border border-rule bg-paper-tint p-5">
         <svg
           viewBox="0 0 680 330"
           role="img"
@@ -43,7 +45,7 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
               markerHeight="6"
               orient="auto-start-reverse"
             >
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--line-strong)" />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink-3)" />
             </marker>
             <marker
               id="arrow-accent"
@@ -70,8 +72,8 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
             y1={99}
             x2={254}
             y2={99}
-            stroke="var(--line-strong)"
-            strokeWidth={1.5}
+            stroke="var(--ink-3)"
+            strokeWidth={1}
             markerEnd="url(#arrow-neutral)"
           />
           <EdgeLabel x={208} y={88}>
@@ -83,8 +85,8 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
             y1={99}
             x2={514}
             y2={99}
-            stroke="var(--line-strong)"
-            strokeWidth={1.5}
+            stroke="var(--ink-3)"
+            strokeWidth={1}
             markerEnd="url(#arrow-neutral)"
           />
           <EdgeLabel x={468} y={88}>
@@ -97,8 +99,8 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
             y1={136}
             x2={612}
             y2={226}
-            stroke="var(--line-strong)"
-            strokeWidth={1.5}
+            stroke="var(--ink-3)"
+            strokeWidth={1}
             markerEnd="url(#arrow-neutral)"
           />
           <EdgeLabel x={622} y={185} anchor="start">
@@ -134,7 +136,7 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
         </svg>
       </div>
 
-      <figcaption className="mt-3 text-xs leading-relaxed text-ink-faint">
+      <figcaption className="mt-4 max-w-[var(--measure)] text-sm leading-relaxed text-ink-3">
         {diagram.chatCaption}
       </figcaption>
     </figure>
@@ -159,9 +161,9 @@ function Box({
         y={y}
         width={160}
         height={70}
-        rx={10}
-        fill="var(--surface)"
-        stroke="var(--line-strong)"
+        rx={0}
+        fill="var(--paper)"
+        stroke="var(--ink)"
         strokeWidth={1}
       />
       <text
@@ -178,7 +180,7 @@ function Box({
         x={x + 80}
         y={y + 50}
         textAnchor="middle"
-        fill="var(--ink-faint)"
+        fill="var(--ink-3)"
         fontSize={10}
       >
         {subtitle}
@@ -205,7 +207,7 @@ function EdgeLabel({
       x={x}
       y={y}
       textAnchor={anchor}
-      fill={accent ? "var(--accent)" : "var(--ink-faint)"}
+      fill={accent ? "var(--accent)" : "var(--ink-3)"}
       fontSize={10}
     >
       {children}

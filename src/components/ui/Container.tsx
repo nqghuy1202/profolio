@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 
 /**
- * Giới hạn chiều rộng nội dung và tạo lề hai bên.
+ * Giới hạn bề rộng nội dung.
  *
- * Chiều rộng lấy từ token --content-width nên đổi một chỗ là đổi cả trang.
+ * Lưu ý: kẻ chỉ ngăn cách các section KHÔNG đi qua component này — chúng chạy
+ * hết bề ngang màn hình. Đó là chi tiết làm nên chất tạp chí: chữ thì thụt
+ * vào lề, còn đường kẻ thì chạm tới mép giấy.
  */
 export function Container({
   children,
@@ -14,7 +16,7 @@ export function Container({
 }) {
   return (
     <div
-      className={`mx-auto w-full max-w-[var(--content-width)] px-5 sm:px-8 ${className}`}
+      className={`mx-auto w-full max-w-[var(--content)] px-6 sm:px-10 ${className}`}
     >
       {children}
     </div>

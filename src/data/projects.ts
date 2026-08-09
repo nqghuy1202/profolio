@@ -2,8 +2,8 @@
  * Dự án.
  *
  * File này giữ phần KHÔNG đổi theo ngôn ngữ: tên công nghệ, đường link, loại
- * thẻ, trạng thái. Toàn bộ câu chữ (tiêu đề, mô tả, đầu việc, con số) nằm ở
- * src/i18n/*.json dưới khoá `projects.<id>`.
+ * thẻ, trạng thái, slug URL. Toàn bộ câu chữ nằm ở src/i18n/*.json dưới khoá
+ * `work.items.<id>`.
  *
  * Hai điều đã cân nhắc kỹ, đừng đổi mà không đọc lý do:
  *
@@ -12,12 +12,12 @@
  *    thay vì tên công ty. Tên thật vẫn nói được khi phỏng vấn.
  *
  * 2. PHẦN LỚN DỰ ÁN KHÔNG CÓ LINK, VÀ ĐÓ LÀ CHỦ Ý. Code thuộc sở hữu công ty
- *    và khách hàng. Thẻ `professional` được thiết kế riêng cho trường hợp này
- *    — có nhãn giải thích và sơ đồ kiến trúc thay cho ảnh chụp màn hình — nên
- *    việc thiếu link đọc ra là một ranh giới nghề nghiệp, không phải chỗ trống.
+ *    và khách hàng. Trang chi tiết của những dự án đó dùng sơ đồ kiến trúc và
+ *    một dòng ghi rõ vì sao không có mã nguồn — chỗ thiếu link đọc ra thành
+ *    ranh giới nghề nghiệp, không phải chỗ trống.
  */
 
-/** Nhãn tầng công nghệ, dùng chung toàn site để các thẻ đọc giống nhau. */
+/** Nhãn tầng công nghệ, dùng chung toàn site để các trang đọc giống nhau. */
 export type TechLayer =
   | "frontend"
   | "backend"
@@ -33,24 +33,30 @@ export type ProjectKind = "openSource" | "professional";
 export type ProjectStatus = "production" | "pilot" | "live";
 
 export interface Project {
-  /** Khớp với khoá trong i18n: projects.items.<id> */
+  /** Khớp với khoá trong i18n: work.items.<id> */
   id: string;
+  /** Đoạn cuối URL: /en/work/<slug> */
+  slug: string;
   kind: ProjectKind;
   featured: boolean;
   status?: ProjectStatus;
+  /** Ba công nghệ in ở hàng chỉ mục trang chủ — chọn thứ nói được nhiều nhất */
+  highlightTech: string[];
   tech: { layer: TechLayer; items: string[] }[];
   links?: { repo?: string; demo?: string };
-  /** Tên sơ đồ SVG vẽ kèm, thay cho ảnh chụp màn hình. */
+  /** Tên sơ đồ SVG vẽ kèm ở trang chi tiết, thay cho ảnh chụp màn hình. */
   diagram?: "chat";
 }
 
 export const projects: Project[] = [
   {
     id: "chat",
+    slug: "real-time-chat",
     kind: "professional",
     featured: true,
     status: "production",
     diagram: "chat",
+    highlightTech: ["Node.js", "Server-Sent Events", "Oracle CQN"],
     tech: [
       {
         layer: "frontend",
@@ -93,8 +99,10 @@ export const projects: Project[] = [
   },
   {
     id: "heartRisk",
+    slug: "heart-risk-estimator",
     kind: "openSource",
     featured: true,
+    highlightTech: ["React 19", "TypeScript", "Django 5.2"],
     links: {
       repo: "https://github.com/nqghuy1202/heart_risk_estimator",
     },
@@ -127,9 +135,11 @@ export const projects: Project[] = [
   },
   {
     id: "localAi",
+    slug: "self-hosted-llm",
     kind: "professional",
     featured: false,
     status: "pilot",
+    highlightTech: ["Ollama", "RAG", "DBMS_VECTOR"],
     tech: [
       {
         layer: "backend",
@@ -152,8 +162,10 @@ export const projects: Project[] = [
   },
   {
     id: "erpWarehouse",
+    slug: "erp-warehouse-integration",
     kind: "professional",
     featured: false,
+    highlightTech: ["ORDS REST", "UTL_HTTP", "PL/SQL"],
     tech: [
       { layer: "frontend", items: ["JavaScript", "AJAX"] },
       {
@@ -173,8 +185,10 @@ export const projects: Project[] = [
   },
   {
     id: "erpProduction",
+    slug: "erp-production-module",
     kind: "professional",
     featured: false,
+    highlightTech: ["Oracle APEX", "PL/SQL", "Schema design"],
     tech: [
       { layer: "frontend", items: ["JavaScript", "jQuery", "AJAX"] },
       {
@@ -185,9 +199,11 @@ export const projects: Project[] = [
   },
   {
     id: "kpiSupplier",
+    slug: "supplier-kpi-module",
     kind: "professional",
     featured: false,
     status: "live",
+    highlightTech: ["Oracle APEX", "PL/SQL", "Oracle Database"],
     tech: [
       { layer: "frontend", items: ["JavaScript"] },
       {
@@ -197,3 +213,8 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+/** Tra dự án theo slug URL. Trả undefined nếu không có — trang gọi sẽ 404. */
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((project) => project.slug === slug);
+}

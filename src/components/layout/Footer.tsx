@@ -1,62 +1,86 @@
 import { Container } from "@/components/ui/Container";
 import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { GitHubIcon, LinkedInIcon, MailIcon } from "@/components/ui/icons";
+import type { Locale } from "@/i18n/config";
 
+/**
+ * Dải chân trang đảo màu — mực làm nền, giấy làm chữ.
+ *
+ * Kế thừa từ `.foot { background-color: black; color: white }` của HL Company,
+ * nhưng kéo dài thành một khối có sức nặng thay vì một thanh cao 32px. Đây là
+ * chỗ duy nhất trên trang đảo màu, nên nó đóng lại toàn bộ trang một cách dứt
+ * khoát.
+ */
 export function Footer({
   footer,
   contact,
+  locale,
 }: {
   footer: Dictionary["footer"];
   contact: Dictionary["contact"];
+  locale: Locale;
 }) {
   const year = new Date().getFullYear();
+  const name = locale === "vi" ? profile.fullNameVi : profile.fullName;
 
-  const socials = [
+  const links = [
     {
-      href: profile.githubUrl,
-      label: contact.githubLabel,
-      Icon: GitHubIcon,
-    },
-    {
-      href: profile.linkedinUrl,
-      label: contact.linkedinLabel,
-      Icon: LinkedInIcon,
-    },
-    {
-      href: `mailto:${profile.email}`,
       label: contact.emailLabel,
-      Icon: MailIcon,
+      value: profile.email,
+      href: `mailto:${profile.email}`,
+      external: false,
+    },
+    {
+      label: contact.githubLabel,
+      value: `github.com/${profile.githubUser}`,
+      href: profile.githubUrl,
+      external: true,
+    },
+    {
+      label: contact.linkedinLabel,
+      value: "linkedin.com/in/huy-nqg",
+      href: profile.linkedinUrl,
+      external: true,
     },
   ];
 
   return (
-    <footer className="border-t border-line py-10">
+    <footer className="border-t border-rule-ink bg-ink text-paper">
       <Container>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1">
-            <p className="text-sm text-ink-muted">{footer.builtWith}</p>
-            <p className="text-xs text-ink-faint">
-              © {year} {profile.fullName}. {footer.rights}
-            </p>
+        <div className="grid gap-12 py-16 lg:grid-cols-[1fr_auto] lg:gap-20">
+          <div>
+            <p className="display-sm text-paper">{name}</p>
+            <p className="label mt-4 text-accent">{footer.availability}</p>
           </div>
 
-          <div className="flex items-center gap-4 text-lg">
-            {socials.map(({ href, label, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target={href.startsWith("mailto:") ? undefined : "_blank"}
-                rel={href.startsWith("mailto:") ? undefined : "noreferrer"}
-                className="text-ink-muted transition-colors hover:text-accent"
-              >
-                <Icon />
-              </a>
+          <ul className="grid gap-6 sm:grid-cols-3 lg:grid-cols-1">
+            {links.map((link) => (
+              <li key={link.label}>
+                <span className="label block text-paper/50">{link.label}</span>
+                <a
+                  href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer" : undefined}
+                  className="underline-grow mt-2 inline-block text-sm text-paper"
+                >
+                  {link.value}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </Container>
+
+      <div className="border-t border-paper/15">
+        <Container>
+          <div className="flex flex-col gap-2 py-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="label text-paper/50">
+              © {year} {profile.fullName}
+            </p>
+            <p className="text-xs text-paper/50">{footer.builtWith}</p>
+          </div>
+        </Container>
+      </div>
     </footer>
   );
 }

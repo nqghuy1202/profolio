@@ -18,4 +18,20 @@ export const features = {
    * được xoay. Lúc đó profile chỉ còn `heart_risk_estimator` đứng một mình.
    */
   githubStats: false,
+
+  /**
+   * Ảnh chân dung ở mục Giới thiệu.
+   *
+   * ⚠️ ĐANG TẮT — chưa có ảnh. Bật lên khi đã đặt file vào
+   * `public/portrait.jpg`.
+   *
+   * Yêu cầu về ảnh: tỉ lệ dọc 4:5 (vd. 800×1000), nền đơn sắc, áo sơ mi trơn,
+   * ánh sáng đều, nhìn thẳng ống kính. Trang sẽ tự chuyển ảnh sang trắng đen
+   * để khớp bảng màu — nên đừng chọn ảnh mà màu sắc là điểm mạnh duy nhất.
+   *
+   * 🚫 KHÔNG dùng ảnh thẻ cấp 3 trong repo `website_fashion` — còn nguyên
+   * đồng phục và bảng tên trường, đặt cạnh dòng "hai năm kinh nghiệm" sẽ phản
+   * tác dụng.
+   */
+  portrait: false,
 } as const;

@@ -2,47 +2,46 @@ import type { ReactNode } from "react";
 import { Container } from "./Container";
 
 /**
- * Khung chung cho một section của trang.
+ * Khung một section.
  *
- * `aria-labelledby` trỏ vào chính thẻ h2 bên trong: trình đọc màn hình liệt
- * kê các vùng của trang theo tiêu đề này, nên người dùng nhảy thẳng tới
- * "Projects" được mà không phải nghe hết trang.
+ * Cấu trúc lấy từ trang tạp chí: một đường kẻ đậm chạy hết bề ngang, rồi một
+ * hàng chạy đầu mục gồm số thứ tự và tên mục, rồi một đường kẻ mảnh, rồi mới
+ * tới nội dung. Đường kẻ nằm NGOÀI Container nên nó chạm tới mép màn hình,
+ * còn chữ thì vẫn thụt vào lề.
+ *
+ * Số thứ tự đặt aria-hidden: nó là ký hiệu thị giác, trình đọc màn hình đọc
+ * lên thành "không một, Dự án" thì chỉ tổ rối.
  */
 export function Section({
   id,
-  title,
-  lead,
+  index,
+  label,
+  action,
   children,
 }: {
   id: string;
-  title: string;
-  lead?: string;
+  index: string;
+  label: string;
+  action?: ReactNode;
   children: ReactNode;
 }) {
-  const headingId = `${id}-heading`;
-
   return (
-    <section
-      id={id}
-      aria-labelledby={headingId}
-      className="border-t border-line py-16 sm:py-24"
-    >
-      <Container>
-        <div className="max-w-2xl">
-          <h2
-            id={headingId}
-            className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
-          >
-            {title}
-          </h2>
-          {lead ? (
-            <p className="mt-4 text-base leading-relaxed text-ink-muted">
-              {lead}
-            </p>
-          ) : null}
-        </div>
-        <div className="mt-10 sm:mt-12">{children}</div>
-      </Container>
+    <section id={id} aria-labelledby={`${id}-label`}>
+      <div className="border-t border-rule-ink">
+        <Container>
+          <div className="flex items-baseline justify-between gap-6 py-4">
+            <h2 id={`${id}-label`} className="flex items-baseline gap-4">
+              <span aria-hidden="true" className="numeral text-lg text-accent">
+                {index}
+              </span>
+              <span className="label text-ink">{label}</span>
+            </h2>
+            {action}
+          </div>
+        </Container>
+      </div>
+
+      <div className="border-t border-rule">{children}</div>
     </section>
   );
 }

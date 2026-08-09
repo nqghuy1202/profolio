@@ -1,10 +1,14 @@
-import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
 import { getGitHubStats } from "@/lib/github";
 import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
-import { ArrowIcon } from "@/components/ui/icons";
 
+/**
+ * Dải số liệu GitHub — cố ý KHÔNG đánh số thứ tự như các section chính.
+ * Nhờ vậy bật hay tắt khối này (features.githubStats) cũng không làm lệch dãy
+ * 01–04 của Dự án / Kỹ năng / Giới thiệu / Liên hệ.
+ */
 export async function GitHubStats({
   copy,
   locale,
@@ -33,34 +37,40 @@ export async function GitHubStats({
     : [];
 
   return (
-    <Section id="github" title={copy.title} lead={copy.lead}>
-      {stats ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {tiles.map((tile) => (
-            <div
-              key={tile.label}
-              className="rounded-lg border border-line bg-surface p-5"
-            >
-              <p className="font-mono text-2xl font-semibold text-accent">
-                {tile.value}
-              </p>
-              <p className="mt-1 text-sm text-ink-muted">{tile.label}</p>
-            </div>
-          ))}
+    <section
+      aria-labelledby="github-label"
+      className="border-t border-rule-ink bg-paper-tint"
+    >
+      <Container>
+        <div className="flex flex-wrap items-baseline justify-between gap-4 pt-8">
+          <h2 id="github-label" className="label text-accent">
+            {copy.title}
+          </h2>
+          <a
+            href={profile.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="label underline-grow text-ink-2 hover:text-ink"
+          >
+            {copy.viewProfile} ↗
+          </a>
         </div>
-      ) : (
-        <p className="text-sm text-ink-faint">{copy.unavailable}</p>
-      )}
 
-      <a
-        href={profile.githubUrl}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-6 inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-accent"
-      >
-        {copy.viewProfile}
-        <ArrowIcon />
-      </a>
-    </Section>
+        {stats ? (
+          <dl className="grid gap-8 pt-8 pb-12 sm:grid-cols-2 lg:grid-cols-4">
+            {tiles.map((tile) => (
+              <div key={tile.label}>
+                <dt className="text-[clamp(1.5rem,3vw,2.25rem)] leading-none font-semibold tracking-[-0.02em] text-ink">
+                  {tile.value}
+                </dt>
+                <dd className="mt-3 text-sm text-ink-2">{tile.label}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <p className="pt-6 pb-12 text-sm text-ink-3">{copy.unavailable}</p>
+        )}
+      </Container>
+    </section>
   );
 }
