@@ -32,6 +32,15 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ...nhưng file mẫu thì PHẢI commit, nếu không người clone về không biết
+# cần những biến nào. Dòng .env* ở trên nuốt luôn cả nó nếu thiếu dòng này.
+!.env.example
+
+# Ghi chú cá nhân chuẩn bị phỏng vấn — chỉ giữ ở máy, không đẩy lên GitHub
+/NOTES.md
+
+# Cấu hình công cụ ở máy, không liên quan tới dự án
+/.claude/
 
 # vercel
 .vercel
