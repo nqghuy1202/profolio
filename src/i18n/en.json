@@ -17,6 +17,7 @@
   },
   "hero": {
     "role": "Full Stack Developer",
+    "portraitAlt": "Portrait of Huy Nguyen Quoc Gia",
     "intro": "Two years of experience building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Deepest on the database side — data modelling, business logic in PL/SQL, and query tuning — and writes the front-end JavaScript by hand.",
     "ctaWork": "See the work",
     "ctaContact": "Get in touch",
@@ -208,8 +209,6 @@
       "Most of what I do sits between systems. Pulling supplier invoices in from a third-party API, exposing inventory data back out over REST, pushing database changes to a Node.js service in real time. The interesting problems are usually at the seams.",
       "I am also the person on the team who gets asked to evaluate new technology and bring it into the system: push notifications, real-time notifications, the real-time chat platform, and most recently a self-hosted LLM with retrieval search. The first three are in daily use; the last one is in pilot."
     ],
-    "portraitAlt": "Portrait of Huy Nguyen Quoc Gia",
-    "portraitCaption": "Ho Chi Minh City",
     "educationTitle": "Education",
     "education": {
       "degree": "Bachelor of Information Technology — Data Science",

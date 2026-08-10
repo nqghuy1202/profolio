@@ -17,6 +17,7 @@
   },
   "hero": {
     "role": "Full Stack Developer",
+    "portraitAlt": "Ảnh chân dung Nguyễn Quốc Gia Huy",
     "intro": "Hai năm kinh nghiệm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Mạnh nhất ở tầng database — thiết kế dữ liệu, xử lý nghiệp vụ bằng PL/SQL và tối ưu truy vấn — và tự viết tay phần JavaScript phía trình duyệt.",
     "ctaWork": "Xem dự án",
     "ctaContact": "Liên hệ",
@@ -208,8 +209,6 @@
       "Phần lớn việc tôi làm nằm ở chỗ nối giữa các hệ thống. Kéo hoá đơn nhà cung cấp về từ API bên thứ ba, mở dữ liệu tồn kho ra ngoài qua REST, đẩy thay đổi dưới database lên một service Node.js theo thời gian thực. Bài toán thú vị thường nằm đúng ở các mối nối.",
       "Tôi cũng là người trong nhóm được giao khảo sát công nghệ mới rồi đưa vào hệ thống: push notification, thông báo thời gian thực, nền tảng chat real-time, và gần đây nhất là một LLM self-hosted kèm tìm kiếm truy hồi. Ba thứ đầu đang được dùng hằng ngày; thứ cuối đang trong giai đoạn thử nghiệm."
     ],
-    "portraitAlt": "Ảnh chân dung Nguyễn Quốc Gia Huy",
-    "portraitCaption": "TP. Hồ Chí Minh",
     "educationTitle": "Học vấn",
     "education": {
       "degree": "Cử nhân Công nghệ thông tin — chuyên ngành Khoa học dữ liệu",

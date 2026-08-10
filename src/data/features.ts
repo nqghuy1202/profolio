@@ -4,7 +4,7 @@ export const features = {
   // Khối GitHub stats. Tắt tới khi dọn xong các repo cũ trên profile.
   githubStats: false,
 
-  // Ảnh chân dung ở mục Giới thiệu. Bật khi đã đặt file vào
-  // public/portrait.jpg — dọc 4:5, nền đơn sắc; trang tự chuyển sang trắng đen.
-  portrait: false,
+  // Ảnh chân dung cạnh tên ở Hero, đọc từ public/portrait.jpg.
+  // Ảnh thay thế phải vuông, nếu không vòng tròn sẽ cắt lệch khuôn mặt.
+  portrait: true,
 } as const;

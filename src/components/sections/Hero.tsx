@@ -1,10 +1,12 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { features } from "@/data/features";
 import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-// Bố cục lệch: tên chiếm trọn bề ngang, đoạn giới thiệu thụt vào cột phải và
-// giới hạn ở --measure (~70 ký tự/dòng) cho dễ đọc.
+// Khối nhận diện: ảnh bên trái, tên và chức danh bên phải, canh giữa theo
+// chiều dọc. Đoạn giới thiệu nằm dưới, giới hạn ở --measure (~70 ký tự/dòng).
 export function Hero({
   hero,
   locale,
@@ -18,36 +20,49 @@ export function Hero({
     <section className="border-b border-rule-ink">
       <Container>
         <div className="pt-16 pb-14 sm:pt-24 sm:pb-20">
-          <p className="label text-accent">{hero.role}</p>
-
-          <h1 className="display mt-6 text-ink">{name}</h1>
-
-          <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-            {/* Cột trái để trống trên màn hình rộng — khoảng trắng ở đây là
-                nội dung, không phải chỗ chưa điền. */}
-            <div aria-hidden="true" className="hidden lg:block" />
-
-            <div className="max-w-[var(--measure)]">
-              <p className="text-lg leading-[1.65] text-ink-2 sm:text-xl">
-                {hero.intro}
-              </p>
-
-              <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-                {/* Nút viền vuông, hover thì đảo màu — đúng cách nút
-                    "XEM THÊM" của HL Company hoạt động. */}
-                <a
-                  href="#work"
-                  className="label border border-ink px-6 py-4 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
-                >
-                  {hero.ctaWork} →
-                </a>
-                <a
-                  href="#contact"
-                  className="label underline-grow text-ink-2 hover:text-ink"
-                >
-                  {hero.ctaContact}
-                </a>
+          <div className="flex items-center gap-6 sm:gap-8">
+            {features.portrait ? (
+              // Khung là một vòng kẻ chỉ riêng, cách ảnh một khoảng đệm, nên
+              // nó đọc ra thành cái khung chứ không phải viền dính vào ảnh.
+              <div className="shrink-0 rounded-full border border-rule-ink p-2.5">
+                <Image
+                  src="/portrait.jpg"
+                  alt={hero.portraitAlt}
+                  width={576}
+                  height={576}
+                  sizes="(min-width: 640px) 12rem, 9rem"
+                  priority
+                  className="size-36 rounded-full object-cover sm:size-48"
+                />
               </div>
+            ) : null}
+
+            <div className="min-w-0">
+              <p className="label text-accent">{hero.role}</p>
+              <h1 className="display-sm mt-3 text-ink">{name}</h1>
+            </div>
+          </div>
+
+          <div className="mt-12 max-w-[var(--measure)]">
+            <p className="text-lg leading-[1.65] text-ink-2 sm:text-xl">
+              {hero.intro}
+            </p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+              {/* Nút viền vuông, hover thì đảo màu — đúng cách nút
+                  "XEM THÊM" của HL Company hoạt động. */}
+              <a
+                href="#work"
+                className="label border border-ink px-6 py-4 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
+              >
+                {hero.ctaWork} →
+              </a>
+              <a
+                href="#contact"
+                className="label underline-grow text-ink-2 hover:text-ink"
+              >
+                {hero.ctaContact}
+              </a>
             </div>
           </div>
         </div>
