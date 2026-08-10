@@ -2,21 +2,10 @@ import type { Dictionary } from "@/i18n/dictionaries";
 
 type Diagram = Dictionary["work"]["diagram"];
 
-/**
- * Sơ đồ đường đi của một tin nhắn trong hệ chat.
- *
- * Vẽ bằng SVG viết tay thay vì ảnh chụp màn hình, vì hai lý do: giao diện
- * thật là sản phẩm nội bộ của công ty nên không chụp được, và một sơ đồ nói
- * được điều mà ảnh chụp không nói — vì sao trình duyệt không gọi thẳng
- * service Node.
- *
- * Màu lấy từ chính design token qua var(), nên sơ đồ tự khớp với phần còn lại
- * của trang mà không phải khai báo màu lần thứ hai. Hộp vẽ góc vuông (rx=0),
- * cùng luật với toàn trang.
- *
- * Đường màu nhấn là chuỗi thời gian thực (CQN → Node → SSE → trình duyệt);
- * đường xám là chiều yêu cầu đi ra. Tách màu để mắt bắt được phần khó trước.
- */
+// Sơ đồ đường đi của một tin nhắn. SVG viết tay vì giao diện thật là sản phẩm
+// nội bộ, không chụp màn hình được. Màu lấy từ design token qua var().
+// Đường màu nhấn = chuỗi thời gian thực (CQN → Node → SSE → trình duyệt),
+// đường xám = chiều yêu cầu đi ra.
 export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
   const { nodes, edges } = diagram;
 
@@ -60,13 +49,13 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
             </marker>
           </defs>
 
-          {/* --- Bốn thành phần --- */}
+          {/* Bốn thành phần */}
           <Box x={0} y={64} title={nodes.browser} subtitle={nodes.browserSub} />
           <Box x={260} y={64} title={nodes.apex} subtitle={nodes.apexSub} />
           <Box x={520} y={64} title={nodes.node} subtitle={nodes.nodeSub} />
           <Box x={520} y={230} title={nodes.oracle} subtitle={nodes.oracleSub} />
 
-          {/* --- Chiều đi ra: trình duyệt gửi tin nhắn --- */}
+          {/* Chiều đi ra: trình duyệt gửi tin nhắn */}
           <line
             x1={162}
             y1={99}
@@ -93,7 +82,7 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
             {edges.forward}
           </EdgeLabel>
 
-          {/* --- Node ghi xuống database --- */}
+          {/* Node ghi xuống database */}
           <line
             x1={612}
             y1={136}
@@ -107,7 +96,7 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
             {edges.write}
           </EdgeLabel>
 
-          {/* --- Chuỗi thời gian thực: database đẩy ngược lên Node --- */}
+          {/* Chuỗi thời gian thực: database đẩy ngược lên Node */}
           <line
             x1={588}
             y1={226}
@@ -121,7 +110,7 @@ export function ChatArchitecture({ diagram }: { diagram: Diagram }) {
             {edges.notify}
           </EdgeLabel>
 
-          {/* --- Node đẩy sự kiện thẳng về trình duyệt qua SSE --- */}
+          {/* Node đẩy sự kiện thẳng về trình duyệt qua SSE */}
           <path
             d="M 600 62 L 600 26 L 80 26 L 80 60"
             fill="none"

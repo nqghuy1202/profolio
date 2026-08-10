@@ -4,11 +4,8 @@ import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-/**
- * Dải số liệu GitHub — cố ý KHÔNG đánh số thứ tự như các section chính.
- * Nhờ vậy bật hay tắt khối này (features.githubStats) cũng không làm lệch dãy
- * 01–04 của Dự án / Kỹ năng / Giới thiệu / Liên hệ.
- */
+// Không đánh số thứ tự như các section chính, để bật/tắt khối này
+// (features.githubStats) không làm lệch dãy 01–04.
 export async function GitHubStats({
   copy,
   locale,

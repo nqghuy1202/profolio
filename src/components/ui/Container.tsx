@@ -1,12 +1,7 @@
 import type { ReactNode } from "react";
 
-/**
- * Giới hạn bề rộng nội dung.
- *
- * Lưu ý: kẻ chỉ ngăn cách các section KHÔNG đi qua component này — chúng chạy
- * hết bề ngang màn hình. Đó là chi tiết làm nên chất tạp chí: chữ thì thụt
- * vào lề, còn đường kẻ thì chạm tới mép giấy.
- */
+// Giới hạn bề rộng nội dung. Kẻ chỉ ngăn cách section KHÔNG đi qua đây —
+// chúng phải chạy hết bề ngang màn hình.
 export function Container({
   children,
   className = "",

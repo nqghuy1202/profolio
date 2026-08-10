@@ -1,17 +1,8 @@
 import type { ReactNode } from "react";
 import { Container } from "./Container";
 
-/**
- * Khung một section.
- *
- * Cấu trúc lấy từ trang tạp chí: một đường kẻ đậm chạy hết bề ngang, rồi một
- * hàng chạy đầu mục gồm số thứ tự và tên mục, rồi một đường kẻ mảnh, rồi mới
- * tới nội dung. Đường kẻ nằm NGOÀI Container nên nó chạm tới mép màn hình,
- * còn chữ thì vẫn thụt vào lề.
- *
- * Số thứ tự đặt aria-hidden: nó là ký hiệu thị giác, trình đọc màn hình đọc
- * lên thành "không một, Dự án" thì chỉ tổ rối.
- */
+// Đường kẻ đặt NGOÀI Container để chạm mép màn hình, chữ vẫn thụt vào lề.
+// Số thứ tự để aria-hidden: trình đọc màn hình đọc thành "không một, Dự án".
 export function Section({
   id,
   index,

@@ -1,12 +1,6 @@
-/**
- * Kỹ năng kỹ thuật.
- *
- * Tên công nghệ giữ nguyên ở cả hai ngôn ngữ nên nằm ở đây; chỉ tiêu đề nhóm
- * là phải dịch, và nó nằm ở src/i18n/*.json theo `id`.
- *
- * NGUYÊN TẮC: chỉ liệt kê thứ đã dùng thật và trả lời được câu hỏi sâu về nó.
- * Danh sách cố ý loại trừ nằm ở cuối file — đọc trước khi định thêm dòng mới.
- */
+// Tên công nghệ giữ nguyên ở cả hai ngôn ngữ nên nằm ở đây; tiêu đề nhóm phải
+// dịch nên nằm ở src/i18n/*.json theo `id`.
+// Chỉ liệt kê thứ đã dùng thật và trả lời được câu hỏi sâu.
 
 export interface SkillGroup {
   /** Khớp với khoá trong i18n: skills.groups.<id> */

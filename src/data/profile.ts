@@ -1,9 +1,5 @@
-/**
- * Thông tin định danh — phần không đổi theo ngôn ngữ.
- *
- * Mọi câu chữ nằm ở src/i18n/*.json. File này chỉ giữ những giá trị mà dịch
- * sang tiếng Việt cũng không khác đi: tên riêng, đường dẫn, tay cầm mạng xã hội.
- */
+// Phần không đổi theo ngôn ngữ: tên riêng, đường dẫn, tài khoản mạng xã hội.
+// Mọi câu chữ nằm ở src/i18n/*.json.
 
 export const profile = {
   /** Dạng dùng trong CV tiếng Anh, thứ tự họ trước như trên giấy tờ. */
@@ -24,10 +20,7 @@ export const profile = {
 
   linkedinUrl: "https://www.linkedin.com/in/huy-nqg",
 
-  /**
-   * Bản CV công khai — cố ý KHÔNG có số điện thoại. Bản đầy đủ dùng để nộp
-   * trực tiếp, không đặt lên web cho bot quét.
-   */
+  /** Bản công khai, không có số điện thoại — bản đầy đủ chỉ nộp trực tiếp. */
   cvPath: "/cv/HuyNguyen_FullStackDeveloper_Resume.pdf",
 
   /** Mốc bắt đầu tính kinh nghiệm: 07/2024, gồm cả kỳ thực tập. */

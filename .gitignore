@@ -39,9 +39,6 @@ yarn-error.log*
 # Ghi chú cá nhân chuẩn bị phỏng vấn — chỉ giữ ở máy, không đẩy lên GitHub
 /NOTES.md
 
-# Cấu hình công cụ ở máy, không liên quan tới dự án
-/.claude/
-
 # vercel
 .vercel
 

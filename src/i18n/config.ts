@@ -1,11 +1,5 @@
-/**
- * Cấu hình đa ngôn ngữ.
- *
- * Cố ý không dùng thư viện i18n nào. Trang này chỉ có hai ngôn ngữ và một
- * route, nên toàn bộ nhu cầu gói gọn trong: một danh sách locale, một hàm
- * nạp file JSON, và segment [locale] của App Router. Thêm thư viện vào đây
- * là thêm một lớp phải giải thích mà không đổi lại được gì.
- */
+// Không dùng thư viện i18n: hai ngôn ngữ và một route thì chỉ cần danh sách
+// locale, một hàm nạp JSON và segment [locale] của App Router.
 
 export const locales = ["en", "vi"] as const;
 

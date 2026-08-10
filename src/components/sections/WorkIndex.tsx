@@ -5,18 +5,8 @@ import { projects } from "@/data/projects";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-/**
- * Mục lục dự án — mỗi dự án một HÀNG, không phải một thẻ.
- *
- * Đây là thay đổi lớn nhất so với bản trước. Sáu cái thẻ dày đặc chữ đứng
- * cạnh nhau buộc người xem đọc hết mới biết nên bấm vào đâu. Sáu hàng chỉ có
- * số thứ tự, tên, một dòng tóm tắt và ba công nghệ thì quét trong năm giây là
- * xong, còn phần dài nằm ở trang riêng của từng dự án.
- *
- * Rê chuột thì cả hàng đảo nền sang màu mực. Đây là bản chuyển thể của hiệu
- * ứng "ảnh mờ đi, chữ hiện lên" trong HL Company: portfolio không có ảnh sản
- * phẩm để làm mờ, nên sức nặng dồn vào việc đảo màu nguyên hàng.
- */
+// Mỗi dự án một hàng, không phải một thẻ: quét nhanh hơn, phần dài nằm ở
+// trang riêng của từng dự án.
 export function WorkIndex({
   work,
   locale,

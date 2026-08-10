@@ -1,16 +1,8 @@
 @import "tailwindcss";
 
-/* ---------------------------------------------------------------------------
-   DESIGN TOKENS
-
-   Ngôn ngữ thị giác: tạp chí in. Nền giấy, mực đen, phân vùng bằng kẻ chỉ,
-   một màu nhấn duy nhất.
-
-   Ba luật tuyệt đối, phá là hỏng cả hệ:
-     1. KHÔNG bo góc. Không một `rounded-*` nào.
-     2. KHÔNG đổ bóng. Chiều sâu tạo bằng kẻ chỉ và khoảng trắng.
-     3. Màu nhấn chỉ dùng để NHẤN. Nó không phải màu nền của nút.
---------------------------------------------------------------------------- */
+/* Design tokens.
+   Ba luật của hệ: không bo góc, không đổ bóng, màu nhấn chỉ để nhấn chứ không
+   làm nền nút. Chiều sâu tạo bằng kẻ chỉ và khoảng trắng. */
 :root {
   /* Giấy — trắng ngà một chút, trắng tinh #fff trên màn hình bị chói */
   --paper: #fbfaf8;
@@ -55,9 +47,7 @@
   --font-numeral: var(--font-instrument);
 }
 
-/* ---------------------------------------------------------------------------
-   BASE
---------------------------------------------------------------------------- */
+/* Base */
 html {
   scroll-behavior: smooth;
   scroll-padding-block-start: 4.5rem;
@@ -117,12 +107,8 @@ body {
   }
 }
 
-/* ---------------------------------------------------------------------------
-   PRIMITIVE VIẾT TAY
-
-   Những thứ dưới đây lặp lại khắp trang và mang bản sắc riêng, nên viết một
-   lần ở đây thay vì rải chuỗi utility dài dòng ở mọi component.
---------------------------------------------------------------------------- */
+/* Primitive viết tay — lặp lại khắp trang nên khai báo một lần ở đây thay vì
+   rải chuỗi utility dài ở mọi component. */
 
 /* Nhãn nhỏ chữ hoa giãn ký tự — dùng cho mọi tiêu đề phụ và siêu dữ liệu.
    Đây là chi tiết định hình cả trang, kế thừa từ nhãn VEST / XEM THÊM. */

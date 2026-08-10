@@ -4,14 +4,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { skillGroups } from "@/data/skills";
 import type { Dictionary } from "@/i18n/dictionaries";
 
-/**
- * Kỹ năng trình bày dạng danh sách định nghĩa hai cột, mỗi nhóm một hàng kẻ
- * chỉ — không chip, không thẻ, không khung bo góc.
- *
- * Lý do: một chip là một cái hộp; sáu nhóm × bảy công nghệ là bốn mươi cái
- * hộp, và mắt phải xử lý từng cái. Một dòng chữ ngăn bằng dấu chấm giữa thì
- * đọc một lượt là hết, mà vẫn phân nhóm rõ nhờ nhãn bên trái.
- */
+// Danh sách định nghĩa hai cột thay vì chip: 6 nhóm × 7 công nghệ là 40 cái
+// hộp, mắt phải xử lý từng cái.
 export function Skills({ skills }: { skills: Dictionary["skills"] }) {
   return (
     <Section id="skills" index="02" label={skills.title}>

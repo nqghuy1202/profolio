@@ -1,21 +1,9 @@
-/**
- * Dự án.
- *
- * File này giữ phần KHÔNG đổi theo ngôn ngữ: tên công nghệ, đường link, loại
- * thẻ, trạng thái, slug URL. Toàn bộ câu chữ nằm ở src/i18n/*.json dưới khoá
- * `work.items.<id>`.
- *
- * Hai điều đã cân nhắc kỹ, đừng đổi mà không đọc lý do:
- *
- * 1. TÊN KHÁCH HÀNG ĐƯỢC ẨN DANH. Trang này công khai và Google index được,
- *    khác với CV gửi riêng cho nhà tuyển dụng. Ghi "khách hàng ngành sản xuất"
- *    thay vì tên công ty. Tên thật vẫn nói được khi phỏng vấn.
- *
- * 2. PHẦN LỚN DỰ ÁN KHÔNG CÓ LINK, VÀ ĐÓ LÀ CHỦ Ý. Code thuộc sở hữu công ty
- *    và khách hàng. Trang chi tiết của những dự án đó dùng sơ đồ kiến trúc và
- *    một dòng ghi rõ vì sao không có mã nguồn — chỗ thiếu link đọc ra thành
- *    ranh giới nghề nghiệp, không phải chỗ trống.
- */
+// Phần không đổi theo ngôn ngữ: công nghệ, link, loại, trạng thái, slug.
+// Câu chữ nằm ở src/i18n/*.json dưới khoá `work.items.<id>`.
+//
+// Tên khách hàng để ẩn danh vì trang này Google index được, khác với CV gửi
+// riêng. Phần lớn dự án không có link vì code thuộc sở hữu công ty và khách
+// hàng — những dự án đó dùng sơ đồ kiến trúc thay cho mã nguồn.
 
 /** Nhãn tầng công nghệ, dùng chung toàn site để các trang đọc giống nhau. */
 export type TechLayer =

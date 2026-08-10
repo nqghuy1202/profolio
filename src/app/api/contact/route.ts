@@ -1,19 +1,9 @@
 import { NextResponse } from "next/server";
 import { profile } from "@/data/profile";
 
-/**
- * Nhận tin nhắn từ form liên hệ.
- *
- * Hoạt động ở hai chế độ, tuỳ vào việc đã có RESEND_API_KEY hay chưa:
- *
- *   - CÓ khoá  → gửi email thật qua Resend.
- *   - CHƯA có  → trả về 501 kèm reason "not-configured", và phía trình duyệt
- *                tự mở ứng dụng mail của người dùng với nội dung điền sẵn.
- *
- * Nhờ vậy form dùng được ngay từ lúc deploy mà không cần cấu hình gì, và bật
- * lên gửi mail thật chỉ bằng cách thêm một biến môi trường — không phải sửa
- * dòng code nào.
- */
+// Hai chế độ tuỳ theo RESEND_API_KEY: có khoá thì gửi mail thật qua Resend,
+// chưa có thì trả 501 kèm reason "not-configured" để trình duyệt tự mở ứng
+// dụng mail với nội dung điền sẵn. Form dùng được ngay từ lúc deploy.
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

@@ -1,12 +1,8 @@
 import type { MetadataRoute } from "next";
 import { profile } from "@/data/profile";
 
-/**
- * Next tự phục vụ file này tại /robots.txt.
- *
- * Cho phép index toàn bộ — mục đích của trang này đúng là được tìm thấy.
- * Chặn /api vì đó là endpoint xử lý, không phải nội dung để đọc.
- */
+// Next phục vụ file này tại /robots.txt. Chặn /api vì đó là endpoint xử lý,
+// không phải nội dung để index.
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {

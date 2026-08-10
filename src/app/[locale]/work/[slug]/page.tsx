@@ -10,10 +10,7 @@ import { ChatArchitecture } from "@/components/sections/ChatArchitecture";
 
 type Params = { params: Promise<{ locale: string; slug: string }> };
 
-/**
- * Sinh sẵn 2 ngôn ngữ × 6 dự án = 12 trang tĩnh lúc build.
- * Không có trang nào phải dựng lúc người xem mở ra.
- */
+// 2 ngôn ngữ × 6 dự án = 12 trang tĩnh, sinh sẵn lúc build.
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
     projects.map((project) => ({ locale, slug: project.slug })),
@@ -61,7 +58,6 @@ export default async function ProjectPage({ params }: Params) {
 
   return (
     <article>
-      {/* --- Đường quay lại --- */}
       <Container>
         <Link
           href={`/${locale}#work`}
@@ -71,7 +67,6 @@ export default async function ProjectPage({ params }: Params) {
         </Link>
       </Container>
 
-      {/* --- Đầu bài --- */}
       <header className="border-t border-rule-ink">
         <Container>
           <div className="py-12 sm:py-16">
@@ -100,7 +95,6 @@ export default async function ProjectPage({ params }: Params) {
         </Container>
       </header>
 
-      {/* --- Con số, đặt to như tít báo --- */}
       <section
         aria-label={work.labels.results}
         className="border-t border-rule-ink bg-paper-tint"
@@ -122,7 +116,6 @@ export default async function ProjectPage({ params }: Params) {
         </Container>
       </section>
 
-      {/* --- Việc đã làm, và bảng công nghệ --- */}
       <section className="border-t border-rule-ink">
         <Container>
           <div className="grid gap-12 py-14 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-20">
@@ -163,7 +156,6 @@ export default async function ProjectPage({ params }: Params) {
         </Container>
       </section>
 
-      {/* --- Sơ đồ kiến trúc, chỉ dự án nào có --- */}
       {project.diagram === "chat" ? (
         <section className="border-t border-rule-ink">
           <Container>
@@ -177,7 +169,6 @@ export default async function ProjectPage({ params }: Params) {
         </section>
       ) : null}
 
-      {/* --- Mã nguồn --- */}
       <section className="border-t border-rule-ink">
         <Container>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 py-8">
@@ -212,7 +203,6 @@ export default async function ProjectPage({ params }: Params) {
         </Container>
       </section>
 
-      {/* --- Dự án kế tiếp --- */}
       <Link
         href={`/${locale}/work/${nextProject.slug}`}
         className="row-invert block border-t border-rule-ink"

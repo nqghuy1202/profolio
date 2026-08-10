@@ -11,11 +11,9 @@ type FieldName = "name" | "email" | "message";
 type FormErrors = Partial<Record<FieldName, string>>;
 type Status = "idle" | "sending" | "success" | "failed" | "fallback";
 
-/**
- * Kiểm tra email ở mức "có đúng hình dạng một địa chỉ không".
- * Cố ý không dùng regex RFC 5322 đầy đủ — nó dài hàng trăm ký tự, vẫn không
- * đúng hết, và địa chỉ có tồn tại hay không thì chỉ máy chủ mail trả lời được.
- */
+// Chỉ kiểm tra hình dạng địa chỉ. Regex RFC 5322 đầy đủ dài hàng trăm ký tự
+// mà vẫn không đúng hết, còn địa chỉ có thật hay không thì chỉ máy chủ mail
+// mới trả lời được.
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const EMPTY_FORM = { name: "", email: "", message: "" };
@@ -247,11 +245,7 @@ export function Contact({ copy }: { copy: ContactCopy }) {
   );
 }
 
-/**
- * Ô nhập chỉ có một đường kẻ dưới, không khung hộp.
- * Khung hộp bo góc là thứ khiến biểu mẫu trông giống mọi biểu mẫu khác; một
- * đường kẻ thì hợp với trang đang phân vùng bằng kẻ chỉ.
- */
+// Ô nhập chỉ có đường kẻ dưới, không khung hộp — cùng luật với phần còn lại.
 function inputClass(hasError: boolean) {
   return `w-full border-0 border-b bg-transparent px-0 py-3 text-base text-ink placeholder:text-ink-3/70 focus:outline-none transition-colors ${
     hasError ? "border-accent-deep" : "border-rule-ink focus:border-accent"

@@ -10,17 +10,10 @@ import { profile } from "@/data/profile";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-/**
- * Ba bộ chữ, mỗi bộ một việc — đúng cách một trang tạp chí xếp chữ:
- *
- *   Archivo         grotesque, gánh toàn bộ chữ đọc và chữ hiển thị cỡ lớn
- *   IBM Plex Mono   nhãn chữ hoa, con số, tên công nghệ
- *   Instrument Serif serif nghiêng, CHỈ dùng cho chữ số thứ tự
- *
- * Hai bộ đầu phải nạp bộ ký tự `vietnamese`, nếu không dấu tiếng Việt sẽ rơi
- * sang font dự phòng của hệ điều hành và lộ ra ngay. Bộ serif thì không cần —
- * nó chỉ đặt chữ số, mà chữ số thì không có dấu.
- */
+// Archivo cho chữ đọc, IBM Plex Mono cho nhãn và số, Instrument Serif chỉ cho
+// chữ số thứ tự. Hai bộ đầu phải nạp subset `vietnamese`, nếu không dấu tiếng
+// Việt rơi sang font dự phòng của hệ điều hành. Serif thì không cần vì nó chỉ
+// đặt chữ số.
 const archivo = Archivo({
   subsets: ["latin", "latin-ext", "vietnamese"],
   variable: "--font-archivo",

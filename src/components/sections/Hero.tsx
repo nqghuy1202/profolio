@@ -3,12 +3,8 @@ import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-/**
- * Bố cục lệch có chủ ý: tên chiếm trọn bề ngang, còn đoạn giới thiệu thụt vào
- * cột phải và bị giới hạn ở --measure (~70 ký tự một dòng). Chữ căn đều hai
- * mép từ mép này sang mép kia thì không ai đọc nổi; một cột hẹp lệch sang một
- * bên vừa dễ đọc vừa tạo khoảng trắng — thứ làm nên chất tạp chí.
- */
+// Bố cục lệch: tên chiếm trọn bề ngang, đoạn giới thiệu thụt vào cột phải và
+// giới hạn ở --measure (~70 ký tự/dòng) cho dễ đọc.
 export function Hero({
   hero,
   locale,

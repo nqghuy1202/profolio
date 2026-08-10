@@ -2,17 +2,9 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-/**
- * Hiện dần khi cuộn tới.
- *
- * Dùng IntersectionObserver thay vì bắt sự kiện scroll: trình duyệt tự báo
- * khi phần tử lọt vào khung nhìn, nên không có hàm nào chạy mỗi lần cuộn.
- * `observer.disconnect()` ngay sau lần đầu — hiệu ứng chỉ chạy một lượt,
- * cuộn ngược lên rồi xuống lại không lặp lại (lặp lại gây khó chịu).
- *
- * Trạng thái ẩn ban đầu nằm ở class .reveal trong globals.css. Người tắt
- * JavaScript vẫn đọc được trang nhờ thẻ <noscript> trong layout.
- */
+// IntersectionObserver thay vì sự kiện scroll, nên không có hàm nào chạy mỗi
+// lần cuộn. disconnect() sau lần đầu: hiệu ứng chỉ chạy một lượt.
+// Trạng thái ẩn ban đầu nằm ở class .reveal trong globals.css.
 export function Reveal({
   children,
   delay = 0,

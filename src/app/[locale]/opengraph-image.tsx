@@ -3,18 +3,11 @@ import { isLocale, defaultLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { profile } from "@/data/profile";
 
-/**
- * Ảnh xem trước khi dán link vào LinkedIn, Zalo, Slack hay Messenger.
- *
- * Vẽ bằng code thay vì thiết kế sẵn một file PNG: sửa tên hay chức danh ở một
- * chỗ là ảnh tự đổi theo, và mỗi ngôn ngữ có một ảnh riêng mà không phải xuất
- * tay hai lần.
- *
- * Next tự dò thấy file này và tự chèn thẻ og:image — không phải khai báo thêm.
- */
+// Ảnh xem trước khi dán link. Vẽ bằng code nên sửa tên hay chức danh một chỗ
+// là cả hai ngôn ngữ tự đổi theo. Next tự chèn thẻ og:image.
 
-/** Dựng sẵn ảnh cho cả hai ngôn ngữ lúc build, thay vì đợi lượt chia sẻ đầu
- *  tiên mới vẽ — lúc đó bot của LinkedIn thường đã bỏ cuộc vì chờ lâu. */
+// Dựng sẵn lúc build: đợi lượt chia sẻ đầu tiên mới vẽ thì bot của LinkedIn
+// thường đã bỏ cuộc vì chờ lâu.
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }

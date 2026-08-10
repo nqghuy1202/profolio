@@ -3,14 +3,7 @@ import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-/**
- * Dải chân trang đảo màu — mực làm nền, giấy làm chữ.
- *
- * Kế thừa từ `.foot { background-color: black; color: white }` của HL Company,
- * nhưng kéo dài thành một khối có sức nặng thay vì một thanh cao 32px. Đây là
- * chỗ duy nhất trên trang đảo màu, nên nó đóng lại toàn bộ trang một cách dứt
- * khoát.
- */
+// Chỗ duy nhất trên trang đảo màu: mực làm nền, giấy làm chữ.
 export function Footer({
   footer,
   contact,

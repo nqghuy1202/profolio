@@ -18,22 +18,10 @@ interface GitHubRepo {
   fork: boolean;
 }
 
-/**
- * Đọc số liệu công khai từ GitHub REST API.
- *
- * Chạy trên server, không chạy trong trình duyệt. Ba lý do:
- * 1. GitHub giới hạn 60 request/giờ cho mỗi IP khi không có token. Gọi từ
- *    trình duyệt nghĩa là mỗi khách một hạn mức riêng, và người dùng ở cùng
- *    một công ty dùng chung IP sẽ đốt hết hạn mức của nhau.
- * 2. `next: { revalidate: 3600 }` cho Next giữ lại kết quả một giờ. Ai mở
- *    trang trong giờ đó cũng nhận cùng một bản đã dựng sẵn — không request
- *    thêm, không có khoảnh khắc trang trống chờ dữ liệu.
- * 3. Nếu sau này thêm token để nâng hạn mức, token nằm ở biến môi trường
- *    phía server chứ không lộ ra mã nguồn tải về máy khách.
- *
- * Trả về null khi gọi hỏng. Số liệu GitHub là phần trang trí, không đáng để
- * làm sập cả trang — phần gọi sẽ tự ẩn khối này đi.
- */
+// Chạy trên server chứ không trong trình duyệt: GitHub giới hạn 60 request/giờ
+// mỗi IP khi không có token, revalidate 3600 cho phép cả giờ dùng chung một
+// bản đã dựng sẵn, và token (nếu có) không lộ ra bundle tải về máy khách.
+// Trả null khi hỏng — số liệu này là trang trí, phần gọi sẽ tự ẩn khối đi.
 export async function getGitHubStats(): Promise<GitHubStats | null> {
   const headers: HeadersInit = {
     Accept: "application/vnd.github+json",

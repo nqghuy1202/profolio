@@ -7,15 +7,8 @@ import { locales, localeLabels, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/Container";
 
-/**
- * Client Component vì menu điện thoại cần state đóng/mở.
- * Chữ nhận qua props để hai file JSON ngôn ngữ không bị gói vào bundle gửi
- * xuống trình duyệt.
- *
- * Không dùng icon: nhãn chữ ("MENU", "ĐÓNG", "CV ↓") hợp với ngôn ngữ tạp chí
- * hơn, đọc được bằng trình đọc màn hình mà không cần aria-label bù, và bớt đi
- * một tệp tài nguyên phải tải.
- */
+// Client Component vì menu điện thoại cần state đóng/mở. Chữ nhận qua props
+// để hai file JSON ngôn ngữ không bị gói vào bundle gửi xuống trình duyệt.
 export function Header({
   locale,
   nav,
@@ -122,11 +115,7 @@ export function Header({
   );
 }
 
-/**
- * Trang chỉ có một bộ route cho mỗi ngôn ngữ, nên đổi ngôn ngữ là đi tới
- * "/vi" hoặc "/en". Hiển thị dạng "VI / EN" — ngôn ngữ đang xem in đậm màu
- * mực, ngôn ngữ kia mờ đi.
- */
+// Mỗi ngôn ngữ một bộ route, nên đổi ngôn ngữ chỉ là đi tới "/vi" hoặc "/en".
 function LanguageSwitch({ locale, label }: { locale: Locale; label: string }) {
   return (
     <div role="group" aria-label={label} className="label flex items-center">
