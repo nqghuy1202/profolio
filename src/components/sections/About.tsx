@@ -11,21 +11,23 @@ export function About({ about }: { about: Dictionary["about"] }) {
       <Container>
         <div
           className={`grid gap-10 pt-12 lg:gap-16 ${
-            features.portrait ? "lg:grid-cols-[20rem_minmax(0,1fr)]" : ""
+            features.portrait ? "lg:grid-cols-[11rem_minmax(0,1fr)]" : ""
           }`}
         >
           {features.portrait ? (
             <div>
               {/* Ảnh để vuông góc, không bo tròn, không đổ bóng — cùng luật
-                  với phần còn lại của trang. Tỉ lệ 4:5 là tỉ lệ chân dung
-                  của tạp chí in. */}
+                  với phần còn lại của trang. Vuông 1:1 và cỡ nhỏ: đây là ảnh
+                  tác giả kiểu tạp chí in, không phải ảnh chân dung toàn khổ.
+                  Cỡ cố định 11rem ở mọi bề ngang — để nó giãn full-width trên
+                  điện thoại thì một tấm selfie cận mặt sẽ át hết phần chữ. */}
               <Image
                 src="/portrait.jpg"
                 alt={about.portraitAlt}
-                width={800}
-                height={1000}
-                sizes="(min-width: 1024px) 20rem, 100vw"
-                className="w-full object-cover grayscale"
+                width={512}
+                height={512}
+                sizes="176px"
+                className="aspect-square w-44 object-cover"
                 priority={false}
               />
               <p className="label mt-3 text-ink-3">{about.portraitCaption}</p>
@@ -78,7 +80,8 @@ export function About({ about }: { about: Dictionary["about"] }) {
               <p className="mt-0.5 text-sm text-ink-3">
                 {about.education.school}
               </p>
-              <p className="mt-2 font-mono text-sm text-ink-2">
+              {/* font-medium vì bộ mono chỉ nạp độ đậm 500 — xem src/app/fonts.ts */}
+              <p className="mt-2 font-mono font-medium text-sm text-ink-2">
                 {about.education.gpa}
               </p>
             </div>
