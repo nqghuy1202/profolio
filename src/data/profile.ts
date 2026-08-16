@@ -26,8 +26,12 @@ export const profile = {
   /** Mốc bắt đầu tính kinh nghiệm: 07/2024, gồm cả kỳ thực tập. */
   experienceStart: "2024-07",
 
-  /** Đổi khi mua tên miền riêng. Dùng cho canonical URL và ảnh Open Graph. */
-  siteUrl: "https://huynguyen.vercel.app",
+  /**
+   * PHẢI trùng với domain đang thực sự phục vụ trang. Dùng cho canonical URL,
+   * sitemap và ảnh Open Graph — trỏ sai thì chính trang này đi nói với Google
+   * rằng bản gốc của nội dung nằm ở nơi khác. Đổi khi mua tên miền riêng.
+   */
+  siteUrl: "https://profolio-eight-inky.vercel.app",
 } as const;
 
 /** Số năm kinh nghiệm, tính từ experienceStart để không phải sửa tay mỗi năm. */
