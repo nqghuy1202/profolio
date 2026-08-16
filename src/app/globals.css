@@ -12,7 +12,11 @@
   /* Mực — không dùng #000, đen tuyệt đối đọc lâu mỏi mắt */
   --ink: #14110f;
   --ink-2: #45403b;
-  --ink-3: #857e76;
+  /* Mực nhạt nhất vẫn phải đọc được: ở #857e76 nó chỉ đạt 3,84:1 trên giấy và
+     3,46:1 trên nền tint, dưới mức 4,5:1 của WCAG AA — mà đây lại là màu của
+     toàn bộ nhãn 11px và chữ phụ. #706a63 giữ đúng sắc nâu xám, đạt 5,12:1
+     trên giấy và 4,62:1 trên tint. */
+  --ink-3: #706a63;
 
   /* Kẻ chỉ */
   --rule: #ddd8d1;
@@ -21,6 +25,10 @@
   /* Màu nhấn: nâu sienna, lấy nguyên từ HL Company (#A0522D) */
   --accent: #a0522d;
   --accent-deep: #7a3d21;
+  /* Bản sáng, CHỈ dùng khi đặt trên nền mực. Nâu gốc trên nền mực chỉ được
+     3,35:1 — đúng cái bẫy mà .row-accent bên dưới đã tránh, nhưng footer thì
+     chưa. Bản này đạt 5,71:1 mà vẫn đọc ra là cùng một màu nhấn. */
+  --accent-light: #c97a4e;
 
   /* Bề rộng */
   --content: 78rem;
@@ -41,10 +49,10 @@
 
   --color-accent: var(--accent);
   --color-accent-deep: var(--accent-deep);
+  --color-accent-light: var(--accent-light);
 
   --font-sans: var(--font-archivo);
   --font-mono: var(--font-plex-mono);
-  --font-numeral: var(--font-instrument);
 }
 
 /* Base */
@@ -108,46 +116,67 @@ body {
 }
 
 /* Primitive viết tay — lặp lại khắp trang nên khai báo một lần ở đây thay vì
-   rải chuỗi utility dài ở mọi component. */
+   rải chuỗi utility dài ở mọi component.
 
-/* Nhãn nhỏ chữ hoa giãn ký tự — dùng cho mọi tiêu đề phụ và siêu dữ liệu.
-   Đây là chi tiết định hình cả trang, kế thừa từ nhãn VEST / XEM THÊM. */
-.label {
-  font-family: var(--font-mono), monospace;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  line-height: 1;
-}
+   Bọc trong @layer components là BẮT BUỘC, không phải cho gọn. Viết trần ở
+   ngoài thì các class này nằm sau @import của Tailwind, cùng độ đặc hiệu với
+   utility, nên bên viết sau thắng — tức primitive đè ngược lại utility. Hậu
+   quả thật đã xảy ra: `label leading-[1.9]` ở WorkIndex bị .label ép về
+   line-height 1, làm hàng công nghệ hai dòng dính chặt vào nhau. Nằm trong
+   layer components thì utility luôn thắng, đúng như người viết JSX trông đợi. */
+@layer components {
+  /* Nhãn nhỏ chữ hoa giãn ký tự — dùng cho mọi tiêu đề phụ và siêu dữ liệu.
+     Đây là chi tiết định hình cả trang, kế thừa từ nhãn VEST / XEM THÊM. */
+  .label {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    line-height: 1;
+  }
 
-/* Chữ hiển thị cỡ lớn, chữ hoa, giãn ký tự âm — ngôn ngữ của nhà mốt.
-   clamp() cho cỡ chữ co giãn liên tục theo bề rộng màn hình, thay vì nhảy
-   bậc ở từng breakpoint. */
-.display {
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 0.94;
-  font-size: clamp(2.75rem, 9vw, 7.5rem);
-}
+  /* Chữ hiển thị cỡ lớn, chữ hoa, giãn ký tự âm — ngôn ngữ của nhà mốt.
+     clamp() cho cỡ chữ co giãn liên tục theo bề rộng màn hình, thay vì nhảy
+     bậc ở từng breakpoint. */
+  .display {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.94;
+    font-size: clamp(2.75rem, 9vw, 7.5rem);
+  }
 
-.display-sm {
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-  line-height: 1.02;
-  font-size: clamp(1.75rem, 4.4vw, 3.25rem);
-}
+  .display-sm {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.02;
+    font-size: clamp(1.75rem, 4.4vw, 3.25rem);
+  }
 
-/* Số thứ tự đặt bằng serif nghiêng, tương phản với grotesque chữ hoa.
-   Chỉ dùng cho CHỮ SỐ nên không cần bộ dấu tiếng Việt. */
-.numeral {
-  font-family: var(--font-numeral), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
+  /* Chữ hoa tiếng Việt cần chỗ cho dấu. "KIẾM" có mũ chồng sắc ở trên, "HỆ"
+     có dấu nặng ở dưới — ở line-height 0.94 và 1.02 thì dấu của dòng dưới
+     đâm vào dòng trên, thấy rõ trên mọi tiêu đề hai dòng của bản tiếng Việt.
+     Chỉ nới cho :lang(vi), để bản tiếng Anh giữ nguyên nhịp chữ đã định. */
+  :lang(vi) .display {
+    line-height: 1.06;
+  }
+
+  :lang(vi) .display-sm {
+    line-height: 1.16;
+  }
+
+  /* Số thứ tự đặt bằng serif nghiêng, tương phản với grotesque chữ hoa.
+     Dùng font có sẵn của máy chứ không tải bộ chữ riêng: cả trang chỉ đặt
+     khoảng mười ký tự bằng kiểu này. */
+  .numeral {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+  }
 }
 
 /* Gạch chân mọc từ trái sang — lấy nguyên kỹ thuật ::after + scaleX từ
