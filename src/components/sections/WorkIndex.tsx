@@ -34,11 +34,15 @@ export function WorkIndex({
             >
               <Container>
                 <div className="grid gap-x-8 gap-y-4 py-8 sm:py-10 lg:grid-cols-[3.5rem_minmax(0,1fr)_16rem_1.5rem] lg:items-start">
-                  <span
-                    aria-hidden="true"
-                    className="numeral row-accent text-2xl leading-none"
-                  >
-                    {String(index + 1).padStart(2, "0")}
+                  {/* Dạng "01/06" bằng chữ mono, KHÔNG dùng .numeral serif
+                      nghiêng màu nhấn. Kiểu đó đang dành riêng cho số thứ tự
+                      section, mà section ngay phía trên cũng mang số 01 — hai
+                      chữ 01 giống hệt nhau cách nhau một quãng ngắn thì người
+                      đọc không biết cái nào đếm cái gì. Thêm mẫu số cũng nói
+                      luôn danh sách có bao nhiêu mục. */}
+                  <span aria-hidden="true" className="row-mute label">
+                    {String(index + 1).padStart(2, "0")}/
+                    {String(projects.length).padStart(2, "0")}
                   </span>
 
                   <div className="min-w-0">
@@ -52,11 +56,30 @@ export function WorkIndex({
                     <p className="row-mute label leading-[1.9]">
                       {project.highlightTech.join(" · ")}
                     </p>
-                    {project.status ? (
-                      <p className="row-accent label mt-3">
-                        {work.status[project.status]}
-                      </p>
-                    ) : null}
+
+                    {/* Loại dự án, trạng thái và dấu hiệu có mã nguồn. Câu dẫn
+                        ngay trên danh sách hứa "dự án mã nguồn mở là nơi bạn
+                        đọc được code" — nếu hàng nào cũng trông như nhau thì
+                        người đọc phải bấm thử từng cái mới biết là cái nào. */}
+                    <p className="row-accent label mt-3 leading-[1.9]">
+                      {work.kinds[project.kind]}
+                      {project.status ? (
+                        <>
+                          <span aria-hidden="true" className="row-mute px-1.5">
+                            /
+                          </span>
+                          {work.status[project.status]}
+                        </>
+                      ) : null}
+                      {project.links?.repo ? (
+                        <>
+                          <span aria-hidden="true" className="row-mute px-1.5">
+                            /
+                          </span>
+                          {work.labels.hasCode}
+                        </>
+                      ) : null}
+                    </p>
                   </div>
 
                   <span

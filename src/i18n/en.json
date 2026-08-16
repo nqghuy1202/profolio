@@ -26,7 +26,11 @@
         "label": "Focus",
         "value": "ERP systems · system integration · real-time data"
       },
-      { "label": "Working in", "value": "Oracle · PL/SQL · Node.js · React" }
+      { "label": "Working in", "value": "Oracle · PL/SQL · Node.js · React" },
+      {
+        "label": "Based in",
+        "value": "Ho Chi Minh City · open to remote"
+      }
     ]
   },
   "work": {
@@ -43,7 +47,7 @@
     },
     "kinds": {
       "openSource": "Open source",
-      "professional": "Company / client work"
+      "professional": "Company & client work"
     },
     "status": {
       "production": "In production",
@@ -56,6 +60,7 @@
       "responsibilities": "What I did",
       "stack": "Stack",
       "sourceNotPublic": "Source not public — company and client code",
+      "hasCode": "Code public",
       "viewRepo": "View repository",
       "viewDemo": "Live demo",
       "allWork": "All projects",
@@ -103,6 +108,26 @@
           { "value": "20+", "caption": "daily users" },
           { "value": "200+", "caption": "messages a day" },
           { "value": "08/2026", "caption": "in production since" }
+        ]
+      },
+      "finance": {
+        "title": "Personal Finance Manager",
+        "tagline": "One binary serves the API and the React app that talks to it",
+        "context": "Personal project · sole developer",
+        "description": "A personal finance app — income and expenses, per-category budgets, and a dashboard that reads the numbers back. What made it worth building was the shape of the deployment: a single Go binary serves both the JSON API and the built React SPA, so there is one artifact to ship instead of a backend and a frontend to keep in step with each other.",
+        "responsibilities": [
+          "Built the Go API on Gin: registration and login with bcrypt-hashed passwords and HS256 JWTs, with every row scoped to the signed-in user",
+          "Made one binary serve /api/* and the built SPA with history-mode fallback, so the whole app deploys as a single artifact",
+          "Wrote the React and TypeScript client — dashboard, transactions table, budgets — with state carried by React Context instead of a state library",
+          "Added a one-click demo account seeded with realistic data, so anyone reviewing the project can look around without signing up",
+          "Localised the entire interface in English and Vietnamese, including the ten default categories seeded at registration",
+          "Packaged it as a multi-stage Docker build and a Compose file covering app and database, with rate-limited auth endpoints and configurable CORS"
+        ],
+        "metrics": [
+          { "value": "14", "caption": "REST endpoints across auth, transactions, categories and budgets" },
+          { "value": "1", "caption": "binary serving both the JSON API and the React app" },
+          { "value": "2", "caption": "languages throughout, down to the seeded category names" },
+          { "value": "6 weeks", "caption": "from first commit to a deployable build" }
         ]
       },
       "heartRisk": {
@@ -245,35 +270,18 @@
   },
   "contact": {
     "title": "Contact",
-    "statement": "Tell me what you're building.",
-    "lead": "Email is the fastest way to reach me. The form below sends a message straight to my inbox.",
-    "form": {
-      "name": "Your name",
-      "namePlaceholder": "Jane Doe",
-      "email": "Your email",
-      "emailPlaceholder": "jane@company.com",
-      "message": "Message",
-      "messagePlaceholder": "What would you like to talk about?",
-      "submit": "Send message",
-      "sending": "Sending",
-      "required": "required"
-    },
-    "errors": {
-      "nameRequired": "Please enter your name.",
-      "emailRequired": "Please enter your email address.",
-      "emailInvalid": "That does not look like a valid email address.",
-      "messageRequired": "Please write a message.",
-      "messageTooShort": "Please write at least 10 characters."
-    },
-    "status": {
-      "success": "Thanks — your message has been sent. I will get back to you by email.",
-      "failed": "The message could not be sent. Please email me directly instead.",
-      "mailtoFallback": "Opening your mail app instead — the message is already filled in."
-    },
+    "lead": "Email is the fastest way to reach me — or find me on GitHub and LinkedIn.",
     "directTitle": "Direct",
     "emailLabel": "Email",
     "githubLabel": "GitHub",
     "linkedinLabel": "LinkedIn"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "This page does not exist",
+    "lead": "The address you followed does not lead anywhere. The link may be out of date, or the address may have a typo in it.",
+    "backHome": "Back to the home page",
+    "seeWork": "See the work"
   },
   "footer": {
     "availability": "Open to full stack roles",

@@ -26,7 +26,11 @@
         "label": "Trọng tâm",
         "value": "Hệ thống ERP · tích hợp hệ thống · dữ liệu thời gian thực"
       },
-      { "label": "Công nghệ chính", "value": "Oracle · PL/SQL · Node.js · React" }
+      { "label": "Công nghệ chính", "value": "Oracle · PL/SQL · Node.js · React" },
+      {
+        "label": "Địa điểm",
+        "value": "TP. Hồ Chí Minh · sẵn sàng làm remote"
+      }
     ]
   },
   "work": {
@@ -43,7 +47,7 @@
     },
     "kinds": {
       "openSource": "Mã nguồn mở",
-      "professional": "Dự án công ty / khách hàng"
+      "professional": "Dự án công ty & khách hàng"
     },
     "status": {
       "production": "Đang chạy production",
@@ -56,6 +60,7 @@
       "responsibilities": "Việc tôi làm",
       "stack": "Công nghệ",
       "sourceNotPublic": "Không công khai mã nguồn — code của công ty và khách hàng",
+      "hasCode": "Có mã nguồn",
       "viewRepo": "Xem mã nguồn",
       "viewDemo": "Xem demo",
       "allWork": "Tất cả dự án",
@@ -103,6 +108,26 @@
           { "value": "20+", "caption": "người dùng mỗi ngày" },
           { "value": "200+", "caption": "tin nhắn mỗi ngày" },
           { "value": "08/2026", "caption": "bắt đầu chạy production" }
+        ]
+      },
+      "finance": {
+        "title": "Ứng dụng quản lý tài chính cá nhân",
+        "tagline": "Một file chạy duy nhất phục vụ cả API lẫn ứng dụng React gọi vào nó",
+        "context": "Dự án cá nhân · lập trình viên duy nhất",
+        "description": "Ứng dụng quản lý tài chính cá nhân — thu chi, hạn mức ngân sách theo từng danh mục, và một trang tổng quan đọc ngược các con số đó ra. Thứ đáng làm ở đây là hình dạng của bản triển khai: một file thực thi Go phục vụ cả JSON API lẫn bản React đã build, nên chỉ có đúng một thứ để đem đi deploy thay vì một backend và một frontend phải giữ cho khớp nhau.",
+        "responsibilities": [
+          "Xây API bằng Go và Gin: đăng ký, đăng nhập với mật khẩu băm bcrypt và JWT HS256, mọi bản ghi đều giới hạn theo đúng người đang đăng nhập",
+          "Gộp về một file chạy phục vụ cả /api/* lẫn bản SPA đã build kèm fallback history-mode, nên cả ứng dụng deploy như một sản phẩm duy nhất",
+          "Viết client React và TypeScript — trang tổng quan, bảng giao dịch, ngân sách — với state gánh bằng React Context thay vì một thư viện quản lý state",
+          "Làm tài khoản dùng thử bấm một nút, có sẵn dữ liệu mẫu thật, để người xem dự án ngó quanh được mà không phải đăng ký",
+          "Dịch toàn bộ giao diện sang tiếng Anh và tiếng Việt, kể cả mười danh mục mặc định sinh ra lúc đăng ký",
+          "Đóng gói bằng Docker multi-stage và một file Compose gồm ứng dụng lẫn database, kèm giới hạn tần suất cho endpoint đăng nhập và CORS cấu hình được"
+        ],
+        "metrics": [
+          { "value": "14", "caption": "REST endpoint cho xác thực, giao dịch, danh mục và ngân sách" },
+          { "value": "1", "caption": "file chạy phục vụ cả JSON API lẫn ứng dụng React" },
+          { "value": "2", "caption": "ngôn ngữ xuyên suốt, tới cả tên danh mục mặc định" },
+          { "value": "6 tuần", "caption": "từ commit đầu tiên tới bản build deploy được" }
         ]
       },
       "heartRisk": {
@@ -245,35 +270,18 @@
   },
   "contact": {
     "title": "Liên hệ",
-    "statement": "Kể tôi nghe bạn đang xây gì.",
-    "lead": "Email là cách nhanh nhất để liên lạc với tôi. Biểu mẫu dưới đây gửi tin nhắn thẳng vào hộp thư của tôi.",
-    "form": {
-      "name": "Tên của bạn",
-      "namePlaceholder": "Nguyễn Văn A",
-      "email": "Email của bạn",
-      "emailPlaceholder": "ban@congty.com",
-      "message": "Nội dung",
-      "messagePlaceholder": "Bạn muốn trao đổi về việc gì?",
-      "submit": "Gửi tin nhắn",
-      "sending": "Đang gửi",
-      "required": "bắt buộc"
-    },
-    "errors": {
-      "nameRequired": "Vui lòng nhập tên của bạn.",
-      "emailRequired": "Vui lòng nhập địa chỉ email.",
-      "emailInvalid": "Địa chỉ email này trông chưa hợp lệ.",
-      "messageRequired": "Vui lòng viết nội dung tin nhắn.",
-      "messageTooShort": "Vui lòng viết ít nhất 10 ký tự."
-    },
-    "status": {
-      "success": "Cảm ơn bạn — tin nhắn đã được gửi. Tôi sẽ phản hồi qua email.",
-      "failed": "Không gửi được tin nhắn. Bạn gửi email trực tiếp cho tôi giúp nhé.",
-      "mailtoFallback": "Đang mở ứng dụng mail của bạn — nội dung đã được điền sẵn."
-    },
+    "lead": "Email là cách nhanh nhất để liên lạc với tôi — hoặc tìm tôi trên GitHub và LinkedIn.",
     "directTitle": "Liên hệ trực tiếp",
     "emailLabel": "Email",
     "githubLabel": "GitHub",
     "linkedinLabel": "LinkedIn"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Trang này không tồn tại",
+    "lead": "Địa chỉ bạn vừa mở không dẫn tới đâu cả. Có thể link đã cũ, hoặc địa chỉ bị gõ nhầm một ký tự.",
+    "backHome": "Về trang chủ",
+    "seeWork": "Xem dự án"
   },
   "footer": {
     "availability": "Sẵn sàng cho vị trí full stack",

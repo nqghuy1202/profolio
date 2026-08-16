@@ -86,6 +86,54 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "finance",
+    slug: "personal-finance-manager",
+    kind: "openSource",
+    featured: true,
+    highlightTech: ["Go 1.26", "React 19", "MySQL 8"],
+    links: {
+      repo: "https://github.com/nqghuy1202/financal_management",
+    },
+    tech: [
+      {
+        layer: "frontend",
+        items: [
+          "React 19",
+          "TypeScript 5",
+          "Vite 6",
+          "Tailwind CSS v4",
+          "React Router 7",
+          "Recharts",
+          "React Context",
+        ],
+      },
+      {
+        layer: "backend",
+        items: [
+          "Go 1.26",
+          "Gin",
+          "database/sql",
+          "JWT (HS256)",
+          "bcrypt",
+          "REST API",
+        ],
+      },
+      {
+        layer: "database",
+        items: ["MySQL 8", "Schema auto-migration"],
+      },
+      {
+        layer: "infrastructure",
+        items: [
+          "Docker (multi-stage)",
+          "Docker Compose",
+          "Alpine",
+          "Rate limiting",
+        ],
+      },
+    ],
+  },
+  {
     id: "heartRisk",
     slug: "heart-risk-estimator",
     kind: "openSource",
