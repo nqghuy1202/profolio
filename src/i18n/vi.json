@@ -60,6 +60,7 @@
       "responsibilities": "Việc tôi làm",
       "stack": "Công nghệ",
       "sourceNotPublic": "Không công khai mã nguồn — code của công ty và khách hàng",
+      "hasDemo": "Có demo",
       "hasCode": "Có mã nguồn",
       "viewRepo": "Xem mã nguồn",
       "viewDemo": "Xem demo",

@@ -60,6 +60,7 @@
       "responsibilities": "What I did",
       "stack": "Stack",
       "sourceNotPublic": "Source not public — company and client code",
+      "hasDemo": "Live demo",
       "hasCode": "Code public",
       "viewRepo": "View repository",
       "viewDemo": "Live demo",

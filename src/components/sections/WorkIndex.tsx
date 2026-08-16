@@ -26,6 +26,14 @@ export function WorkIndex({
         {projects.map((project, index) => {
           const copy = work.items[project.id as keyof typeof work.items];
 
+          // Những gì đáng nói về dự án ở mức danh sách, xếp theo thứ tự người
+          // đọc quan tâm: bấm xem được ngay quan trọng hơn đọc được code, và
+          // cả hai đều quan trọng hơn việc nó thuộc loại nào.
+          const marks = [work.kinds[project.kind]];
+          if (project.status) marks.push(work.status[project.status]);
+          if (project.links?.demo) marks.push(work.labels.hasDemo);
+          if (project.links?.repo) marks.push(work.labels.hasCode);
+
           return (
             <Link
               key={project.id}
@@ -57,28 +65,22 @@ export function WorkIndex({
                       {project.highlightTech.join(" · ")}
                     </p>
 
-                    {/* Loại dự án, trạng thái và dấu hiệu có mã nguồn. Câu dẫn
-                        ngay trên danh sách hứa "dự án mã nguồn mở là nơi bạn
-                        đọc được code" — nếu hàng nào cũng trông như nhau thì
-                        người đọc phải bấm thử từng cái mới biết là cái nào. */}
+                    {/* Câu dẫn ngay trên danh sách hứa "dự án mã nguồn mở là
+                        nơi bạn đọc được code" — nếu hàng nào cũng trông như
+                        nhau thì người đọc phải bấm thử từng cái mới biết là
+                        cái nào. Dấu gạch chéo là chữ trang trí nên để
+                        aria-hidden; trình đọc màn hình đọc liền các mục. */}
                     <p className="row-accent label mt-3 leading-[1.9]">
-                      {work.kinds[project.kind]}
-                      {project.status ? (
-                        <>
-                          <span aria-hidden="true" className="row-mute px-1.5">
-                            /
-                          </span>
-                          {work.status[project.status]}
-                        </>
-                      ) : null}
-                      {project.links?.repo ? (
-                        <>
-                          <span aria-hidden="true" className="row-mute px-1.5">
-                            /
-                          </span>
-                          {work.labels.hasCode}
-                        </>
-                      ) : null}
+                      {marks.map((mark, markIndex) => (
+                        <span key={mark}>
+                          {markIndex > 0 ? (
+                            <span aria-hidden="true" className="row-mute px-1.5">
+                              /
+                            </span>
+                          ) : null}
+                          {mark}
+                        </span>
+                      ))}
                     </p>
                   </div>
 

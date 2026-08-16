@@ -93,6 +93,7 @@ export const projects: Project[] = [
     highlightTech: ["Go 1.26", "React 19", "MySQL 8"],
     links: {
       repo: "https://github.com/nqghuy1202/financal_management",
+      demo: "https://financalmanagement-production.up.railway.app",
     },
     tech: [
       {
@@ -141,6 +142,7 @@ export const projects: Project[] = [
     highlightTech: ["React 19", "TypeScript", "Django 5.2"],
     links: {
       repo: "https://github.com/nqghuy1202/heart_risk_estimator",
+      demo: "https://heart-risk-estimator.vercel.app",
     },
     tech: [
       {
