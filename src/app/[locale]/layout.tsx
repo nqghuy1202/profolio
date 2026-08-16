@@ -1,39 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Archivo, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
-import { notFound } from "next/navigation";
 import "../globals.css";
 
-import { isLocale, locales, localeTags } from "@/i18n/config";
+import { fontVariables } from "../fonts";
+import { isLocale, locales, localeTags, defaultLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { profile } from "@/data/profile";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-
-// Archivo cho chữ đọc, IBM Plex Mono cho nhãn và số, Instrument Serif chỉ cho
-// chữ số thứ tự. Hai bộ đầu phải nạp subset `vietnamese`, nếu không dấu tiếng
-// Việt rơi sang font dự phòng của hệ điều hành. Serif thì không cần vì nó chỉ
-// đặt chữ số.
-const archivo = Archivo({
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  variable: "--font-archivo",
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  weight: ["400", "500"],
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  variable: "--font-plex-mono",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
-  style: "italic",
-  subsets: ["latin"],
-  variable: "--font-instrument",
-  display: "swap",
-});
 
 type Params = { params: Promise<{ locale: string }> };
 
@@ -41,10 +15,17 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const { locale } = await params;
-  if (!isLocale(locale)) return {};
+// Chỉ có đúng hai ngôn ngữ, nên đoạn locale nào khác thì không có gì để dựng.
+// Chặn ở đây để "/fr" rơi thẳng vào trang 404 đã prerender, thay vì render
+// động rồi ném notFound() — kiểu đó làm hỏng shell SSR và trang lỗi về tay
+// người xem ở dạng trắng trơn, phải đợi JavaScript mới thấy chữ.
+export const dynamicParams = false;
 
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { locale: raw } = await params;
+  if (!isLocale(raw)) return { robots: { index: false, follow: false } };
+
+  const locale = raw;
   const dict = getDictionary(locale);
 
   return {
@@ -82,15 +63,19 @@ export default async function LocaleLayout({
   children,
   params,
 }: Params & { children: ReactNode }) {
-  const { locale } = await params;
-  if (!isLocale(locale)) notFound();
+  const { locale: raw } = await params;
 
+  // Cố ý KHÔNG gọi notFound() ở đây. Layout mà tự ném lỗi thì ranh giới bắt
+  // lỗi nằm CAO HƠN nó, nên trang 404 sẽ hiện ra trần trụi — không header,
+  // không footer, không font. Layout cứ dựng khung bằng ngôn ngữ mặc định,
+  // còn việc báo 404 để page.tsx làm, khi đó trang lỗi nằm gọn trong khung.
+  const locale = isLocale(raw) ? raw : defaultLocale;
   const dict = getDictionary(locale);
 
   return (
     <html
       lang={localeTags[locale]}
-      className={`${archivo.variable} ${plexMono.variable} ${instrumentSerif.variable} h-full`}
+      className={`${fontVariables} h-full`}
     >
       <head>
         {/* Hiệu ứng hiện dần khi cuộn bắt đầu ở trạng thái trong suốt. Người
