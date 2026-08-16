@@ -45,3 +45,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ảnh nguồn chưa xử lý
+# Repo công khai. Bản đã resize dùng trên trang nằm ở public/portrait.jpg và
+# vẫn được commit; thư mục này giữ file gốc chưa cắt, không cần lên GitHub.
+/image
