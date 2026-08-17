@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Nguyễn Quốc Gia Huy — Full Stack Developer",
-    "description": "Full Stack Developer, hai năm xây hệ thống ERP nền web, tích hợp hệ thống thời gian thực và công cụ nội bộ trên Oracle, Node.js và React.",
+    "description": "Full Stack Developer, hai năm xây hệ thống ERP nền web, tích hợp hệ thống thời gian thực và công cụ nội bộ trên Oracle, Node.js và React — nay xây thêm backend bằng Go.",
     "skipToContent": "Bỏ qua, tới nội dung chính"
   },
   "nav": {
@@ -16,9 +16,9 @@
     "close": "Đóng"
   },
   "hero": {
-    "role": "Full Stack Developer",
+    "role": "Full Stack Developer · thiên hướng Go",
     "portraitAlt": "Ảnh chân dung Nguyễn Quốc Gia Huy",
-    "intro": "Hai năm kinh nghiệm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Mạnh nhất ở tầng database — thiết kế dữ liệu, xử lý nghiệp vụ bằng PL/SQL và tối ưu truy vấn — và tự viết tay phần JavaScript phía trình duyệt.",
+    "intro": "Hai năm kinh nghiệm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Mạnh nhất ở tầng database — thiết kế dữ liệu, xử lý nghiệp vụ bằng PL/SQL và tối ưu truy vấn — và tự viết tay phần JavaScript phía trình duyệt. Học Go theo đúng cách vẫn học mọi thứ khác: xây một backend kiểu production trước, đọc tài liệu sau, với Claude Code là một phần trong quy trình làm việc hằng ngày.",
     "ctaWork": "Xem dự án",
     "ctaContact": "Liên hệ",
     "meta": [
@@ -27,7 +27,14 @@
         "label": "Trọng tâm",
         "value": "Hệ thống ERP · tích hợp hệ thống · dữ liệu thời gian thực"
       },
-      { "label": "Công nghệ chính", "value": "Oracle · PL/SQL · Node.js · React" }
+      {
+        "label": "Công nghệ chính",
+        "value": "Oracle · PL/SQL · Node.js · React · Go"
+      },
+      {
+        "label": "Địa điểm",
+        "value": "TP. Hồ Chí Minh · sẵn sàng làm remote"
+      }
     ]
   },
   "work": {
@@ -44,7 +51,7 @@
     },
     "kinds": {
       "openSource": "Mã nguồn mở",
-      "professional": "Dự án công ty / khách hàng"
+      "professional": "Dự án công ty & khách hàng"
     },
     "status": {
       "production": "Đang chạy production",
@@ -57,6 +64,8 @@
       "responsibilities": "Việc tôi làm",
       "stack": "Công nghệ",
       "sourceNotPublic": "Không công khai mã nguồn — code của công ty và khách hàng",
+      "hasDemo": "Có demo",
+      "hasCode": "Có mã nguồn",
       "viewRepo": "Xem mã nguồn",
       "viewDemo": "Xem demo",
       "allWork": "Tất cả dự án",
@@ -106,6 +115,26 @@
           { "value": "08/2026", "caption": "bắt đầu chạy production" }
         ]
       },
+      "finance": {
+        "title": "Ứng dụng quản lý tài chính cá nhân",
+        "tagline": "Một file chạy duy nhất phục vụ cả API lẫn ứng dụng React gọi vào nó",
+        "context": "Dự án cá nhân · lập trình viên duy nhất",
+        "description": "Ứng dụng quản lý tài chính cá nhân — thu chi, hạn mức ngân sách theo từng danh mục, và một trang tổng quan đọc ngược các con số đó ra. Thứ đáng làm ở đây là hình dạng của bản triển khai: một file thực thi Go phục vụ cả JSON API lẫn bản React đã build, nên chỉ có đúng một thứ để đem đi deploy thay vì một backend và một frontend phải giữ cho khớp nhau.",
+        "responsibilities": [
+          "Xây API bằng Go và Gin: đăng ký, đăng nhập với mật khẩu băm bcrypt và JWT HS256, mọi bản ghi đều giới hạn theo đúng người đang đăng nhập",
+          "Gộp về một file chạy phục vụ cả /api/* lẫn bản SPA đã build kèm fallback history-mode, nên cả ứng dụng deploy như một sản phẩm duy nhất",
+          "Viết client React và TypeScript — trang tổng quan, bảng giao dịch, ngân sách — với state gánh bằng React Context thay vì một thư viện quản lý state",
+          "Làm tài khoản dùng thử bấm một nút, có sẵn dữ liệu mẫu thật, để người xem dự án ngó quanh được mà không phải đăng ký",
+          "Dịch toàn bộ giao diện sang tiếng Anh và tiếng Việt, kể cả mười danh mục mặc định sinh ra lúc đăng ký",
+          "Đóng gói bằng Docker multi-stage và một file Compose gồm ứng dụng lẫn database, kèm giới hạn tần suất cho endpoint đăng nhập và CORS cấu hình được"
+        ],
+        "metrics": [
+          { "value": "14", "caption": "REST endpoint cho xác thực, giao dịch, danh mục và ngân sách" },
+          { "value": "1", "caption": "file chạy phục vụ cả JSON API lẫn ứng dụng React" },
+          { "value": "2", "caption": "ngôn ngữ xuyên suốt, tới cả tên danh mục mặc định" },
+          { "value": "6 tuần", "caption": "từ commit đầu tiên tới bản build deploy được" }
+        ]
+      },
       "heartRisk": {
         "title": "Heart Risk Estimator",
         "tagline": "Công cụ sàng lọc mà validation là đường duy nhất đi tới model",
@@ -129,16 +158,17 @@
         "title": "LLM self-hosted kèm tìm kiếm RAG",
         "tagline": "Mô hình ngôn ngữ chạy trên máy công ty, không GPU và không dữ liệu nào rời khỏi toà nhà",
         "context": "Gia Cát Technology Solutions · sản phẩm nội bộ · lập trình viên duy nhất",
-        "description": "Mô hình ngôn ngữ chạy trên hạ tầng nội bộ không có GPU, kèm pipeline truy hồi trên chính kho tài liệu nghiệp vụ của công ty. Đang được vài nhóm ERP nội bộ dùng thử, chưa mở rộng toàn công ty.",
+        "description": "Giao diện hỏi-đáp kiểu RAG chạy trên mô hình Qwen 3.5 self-hosted, để người dùng ERP hỏi về quy trình nghiệp vụ bằng ngôn ngữ tự nhiên thay vì lục qua từng màn hình. Tự khảo sát, thiết kế và xây trọn vẹn, dùng Claude Code làm workflow phát triển chính.",
         "responsibilities": [
-          "Cài đặt và cấu hình server LLM nội bộ, đánh giá ràng buộc phần cứng và inference trên hạ tầng không GPU",
-          "Chọn mô hình đã lượng tử hoá và tinh chỉnh tham số để inference chỉ bằng CPU dùng được",
-          "Xây pipeline RAG và kho tri thức tài liệu cho một chatbot nội bộ, kèm giao diện web gọn nhẹ dùng để đo tốc độ phản hồi và độ chính xác câu trả lời",
-          "So sánh phương án chạy trên cloud với chạy tại chỗ, rồi chọn tại chỗ theo ràng buộc hạ tầng"
+          "Self-host Qwen 3.5 qua Ollama trên server chỉ có CPU (không GPU) và tinh chỉnh để đạt thời gian phản hồi khoảng 40 giây",
+          "Xây các package PL/SQL dịch ngôn ngữ tự nhiên sang SQL, kèm logic kiểm tra chống truy vấn không an toàn",
+          "Lập chỉ mục dữ liệu ERP thành vector embedding bằng DBMS_VECTOR, viết test cho logic truy hồi và tích hợp",
+          "Xây pipeline RAG và kho tri thức tài liệu cho một chatbot nội bộ, kèm giao diện web gọn nhẹ dùng để đo tốc độ phản hồi và độ chính xác câu trả lời"
         ],
         "metrics": [
-          { "value": "~50", "caption": "token mỗi giây trên phần cứng chỉ có CPU, đọc từ log inference" },
-          { "value": "20+", "caption": "tài liệu nghiệp vụ nội bộ đã lập chỉ mục" }
+          { "value": "10+", "caption": "nhân viên nội bộ dùng hằng ngày để tra cứu ERP" },
+          { "value": "~20%", "caption": "giảm thời gian tra cứu thủ công" },
+          { "value": "~40s", "caption": "thời gian phản hồi trên phần cứng chỉ có CPU, không GPU" }
         ]
       },
       "erpWarehouse": {
@@ -207,7 +237,7 @@
     "paragraphs": [
       "Tôi vào Gia Cát Technology Solutions năm 2024 với vị trí thực tập back-end rồi ở lại làm full stack developer. Công việc là hệ thống nghiệp vụ nội bộ — nền tảng ERP cho các đội xây dựng, sản xuất và kế toán — nơi một tính năng chỉ coi là xong khi người ở xưởng hoặc ở phòng kế toán thực sự dùng được nó.",
       "Phần lớn việc tôi làm nằm ở chỗ nối giữa các hệ thống. Kéo hoá đơn nhà cung cấp về từ API bên thứ ba, mở dữ liệu tồn kho ra ngoài qua REST, đẩy thay đổi dưới database lên một service Node.js theo thời gian thực. Bài toán thú vị thường nằm đúng ở các mối nối.",
-      "Tôi cũng là người trong nhóm được giao khảo sát công nghệ mới rồi đưa vào hệ thống: push notification, thông báo thời gian thực, nền tảng chat real-time, và gần đây nhất là một LLM self-hosted kèm tìm kiếm truy hồi. Ba thứ đầu đang được dùng hằng ngày; thứ cuối đang trong giai đoạn thử nghiệm."
+      "Tôi cũng là người trong nhóm được giao khảo sát công nghệ mới rồi đưa vào hệ thống: push notification, thông báo thời gian thực, nền tảng chat real-time, và gần đây nhất là một LLM self-hosted kèm tìm kiếm truy hồi — tự khảo sát và xây trọn vẹn với Claude Code là workflow chính. Cả bốn thứ đều đang được dùng hằng ngày."
     ],
     "educationTitle": "Học vấn",
     "education": {
@@ -232,6 +262,10 @@
       }
     ]
   },
+  "certifications": {
+    "title": "Chứng chỉ",
+    "lead": "Huy hiệu và khoá học hoàn thành ngoài giờ làm, chỉ liệt kê khi có bằng chứng công khai đứng sau."
+  },
   "github": {
     "title": "Trên GitHub",
     "lead": "Đọc trực tiếp từ GitHub API và cache lại một giờ.",
@@ -244,35 +278,18 @@
   },
   "contact": {
     "title": "Liên hệ",
-    "statement": "Kể tôi nghe bạn đang xây gì.",
-    "lead": "Email là cách nhanh nhất để liên lạc với tôi. Biểu mẫu dưới đây gửi tin nhắn thẳng vào hộp thư của tôi.",
-    "form": {
-      "name": "Tên của bạn",
-      "namePlaceholder": "Nguyễn Văn A",
-      "email": "Email của bạn",
-      "emailPlaceholder": "ban@congty.com",
-      "message": "Nội dung",
-      "messagePlaceholder": "Bạn muốn trao đổi về việc gì?",
-      "submit": "Gửi tin nhắn",
-      "sending": "Đang gửi",
-      "required": "bắt buộc"
-    },
-    "errors": {
-      "nameRequired": "Vui lòng nhập tên của bạn.",
-      "emailRequired": "Vui lòng nhập địa chỉ email.",
-      "emailInvalid": "Địa chỉ email này trông chưa hợp lệ.",
-      "messageRequired": "Vui lòng viết nội dung tin nhắn.",
-      "messageTooShort": "Vui lòng viết ít nhất 10 ký tự."
-    },
-    "status": {
-      "success": "Cảm ơn bạn — tin nhắn đã được gửi. Tôi sẽ phản hồi qua email.",
-      "failed": "Không gửi được tin nhắn. Bạn gửi email trực tiếp cho tôi giúp nhé.",
-      "mailtoFallback": "Đang mở ứng dụng mail của bạn — nội dung đã được điền sẵn."
-    },
+    "lead": "Email là cách nhanh nhất để liên lạc với tôi — hoặc tìm tôi trên GitHub và LinkedIn.",
     "directTitle": "Liên hệ trực tiếp",
     "emailLabel": "Email",
     "githubLabel": "GitHub",
     "linkedinLabel": "LinkedIn"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Trang này không tồn tại",
+    "lead": "Địa chỉ bạn vừa mở không dẫn tới đâu cả. Có thể link đã cũ, hoặc địa chỉ bị gõ nhầm một ký tự.",
+    "backHome": "Về trang chủ",
+    "seeWork": "Xem dự án"
   },
   "footer": {
     "availability": "Sẵn sàng cho vị trí full stack",

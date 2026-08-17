@@ -43,7 +43,10 @@ export function Footer({
         <div className="grid gap-12 py-16 lg:grid-cols-[1fr_auto] lg:gap-20">
           <div>
             <p className="display-sm text-paper">{name}</p>
-            <p className="label mt-4 text-accent">{footer.availability}</p>
+            {/* accent-light chứ không phải accent: nền ở đây là mực, mà nâu
+                gốc trên mực chỉ đạt 3,35:1. Xem --accent-light trong
+                globals.css. */}
+            <p className="label mt-4 text-accent-light">{footer.availability}</p>
           </div>
 
           <ul className="grid gap-6 sm:grid-cols-3 lg:grid-cols-1">

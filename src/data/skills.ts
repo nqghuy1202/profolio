@@ -28,6 +28,8 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "backend",
     items: [
+      "Go",
+      "Gin",
       "Node.js 22",
       "Express 5",
       "REST API",
@@ -36,7 +38,7 @@ export const skillGroups: SkillGroup[] = [
       "Oracle APEX 24.2",
       "ORDS",
       "UTL_HTTP",
-      "Django 5.2",
+      "Django REST Framework",
     ],
   },
   {
@@ -48,6 +50,7 @@ export const skillGroups: SkillGroup[] = [
       "DBMS_VECTOR / Vector Search",
       "DBLink",
       "Connection pooling",
+      "MySQL 8",
     ],
   },
   {
@@ -61,18 +64,27 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     id: "ops",
-    items: ["Git", "Oracle Linux 8", "nginx", "PM2", "Shell scripting"],
+    items: [
+      "Git",
+      "Docker",
+      "Oracle Linux 8",
+      "nginx",
+      "PM2",
+      "Shell scripting",
+      "testcontainers-go",
+    ],
   },
 ];
 
 /**
  * CỐ Ý KHÔNG CÓ TRONG DANH SÁCH TRÊN — đừng thêm vào nếu chưa dùng thật:
  *
- *   VueJS · Azure · Docker · Terraform · CI/CD · Django REST Framework ·
- *   FastAPI · OCI · SQL Server · MongoDB · SQLite
+ *   VueJS · Azure · Terraform · CI/CD · FastAPI · OCI · SQL Server ·
+ *   MongoDB · SQLite
  *
  * Lý do: dòng Skills là lời hứa về mức thành thạo. Vòng phỏng vấn kỹ thuật
  * sẽ hỏi tới, và một keyword không đỡ nổi câu trả lời "tôi mới đọc qua".
  * Chỉ thêm sau khi đã có một thứ công khai chứng minh được — như cách React
- * và TypeScript được mở sau khi repo heart_risk_estimator hoàn thành.
+ * và TypeScript được mở sau khi repo heart_risk_estimator hoàn thành, và Go
+ * cùng Docker sau khi repo financal_management hoàn thành.
  */

@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Cho phép app/global-not-found.tsx. Cần cờ này vì thẻ <html> của site nằm
+    // trong app/[locale]/layout.tsx: địa chỉ không khớp route nào thì không
+    // layout nào chạy, nên phải có một trang 404 tự dựng cả tài liệu. Không
+    // bật thì Next trả về trang 404 mặc định, chữ đen nền trắng, không font.
+    globalNotFound: true,
+  },
+
   async redirects() {
     return [
       {

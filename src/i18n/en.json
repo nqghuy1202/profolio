@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Huy Nguyen Quoc Gia — Full Stack Developer",
-    "description": "Full Stack Developer with two years building web-based ERP systems, real-time integrations and internal tools on Oracle, Node.js and React.",
+    "description": "Full Stack Developer with two years building web-based ERP systems, real-time integrations and internal tools on Oracle, Node.js and React — now also building backend systems in Go.",
     "skipToContent": "Skip to content"
   },
   "nav": {
@@ -16,9 +16,9 @@
     "close": "Close"
   },
   "hero": {
-    "role": "Full Stack Developer",
+    "role": "Full Stack Developer · Go focus",
     "portraitAlt": "Portrait of Huy Nguyen Quoc Gia",
-    "intro": "Two years of experience building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Deepest on the database side — data modelling, business logic in PL/SQL, and query tuning — and writes the front-end JavaScript by hand.",
+    "intro": "Two years of experience building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Deepest on the database side — data modelling, business logic in PL/SQL, and query tuning — and writes the front-end JavaScript by hand. Picking up Go the same way I pick up everything else: by building a production-style backend rather than reading docs first, with Claude Code as a daily part of the workflow.",
     "ctaWork": "See the work",
     "ctaContact": "Get in touch",
     "meta": [
@@ -27,7 +27,14 @@
         "label": "Focus",
         "value": "ERP systems · system integration · real-time data"
       },
-      { "label": "Working in", "value": "Oracle · PL/SQL · Node.js · React" }
+      {
+        "label": "Working in",
+        "value": "Oracle · PL/SQL · Node.js · React · Go"
+      },
+      {
+        "label": "Based in",
+        "value": "Ho Chi Minh City · open to remote"
+      }
     ]
   },
   "work": {
@@ -44,7 +51,7 @@
     },
     "kinds": {
       "openSource": "Open source",
-      "professional": "Company / client work"
+      "professional": "Company & client work"
     },
     "status": {
       "production": "In production",
@@ -57,6 +64,8 @@
       "responsibilities": "What I did",
       "stack": "Stack",
       "sourceNotPublic": "Source not public — company and client code",
+      "hasDemo": "Live demo",
+      "hasCode": "Code public",
       "viewRepo": "View repository",
       "viewDemo": "Live demo",
       "allWork": "All projects",
@@ -106,6 +115,26 @@
           { "value": "08/2026", "caption": "in production since" }
         ]
       },
+      "finance": {
+        "title": "Personal Finance Manager",
+        "tagline": "One binary serves the API and the React app that talks to it",
+        "context": "Personal project · sole developer",
+        "description": "A personal finance app — income and expenses, per-category budgets, and a dashboard that reads the numbers back. What made it worth building was the shape of the deployment: a single Go binary serves both the JSON API and the built React SPA, so there is one artifact to ship instead of a backend and a frontend to keep in step with each other.",
+        "responsibilities": [
+          "Built the Go API on Gin: registration and login with bcrypt-hashed passwords and HS256 JWTs, with every row scoped to the signed-in user",
+          "Made one binary serve /api/* and the built SPA with history-mode fallback, so the whole app deploys as a single artifact",
+          "Wrote the React and TypeScript client — dashboard, transactions table, budgets — with state carried by React Context instead of a state library",
+          "Added a one-click demo account seeded with realistic data, so anyone reviewing the project can look around without signing up",
+          "Localised the entire interface in English and Vietnamese, including the ten default categories seeded at registration",
+          "Packaged it as a multi-stage Docker build and a Compose file covering app and database, with rate-limited auth endpoints and configurable CORS"
+        ],
+        "metrics": [
+          { "value": "14", "caption": "REST endpoints across auth, transactions, categories and budgets" },
+          { "value": "1", "caption": "binary serving both the JSON API and the React app" },
+          { "value": "2", "caption": "languages throughout, down to the seeded category names" },
+          { "value": "6 weeks", "caption": "from first commit to a deployable build" }
+        ]
+      },
       "heartRisk": {
         "title": "Heart Risk Estimator",
         "tagline": "A screening tool where validation is the only route to the model",
@@ -129,16 +158,17 @@
         "title": "Self-hosted LLM with RAG Search",
         "tagline": "A language model on company hardware, with no GPU and no data leaving the building",
         "context": "Gia Cat Technology Solutions · internal product · sole developer",
-        "description": "A language model running on internal hardware with no GPU, with a retrieval pipeline over the company's own business documents. Piloted by internal ERP teams; not rolled out company-wide yet.",
+        "description": "A RAG-based Q&A interface powered by a locally-hosted Qwen 3.5 model, letting ERP users ask questions about business processes in plain language instead of digging through screens. Researched, designed and built end to end, using Claude Code as the primary development workflow.",
         "responsibilities": [
-          "Set up and configured the local LLM server, evaluating hardware and inference constraints on GPU-less infrastructure",
-          "Selected a quantized model and tuned its parameters to make CPU-only inference usable",
-          "Built a RAG pipeline and document knowledge base behind an internal chatbot, with a lightweight web UI used to test response speed and answer accuracy",
-          "Compared cloud and on-premise options for the workload, then chose on-premise given the infrastructure constraints"
+          "Self-hosted Qwen 3.5 via Ollama on a CPU-only server (no GPU) and tuned it for about 40 seconds response time",
+          "Built PL/SQL packages that translate natural language into SQL, with validation logic against unsafe queries",
+          "Indexed ERP data as vector embeddings using DBMS_VECTOR, and wrote tests for the retrieval and integration logic",
+          "Built a RAG pipeline and document knowledge base behind an internal chatbot, with a lightweight web UI used to test response speed and answer accuracy"
         ],
         "metrics": [
-          { "value": "~50", "caption": "tokens per second on CPU-only hardware, read from the inference log" },
-          { "value": "20+", "caption": "internal business documents indexed" }
+          { "value": "10+", "caption": "internal staff using it daily for ERP lookups" },
+          { "value": "~20%", "caption": "cut in manual lookup time" },
+          { "value": "~40s", "caption": "response time on CPU-only hardware, no GPU" }
         ]
       },
       "erpWarehouse": {
@@ -207,7 +237,7 @@
     "paragraphs": [
       "I joined Gia Cat Technology Solutions as a back-end intern in 2024 and stayed on as a full stack developer. The work is internal business systems — ERP platforms for construction, manufacturing and accounting teams — where a feature is only finished when the people on the factory floor or in the accounts department can actually use it.",
       "Most of what I do sits between systems. Pulling supplier invoices in from a third-party API, exposing inventory data back out over REST, pushing database changes to a Node.js service in real time. The interesting problems are usually at the seams.",
-      "I am also the person on the team who gets asked to evaluate new technology and bring it into the system: push notifications, real-time notifications, the real-time chat platform, and most recently a self-hosted LLM with retrieval search. The first three are in daily use; the last one is in pilot."
+      "I am also the person on the team who gets asked to evaluate new technology and bring it into the system: push notifications, real-time notifications, the real-time chat platform, and most recently a self-hosted LLM with retrieval search — researched and built end to end using Claude Code as the primary workflow. All four are now in daily use."
     ],
     "educationTitle": "Education",
     "education": {
@@ -232,6 +262,10 @@
       }
     ]
   },
+  "certifications": {
+    "title": "Certifications",
+    "lead": "Badges and courses completed outside of work, listed once there is a public credential behind them."
+  },
   "github": {
     "title": "On GitHub",
     "lead": "Read live from the GitHub API and cached for an hour.",
@@ -244,35 +278,18 @@
   },
   "contact": {
     "title": "Contact",
-    "statement": "Tell me what you're building.",
-    "lead": "Email is the fastest way to reach me. The form below sends a message straight to my inbox.",
-    "form": {
-      "name": "Your name",
-      "namePlaceholder": "Jane Doe",
-      "email": "Your email",
-      "emailPlaceholder": "jane@company.com",
-      "message": "Message",
-      "messagePlaceholder": "What would you like to talk about?",
-      "submit": "Send message",
-      "sending": "Sending",
-      "required": "required"
-    },
-    "errors": {
-      "nameRequired": "Please enter your name.",
-      "emailRequired": "Please enter your email address.",
-      "emailInvalid": "That does not look like a valid email address.",
-      "messageRequired": "Please write a message.",
-      "messageTooShort": "Please write at least 10 characters."
-    },
-    "status": {
-      "success": "Thanks — your message has been sent. I will get back to you by email.",
-      "failed": "The message could not be sent. Please email me directly instead.",
-      "mailtoFallback": "Opening your mail app instead — the message is already filled in."
-    },
+    "lead": "Email is the fastest way to reach me — or find me on GitHub and LinkedIn.",
     "directTitle": "Direct",
     "emailLabel": "Email",
     "githubLabel": "GitHub",
     "linkedinLabel": "LinkedIn"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "This page does not exist",
+    "lead": "The address you followed does not lead anywhere. The link may be out of date, or the address may have a typo in it.",
+    "backHome": "Back to the home page",
+    "seeWork": "See the work"
   },
   "footer": {
     "availability": "Open to full stack roles",

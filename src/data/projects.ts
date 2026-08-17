@@ -86,6 +86,55 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "finance",
+    slug: "personal-finance-manager",
+    kind: "openSource",
+    featured: true,
+    highlightTech: ["Go 1.26", "React 19", "MySQL 8"],
+    links: {
+      repo: "https://github.com/nqghuy1202/financal_management",
+      demo: "https://financalmanagement-production.up.railway.app",
+    },
+    tech: [
+      {
+        layer: "frontend",
+        items: [
+          "React 19",
+          "TypeScript 5",
+          "Vite 6",
+          "Tailwind CSS v4",
+          "React Router 7",
+          "Recharts",
+          "React Context",
+        ],
+      },
+      {
+        layer: "backend",
+        items: [
+          "Go 1.26",
+          "Gin",
+          "database/sql",
+          "JWT (HS256)",
+          "bcrypt",
+          "REST API",
+        ],
+      },
+      {
+        layer: "database",
+        items: ["MySQL 8", "Schema auto-migration"],
+      },
+      {
+        layer: "infrastructure",
+        items: [
+          "Docker (multi-stage)",
+          "Docker Compose",
+          "Alpine",
+          "Rate limiting",
+        ],
+      },
+    ],
+  },
+  {
     id: "heartRisk",
     slug: "heart-risk-estimator",
     kind: "openSource",
@@ -93,6 +142,7 @@ export const projects: Project[] = [
     highlightTech: ["React 19", "TypeScript", "Django 5.2"],
     links: {
       repo: "https://github.com/nqghuy1202/heart_risk_estimator",
+      demo: "https://heart-risk-estimator.vercel.app",
     },
     tech: [
       {
@@ -126,12 +176,12 @@ export const projects: Project[] = [
     slug: "self-hosted-llm",
     kind: "professional",
     featured: false,
-    status: "pilot",
-    highlightTech: ["Ollama", "RAG", "DBMS_VECTOR"],
+    status: "production",
+    highlightTech: ["Ollama", "Qwen 3.5", "RAG"],
     tech: [
       {
         layer: "backend",
-        items: ["Ollama", "Qwen (local LLM)", "RAG pipeline"],
+        items: ["Ollama", "Qwen 3.5 (local LLM)", "RAG pipeline"],
       },
       {
         layer: "database",

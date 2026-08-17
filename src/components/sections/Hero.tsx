@@ -71,13 +71,20 @@ export function Hero({
       {/* Dải siêu dữ liệu — kẻ chỉ chạy hết bề ngang, chia ô bằng đường dọc */}
       <div className="border-t border-rule">
         <Container>
-          <dl className="grid sm:grid-cols-3">
+          {/* Bốn ô: hai hàng đôi ở khổ tablet, một hàng ngang ở khổ rộng.
+              Đường kẻ dọc chỉ vẽ khi ô KHÔNG đứng đầu hàng, nếu không sẽ có
+              một nét thừa dính vào lề trái. */}
+          <dl className="grid sm:grid-cols-2 lg:grid-cols-4">
             {hero.meta.map((item, index) => (
               <div
                 key={item.label}
-                className={`py-6 sm:px-8 sm:first:pl-0 sm:last:pr-0 ${
-                  index > 0
-                    ? "border-t border-rule sm:border-t-0 sm:border-l"
+                className={`py-6 sm:px-8 sm:even:pr-0 lg:even:pr-8 lg:last:pr-0 ${
+                  index > 0 ? "border-t border-rule sm:border-t-0" : ""
+                } ${
+                  index % 2 === 1 ? "sm:border-l sm:border-rule" : "sm:pl-0"
+                } ${
+                  index % 2 === 0 && index > 0
+                    ? "sm:border-t sm:border-rule lg:border-t-0 lg:border-l lg:pl-8"
                     : ""
                 }`}
               >

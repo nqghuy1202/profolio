@@ -52,7 +52,8 @@ export function About({ about }: { about: Dictionary["about"] }) {
               <p className="mt-0.5 text-sm text-ink-3">
                 {about.education.school}
               </p>
-              <p className="mt-2 font-mono text-sm text-ink-2">
+              {/* font-medium vì bộ mono chỉ nạp độ đậm 500 — xem src/app/fonts.ts */}
+              <p className="mt-2 font-mono font-medium text-sm text-ink-2">
                 {about.education.gpa}
               </p>
             </div>

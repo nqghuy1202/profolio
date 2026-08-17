@@ -10,6 +10,11 @@ import { ChatArchitecture } from "@/components/sections/ChatArchitecture";
 
 type Params = { params: Promise<{ locale: string; slug: string }> };
 
+// Danh sách dự án là cố định, nên slug lạ không có gì để dựng. Chặn ở đây thì
+// Next trả 404 đã prerender sẵn thay vì render động — mà 404 render động thì
+// shell SSR hỏng và trang lỗi về tay người xem ở dạng trắng trơn.
+export const dynamicParams = false;
+
 // 2 ngôn ngữ × 6 dự án = 12 trang tĩnh, sinh sẵn lúc build.
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
