@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Huy Nguyen Quoc Gia — Full Stack Developer",
-    "description": "Full Stack Developer with two years building web-based ERP systems, real-time integrations and internal tools on Oracle, Node.js and React — now also building backend systems in Go.",
+    "description": "Full Stack Developer with two years of production ERP experience and a production-deployed agentic AI assistant — an on-premise pipeline that lets ERP customers query and modify data in plain language, used by 20+ customers daily and cutting support questions by 30%. Side projects span Go, Python and Java.",
     "skipToContent": "Skip to content"
   },
   "nav": {
@@ -16,20 +16,20 @@
     "close": "Close"
   },
   "hero": {
-    "role": "Full Stack Developer · Go focus",
+    "role": "Full Stack Developer",
     "portraitAlt": "Portrait of Huy Nguyen Quoc Gia",
-    "intro": "Two years of experience building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Deepest on the database side — data modelling, business logic in PL/SQL, and query tuning — and writes the front-end JavaScript by hand. Picking up Go the same way I pick up everything else: by building a production-style backend rather than reading docs first, with Claude Code as a daily part of the workflow.",
+    "intro": "Two years building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Most recently, built an on-premise AI assistant that lets ERP customers query and modify data in plain language — a pipeline now used by 20+ customers daily, cutting inbound support questions by 30%. Deepest on Oracle, from PL/SQL to vector search. Claude Code and the BMAD-METHOD workflow are part of how I build now. Side projects include Debt Crusher, a Spring Boot app comparing three debt-payoff strategies (avalanche, snowball, minimum payments) through one shared amortization engine.",
     "ctaWork": "See the work",
     "ctaContact": "Get in touch",
     "meta": [
       { "label": "Experience", "value": "2 years, since July 2024" },
       {
         "label": "Focus",
-        "value": "ERP systems · system integration · real-time data"
+        "value": "Agentic AI · ERP systems · real-time data"
       },
       {
         "label": "Working in",
-        "value": "Oracle · PL/SQL · Node.js · React · Go"
+        "value": "Oracle AI Database · PL/SQL · Java · JavaScript · Python · Go"
       },
       {
         "label": "Based in",
@@ -71,47 +71,106 @@
       "allWork": "All projects",
       "nextProject": "Next project",
       "role": "Role",
-      "type": "Type"
+      "type": "Type",
+      "confusionMatrix": "Confusion matrix on the held-out test set"
     },
-    "diagram": {
-      "chatTitle": "How a message reaches the browser",
-      "chatCaption": "Simplified. The browser never calls the Node service directly — every action goes through a PL/SQL callback, so the internal server stays off the public network.",
-      "nodes": {
-        "browser": "Browser",
-        "browserSub": "Chat client, hand-written JS",
-        "apex": "Oracle APEX",
-        "apexSub": "PL/SQL AJAX callback",
-        "node": "Node.js service",
-        "nodeSub": "Express · SSE",
-        "oracle": "Oracle Database",
-        "oracleSub": "Chat tables · CQN"
+    "diagrams": {
+      "chat": {
+        "title": "How a message reaches the browser",
+        "caption": "Simplified. The browser never calls the Node service directly — every action goes through a PL/SQL callback, so the internal server stays off the public network.",
+        "nodes": {
+          "browser": "Browser",
+          "browserSub": "Chat client, hand-written JS",
+          "apex": "Oracle APEX",
+          "apexSub": "PL/SQL AJAX callback",
+          "node": "Node.js service",
+          "nodeSub": "Express · SSE",
+          "oracle": "Oracle Database",
+          "oracleSub": "Chat tables · CQN"
+        },
+        "edges": {
+          "send": "send message",
+          "forward": "UTL_HTTP",
+          "write": "write",
+          "notify": "CQN change event",
+          "stream": "SSE event stream"
+        }
       },
-      "edges": {
-        "send": "send message",
-        "forward": "UTL_HTTP",
-        "write": "write",
-        "notify": "CQN change event",
-        "stream": "SSE event stream"
+      "aiAssistant": {
+        "title": "One question, two guarded paths to the database",
+        "caption": "Simplified. The router never lets a write reach the database on its own say-so — a modification always waits for confirmation and lands in an audit log before it runs.",
+        "nodes": {
+          "user": "ERP customer",
+          "userSub": "plain-language question",
+          "router": "Intent router",
+          "routerSub": "LLM classifies the request",
+          "rag": "RAG pipeline",
+          "ragSub": "bge-m3 embeddings · HNSW search",
+          "nl2sql": "Guarded NL→SQL",
+          "nl2sqlSub": "confirm → audit log → execute",
+          "db": "Oracle AI DB 26ai",
+          "dbSub": "ERP data + vector index"
+        },
+        "edges": {
+          "ask": "ask",
+          "routeRag": "read intent",
+          "routeSql": "write intent",
+          "search": "vector search",
+          "write": "guarded write",
+          "answer": "answer"
+        }
+      },
+      "erpWarehouse": {
+        "title": "Invoices in, inventory out",
+        "caption": "Both directions run over REST: the Bizzi integration pulls invoices in, and ORDS exposes inventory and invoice data back out.",
+        "boxes": [
+          { "title": "Bizzi invoice API", "subtitle": "external service" },
+          { "title": "ERP (PL/SQL)", "subtitle": "warehouse + payables" },
+          { "title": "ORDS REST", "subtitle": "second in-house system" }
+        ],
+        "edges": ["UTL_HTTP pull", "REST expose"]
+      },
+      "erpProduction": {
+        "title": "From client requirements to the shop floor",
+        "caption": "The Production module and its schema were designed from the client's process, then rolled out to replace a manual Excel workflow.",
+        "boxes": [
+          { "title": "Client requirements", "subtitle": "manufacturing process" },
+          { "title": "Production module", "subtitle": "schema + UI, built from scratch" },
+          { "title": "Shop floor", "subtitle": "10+ users, Excel retired" }
+        ],
+        "edges": ["schema design", "rollout"]
+      },
+      "kpiSupplier": {
+        "title": "An unfinished module, taken to release",
+        "caption": "Scoring criteria live on their own page instead of in code, so the business team can change what gets measured without a deploy.",
+        "boxes": [
+          { "title": "Unfinished module", "subtitle": "handed over mid-build" },
+          { "title": "Rebuilt & released", "subtitle": "criteria page, new UI" },
+          { "title": "Supplier scorecards", "subtitle": "500+ recorded, still in use" }
+        ],
+        "edges": ["took over", "shipped"]
       }
     },
     "items": {
       "chat": {
         "title": "Real-time Chat System for ERP",
         "tagline": "A chat layer that lives inside the ERP, not beside it",
-        "context": "Gia Cat Technology Solutions · internal product · sole developer",
+        "context": "Gia Cat Technology Solutions · in-house ERP feature, used by external customers · sole developer",
         "description": "A real-time chat layer built into the ERP platform, covering four kinds of conversation: one-to-one, group, threads attached to a specific ERP document, and channels that inherit the permission groups already defined in the ERP. The last two are the part an off-the-shelf messenger cannot do — a conversation that lives on a purchase order, and access that follows the permission data the system already holds.",
         "responsibilities": [
           "Architected and built the full stack: Node.js backend, SSE-based message push, and the PL/SQL data layer",
           "Wrote the browser chat client by hand in JavaScript, consuming the SSE event stream and rendering incoming messages without page reloads",
           "Integrated Oracle CQN with a multi-database registry to detect row-level changes and fan out notifications",
-          "Designed the APEX to Node integration path through PL/SQL AJAX callbacks and UTL_HTTP with token-based authentication, keeping the internal server off the public network",
+          "Designed the APEX to Node integration path through PL/SQL AJAX callbacks and UTL_HTTP with HMAC-SHA256 token authentication, keeping the internal server off the public network",
           "Owned production deployment and operations with PM2 and custom start / stop shell scripts",
+          "Diagnosed and fixed two production bugs — a cross-schema message-delivery collision and a notification-badge desync — and flagged an unauthenticated broadcast endpoint as a security risk",
+          "Redesigned the browser client around a SharedWorker so every tab shares one connection instead of opening its own, cutting concurrent SSE connections by about 90% and eliminating a prior connection-limit issue",
           "Built CLI verification scripts covering the REST endpoints, CQN callbacks, SSE streams and the connection registry"
         ],
         "metrics": [
           { "value": "~1 month", "caption": "from zero to production, as sole developer" },
-          { "value": "20+", "caption": "daily users" },
-          { "value": "200+", "caption": "messages a day" },
+          { "value": "30+", "caption": "external ERP customers using it daily" },
+          { "value": "~90%", "caption": "cut in concurrent SSE connections after moving to a SharedWorker" },
           { "value": "08/2026", "caption": "in production since" }
         ]
       },
@@ -119,27 +178,51 @@
         "title": "Personal Finance Manager",
         "tagline": "One binary serves the API and the React app that talks to it",
         "context": "Personal project · sole developer",
-        "description": "A personal finance app — income and expenses, per-category budgets, and a dashboard that reads the numbers back. What made it worth building was the shape of the deployment: a single Go binary serves both the JSON API and the built React SPA, so there is one artifact to ship instead of a backend and a frontend to keep in step with each other.",
+        "description": "A personal finance app that turns income, fixed costs and a savings goal into one daily \"safe-to-spend\" number, so you always know what's left to spend without opening a spreadsheet.",
         "responsibilities": [
           "Built the Go API on Gin: registration and login with bcrypt-hashed passwords and HS256 JWTs, with every row scoped to the signed-in user",
           "Made one binary serve /api/* and the built SPA with history-mode fallback, so the whole app deploys as a single artifact",
+          "Added a \"safe-to-spend\" figure — income minus fixed costs, savings goal and spend-to-date, divided by days left in a configurable budget cycle — recomputed on every transaction",
+          "Triggered budget-threshold alerts (70/90/100% of a category's limit) inside the same database transaction as the expense that crossed it, surfaced as dismissible banners on the dashboard",
           "Wrote the React and TypeScript client — dashboard, transactions table, budgets — with state carried by React Context instead of a state library",
-          "Added a one-click demo account seeded with realistic data, so anyone reviewing the project can look around without signing up",
+          "Ran the budgeting epic through a spec-driven review pass that caught real bugs before they shipped: a division that silently broke a \"never go negative\" guarantee, a timezone edge case in day-boundary math, and a double-counted transaction in threshold detection",
           "Localised the entire interface in English and Vietnamese, including the ten default categories seeded at registration",
           "Packaged it as a multi-stage Docker build and a Compose file covering app and database, with rate-limited auth endpoints and configurable CORS"
         ],
         "metrics": [
-          { "value": "14", "caption": "REST endpoints across auth, transactions, categories and budgets" },
+          { "value": "21", "caption": "REST endpoints across auth, transactions, budgets, fixed costs and cycle settings" },
           { "value": "1", "caption": "binary serving both the JSON API and the React app" },
           { "value": "2", "caption": "languages throughout, down to the seeded category names" },
-          { "value": "6 weeks", "caption": "from first commit to a deployable build" }
+          { "value": "3", "caption": "budget alert thresholds (70/90/100%), enforced inside the same DB transaction as the spend" }
+        ]
+      },
+      "debtCrusher": {
+        "title": "Debt Crusher",
+        "tagline": "Three payoff strategies compared side by side, refusing to project one that never finishes",
+        "context": "Personal project · sole developer",
+        "description": "A debt payoff planner for anyone juggling multiple loans or cards who isn't sure which one to tackle first. It projects a full payoff timeline under three strategies (avalanche, snowball, minimum payments) so a user can compare and pick whichever gets them debt-free fastest — and refuses to show a plan that would never actually finish paying off.",
+        "responsibilities": [
+          "Split the backend into five Maven modules along DDD lines — domain, infrastructure, application, controller, start — keeping the payoff math independent of Spring and JPA",
+          "Implemented avalanche, snowball, and minimum-only payoff strategies behind one interface and a factory, sharing a single amortization calculator so /payoff/compare returns all three side by side from one call",
+          "Added a PayoffNeverCompletesException so a projection where the minimum payment doesn't outpace accruing interest is rejected instead of returned as a schedule that runs forever",
+          "Built JWT registration and login with Resilience4j rate limiting on both endpoints to blunt brute-force attempts",
+          "Modeled seven domain exceptions (not-found, access-denied, invalid request, no active debts, user already exists, and others) so the API maps business failures to HTTP responses instead of leaking persistence errors",
+          "Wrote a demo-login path that seeds 20 sample debts on first backend start, so a visitor can try the planner without registering or entering their own data",
+          "Built the React and TypeScript client — login, debt list, payoff comparison — bilingual in English and Vietnamese, talking to the API over Axios",
+          "Set up local development with Docker Compose for MySQL and wrote separate production deploy docs with environment-variable templates"
+        ],
+        "metrics": [
+          { "value": "3", "caption": "payoff strategies (avalanche, snowball, minimum-only) compared from a single endpoint" },
+          { "value": "9", "caption": "REST endpoints across authentication, debt management and payoff planning" },
+          { "value": "5", "caption": "Maven modules split along Domain-Driven Design lines" },
+          { "value": "20", "caption": "sample debts auto-seeded for the try-without-signup demo login" }
         ]
       },
       "heartRisk": {
         "title": "Heart Risk Estimator",
         "tagline": "A screening tool where validation is the only route to the model",
         "context": "Personal project · sole developer",
-        "description": "A heart-disease risk screening tool. The Django API is built so validation is the only route to the model, and the React client renders itself from a schema the server sends — no field name, range or option is hard-coded in the browser.",
+        "description": "A screening tool that estimates heart-disease risk from a handful of clinical measurements — a quick check before deciding whether it's worth seeing a doctor.",
         "responsibilities": [
           "Trained an AdaBoost ensemble of decision stumps on the UCI Heart Disease dataset, measured it against a single-stump baseline, and exported the fitted model with joblib",
           "Built the Django API so the view binds the JSON body to a form and passes nothing but cleaned data to the classifier",
@@ -155,20 +238,21 @@
         ]
       },
       "localAi": {
-        "title": "Self-hosted LLM with RAG Search",
-        "tagline": "A language model on company hardware, with no GPU and no data leaving the building",
-        "context": "Gia Cat Technology Solutions · internal product · sole developer",
-        "description": "A RAG-based Q&A interface powered by a locally-hosted Qwen 3.5 model, letting ERP users ask questions about business processes in plain language instead of digging through screens. Researched, designed and built end to end, using Claude Code as the primary development workflow.",
+        "title": "On-Premise AI Assistant for ERP",
+        "tagline": "An agentic pipeline that reads ERP data or rewrites it — never both without asking first",
+        "context": "Gia Cat Technology Solutions · in-house ERP feature, used by external customers · sole developer",
+        "description": "A natural-language assistant embedded in the company's ERP, letting external customers query and modify their data in plain language instead of filing a support ticket. Every write needs explicit confirmation and lands in an audit log first, so a customer poking around their own data can't accidentally break anything. Self-initiated, researched and built end to end with Claude Code and the BMAD-METHOD workflow.",
         "responsibilities": [
-          "Self-hosted Qwen 3.5 via Ollama on a CPU-only server (no GPU) and tuned it for about 40 seconds response time",
-          "Built PL/SQL packages that translate natural language into SQL, with validation logic against unsafe queries",
-          "Indexed ERP data as vector embeddings using DBMS_VECTOR, and wrote tests for the retrieval and integration logic",
-          "Built a RAG pipeline and document knowledge base behind an internal chatbot, with a lightweight web UI used to test response speed and answer accuracy"
+          "Designed the agentic dual-pipeline architecture: an intent router sends read requests to a RAG pipeline (bge-m3 embeddings, HNSW vector search) and write requests to a guarded Natural-Language-to-SQL flow with confirmation, audit logging and rollback",
+          "Traced a severe latency problem on CPU-only infrastructure to a security token that was breaking Ollama's prefix cache, using packet capture — then redesigned the flow into a single call to remove it",
+          "Evaluated the Natural-Language-to-SQL flow against 12 Vietnamese-language queries (100% correct) and 4 SQL-injection attempts before letting it touch real data",
+          "Indexed ERP data as vector embeddings in Oracle AI Database 26ai and wrote the PL/SQL packages the retrieval and write paths both call"
         ],
         "metrics": [
-          { "value": "10+", "caption": "internal staff using it daily for ERP lookups" },
-          { "value": "~20%", "caption": "cut in manual lookup time" },
-          { "value": "~40s", "caption": "response time on CPU-only hardware, no GPU" }
+          { "value": "153s → 40s", "caption": "average response time, after redesigning around the prefix-cache bug" },
+          { "value": "20+", "caption": "external ERP customers using it daily" },
+          { "value": "30%", "caption": "cut in inbound support questions" },
+          { "value": "20%", "caption": "cut in data lookup time" }
         ]
       },
       "erpWarehouse": {
@@ -189,7 +273,7 @@
       },
       "erpProduction": {
         "title": "ERP Production Module",
-        "tagline": "A production module built from scratch, from schema to shop floor",
+        "tagline": "Built from scratch, replacing a manual Excel process on the shop floor",
         "context": "Gia Cat Technology Solutions · client in manufacturing · main developer",
         "description": "Built the Production module from scratch for a manufacturing ERP and designed its database schema from the client's requirements, then worked across the rest of the system fixing defects.",
         "responsibilities": [
@@ -207,10 +291,11 @@
         "title": "Supplier KPI Evaluation Module",
         "tagline": "An unfinished module taken over and shipped — still running two years on",
         "context": "Gia Cat Technology Solutions · internship · client in construction · team of 2",
-        "description": "Took over an unfinished supplier-evaluation module and brought it to release. Scoring criteria are declared on their own page rather than hard-coded, so the business team can change what gets measured without a code change.",
+        "description": "Took over an unfinished supplier-evaluation module for a construction client and brought it to release.",
         "responsibilities": [
-          "Took over an unfinished module and brought it to release",
-          "Designed and built new pages, front-end and back-end, and resolved the outstanding defects"
+          "Picked up the module mid-build, with most of the scope still unimplemented, and designed the remaining pages front-end and back-end",
+          "Declared scoring criteria on their own page instead of hard-coding them, so the business team can change what gets measured without a code change",
+          "Resolved the defects left in the unfinished module before shipping it"
         ],
         "metrics": [
           { "value": "500+", "caption": "evaluation forms recorded, still in use today" },
@@ -236,8 +321,8 @@
     "title": "About",
     "paragraphs": [
       "I joined Gia Cat Technology Solutions as a back-end intern in 2024 and stayed on as a full stack developer. The work is internal business systems — ERP platforms for construction, manufacturing and accounting teams — where a feature is only finished when the people on the factory floor or in the accounts department can actually use it.",
-      "Most of what I do sits between systems. Pulling supplier invoices in from a third-party API, exposing inventory data back out over REST, pushing database changes to a Node.js service in real time. The interesting problems are usually at the seams.",
-      "I am also the person on the team who gets asked to evaluate new technology and bring it into the system: push notifications, real-time notifications, the real-time chat platform, and most recently a self-hosted LLM with retrieval search — researched and built end to end using Claude Code as the primary workflow. All four are now in daily use."
+      "Most of what I do sits between the ERP and the world outside it. Pulling supplier invoices in from a third-party API, exposing the ERP's inventory data back out over REST, pushing database changes to a Node.js service in real time. The interesting problems are usually at the seams.",
+      "I am also the person on the team who gets asked to evaluate new technology and bring it into the system: push notifications, real-time notifications, the real-time chat platform, and — self-initiated — an on-premise AI assistant that lets external ERP customers query and modify data in plain language. Built end to end with Claude Code and the BMAD-METHOD workflow, it is now used by 20+ customers daily and has cut inbound support questions by 30%."
     ],
     "educationTitle": "Education",
     "education": {
@@ -252,7 +337,7 @@
         "role": "Full Stack Developer",
         "company": "Gia Cat Technology Solutions",
         "period": "Jan 2025 — present",
-        "summary": "ERP platform work for clients in manufacturing, accounting and warehousing, plus two internal products built end to end: the real-time chat system and the self-hosted LLM."
+        "summary": "Built two internal products end to end — an on-premise AI assistant on a self-hosted LLM, and a real-time chat platform — plus systems-integration work for clients in manufacturing, accounting and warehousing."
       },
       {
         "role": "Back-End Developer Intern",

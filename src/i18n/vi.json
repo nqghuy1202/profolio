@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Nguyễn Quốc Gia Huy — Full Stack Developer",
-    "description": "Full Stack Developer, hai năm xây hệ thống ERP nền web, tích hợp hệ thống thời gian thực và công cụ nội bộ trên Oracle, Node.js và React — nay xây thêm backend bằng Go.",
+    "description": "Full Stack Developer với hai năm kinh nghiệm ERP production và một trợ lý AI agentic đã lên production — một pipeline chạy on-premise cho khách hàng ERP tra cứu và sửa dữ liệu bằng ngôn ngữ tự nhiên, được 20+ khách hàng dùng hằng ngày và giảm 30% lượng câu hỏi hỗ trợ. Các dự án cá nhân trải rộng qua Go, Python và Java.",
     "skipToContent": "Bỏ qua, tới nội dung chính"
   },
   "nav": {
@@ -16,20 +16,20 @@
     "close": "Đóng"
   },
   "hero": {
-    "role": "Full Stack Developer · thiên hướng Go",
+    "role": "Full Stack Developer",
     "portraitAlt": "Ảnh chân dung Nguyễn Quốc Gia Huy",
-    "intro": "Hai năm kinh nghiệm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Mạnh nhất ở tầng database — thiết kế dữ liệu, xử lý nghiệp vụ bằng PL/SQL và tối ưu truy vấn — và tự viết tay phần JavaScript phía trình duyệt. Học Go theo đúng cách vẫn học mọi thứ khác: xây một backend kiểu production trước, đọc tài liệu sau, với Claude Code là một phần trong quy trình làm việc hằng ngày.",
+    "intro": "Hai năm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Gần đây nhất, xây một trợ lý AI on-premise cho khách hàng ERP tra cứu và sửa dữ liệu bằng ngôn ngữ tự nhiên — một pipeline hiện được 20+ khách hàng dùng hằng ngày, giảm 30% lượng câu hỏi hỗ trợ gửi về. Mạnh nhất ở Oracle, từ PL/SQL tới vector search. Claude Code và quy trình BMAD-METHOD là một phần trong cách tôi xây dựng hiện nay. Dự án cá nhân có Debt Crusher, một ứng dụng Spring Boot so sánh ba chiến lược trả nợ (avalanche, snowball, trả tối thiểu) qua cùng một bộ tính khấu hao.",
     "ctaWork": "Xem dự án",
     "ctaContact": "Liên hệ",
     "meta": [
       { "label": "Kinh nghiệm", "value": "2 năm, từ 07/2024" },
       {
         "label": "Trọng tâm",
-        "value": "Hệ thống ERP · tích hợp hệ thống · dữ liệu thời gian thực"
+        "value": "AI agentic · hệ thống ERP · dữ liệu thời gian thực"
       },
       {
         "label": "Công nghệ chính",
-        "value": "Oracle · PL/SQL · Node.js · React · Go"
+        "value": "Oracle AI Database · PL/SQL · Java · JavaScript · Python · Go"
       },
       {
         "label": "Địa điểm",
@@ -71,47 +71,106 @@
       "allWork": "Tất cả dự án",
       "nextProject": "Dự án tiếp theo",
       "role": "Vai trò",
-      "type": "Loại"
+      "type": "Loại",
+      "confusionMatrix": "Confusion matrix trên tập test giữ riêng"
     },
-    "diagram": {
-      "chatTitle": "Một tin nhắn đi tới trình duyệt bằng đường nào",
-      "chatCaption": "Sơ đồ rút gọn. Trình duyệt không bao giờ gọi thẳng service Node — mọi thao tác đều đi qua một callback PL/SQL, nhờ vậy server nội bộ nằm ngoài mạng công cộng.",
-      "nodes": {
-        "browser": "Trình duyệt",
-        "browserSub": "Client chat, JS viết tay",
-        "apex": "Oracle APEX",
-        "apexSub": "AJAX callback PL/SQL",
-        "node": "Service Node.js",
-        "nodeSub": "Express · SSE",
-        "oracle": "Oracle Database",
-        "oracleSub": "Bảng chat · CQN"
+    "diagrams": {
+      "chat": {
+        "title": "Một tin nhắn đi tới trình duyệt bằng đường nào",
+        "caption": "Sơ đồ rút gọn. Trình duyệt không bao giờ gọi thẳng service Node — mọi thao tác đều đi qua một callback PL/SQL, nhờ vậy server nội bộ nằm ngoài mạng công cộng.",
+        "nodes": {
+          "browser": "Trình duyệt",
+          "browserSub": "Client chat, JS viết tay",
+          "apex": "Oracle APEX",
+          "apexSub": "AJAX callback PL/SQL",
+          "node": "Service Node.js",
+          "nodeSub": "Express · SSE",
+          "oracle": "Oracle Database",
+          "oracleSub": "Bảng chat · CQN"
+        },
+        "edges": {
+          "send": "gửi tin nhắn",
+          "forward": "UTL_HTTP",
+          "write": "ghi",
+          "notify": "sự kiện CQN",
+          "stream": "luồng sự kiện SSE"
+        }
       },
-      "edges": {
-        "send": "gửi tin nhắn",
-        "forward": "UTL_HTTP",
-        "write": "ghi",
-        "notify": "sự kiện CQN",
-        "stream": "luồng sự kiện SSE"
+      "aiAssistant": {
+        "title": "Một câu hỏi, hai đường đi vào database đều có gác chắn",
+        "caption": "Sơ đồ rút gọn. Router không bao giờ để một lệnh ghi tự ý chạm vào database — mọi chỉnh sửa đều chờ xác nhận và được ghi vào audit log trước khi thực thi.",
+        "nodes": {
+          "user": "Khách hàng ERP",
+          "userSub": "câu hỏi bằng ngôn ngữ tự nhiên",
+          "router": "Bộ định tuyến ý định",
+          "routerSub": "LLM phân loại yêu cầu",
+          "rag": "Pipeline RAG",
+          "ragSub": "embedding bge-m3 · tìm kiếm HNSW",
+          "nl2sql": "NL→SQL có gác chắn",
+          "nl2sqlSub": "xác nhận → audit log → thực thi",
+          "db": "Oracle AI DB 26ai",
+          "dbSub": "dữ liệu ERP + chỉ mục vector"
+        },
+        "edges": {
+          "ask": "hỏi",
+          "routeRag": "ý định đọc",
+          "routeSql": "ý định ghi",
+          "search": "tìm kiếm vector",
+          "write": "ghi có gác chắn",
+          "answer": "trả lời"
+        }
+      },
+      "erpWarehouse": {
+        "title": "Hoá đơn vào, tồn kho ra",
+        "caption": "Cả hai chiều đều qua REST: tích hợp Bizzi kéo hoá đơn vào, ORDS mở dữ liệu tồn kho và hoá đơn ra ngoài.",
+        "boxes": [
+          { "title": "API hoá đơn Bizzi", "subtitle": "dịch vụ bên ngoài" },
+          { "title": "ERP (PL/SQL)", "subtitle": "kho vận + công nợ" },
+          { "title": "ORDS REST", "subtitle": "phần mềm nội bộ thứ hai" }
+        ],
+        "edges": ["UTL_HTTP kéo về", "REST mở ra"]
+      },
+      "erpProduction": {
+        "title": "Từ yêu cầu khách hàng tới xưởng máy",
+        "caption": "Phân hệ Sản xuất và lược đồ dữ liệu của nó được thiết kế từ quy trình của khách hàng, rồi triển khai để thay thế quy trình Excel thủ công.",
+        "boxes": [
+          { "title": "Yêu cầu khách hàng", "subtitle": "quy trình sản xuất" },
+          { "title": "Phân hệ Sản xuất", "subtitle": "schema + giao diện, xây từ đầu" },
+          { "title": "Xưởng máy", "subtitle": "10+ người dùng, bỏ Excel" }
+        ],
+        "edges": ["thiết kế schema", "triển khai"]
+      },
+      "kpiSupplier": {
+        "title": "Một phân hệ dang dở, đưa tới bản phát hành",
+        "caption": "Tiêu chí chấm điểm nằm trên trang riêng thay vì trong code, nên bộ phận nghiệp vụ đổi được thứ cần đo mà không cần một bản deploy.",
+        "boxes": [
+          { "title": "Phân hệ dang dở", "subtitle": "bàn giao giữa chừng" },
+          { "title": "Xây lại & phát hành", "subtitle": "trang tiêu chí, giao diện mới" },
+          { "title": "Phiếu đánh giá NCC", "subtitle": "500+ phiếu, vẫn đang dùng" }
+        ],
+        "edges": ["tiếp nhận", "phát hành"]
       }
     },
     "items": {
       "chat": {
         "title": "Hệ thống chat thời gian thực cho ERP",
         "tagline": "Tầng chat sống bên trong ERP, không phải đứng cạnh nó",
-        "context": "Gia Cát Technology Solutions · sản phẩm nội bộ · lập trình viên duy nhất",
+        "context": "Gia Cát Technology Solutions · tính năng ERP nội bộ, khách hàng bên ngoài sử dụng · lập trình viên duy nhất",
         "description": "Tầng chat thời gian thực dựng thẳng vào nền tảng ERP, phủ bốn loại hội thoại: cá nhân, nhóm, hội thoại gắn vào từng chứng từ ERP, và kênh thừa hưởng nhóm quyền có sẵn của ERP. Hai loại sau là thứ một ứng dụng chat có sẵn không làm được — hội thoại sống ngay trên một phiếu mua hàng, và quyền truy cập chạy theo dữ liệu phân quyền hệ thống đã có.",
         "responsibilities": [
           "Thiết kế kiến trúc và xây toàn bộ các tầng: backend Node.js, đẩy tin nhắn thời gian thực bằng SSE, và tầng dữ liệu PL/SQL",
           "Tự viết tay client chat trên trình duyệt bằng JavaScript, đọc luồng sự kiện SSE và render tin nhắn đến mà không tải lại trang",
           "Tích hợp Oracle CQN với thiết kế registry nhiều database để bắt thay đổi ở mức dòng và phát thông báo đi",
-          "Thiết kế đường tích hợp APEX ↔ Node qua AJAX callback PL/SQL và UTL_HTTP kèm xác thực bằng token, giữ server nội bộ nằm ngoài mạng công cộng",
+          "Thiết kế đường tích hợp APEX ↔ Node qua AJAX callback PL/SQL và UTL_HTTP kèm xác thực bằng token HMAC-SHA256, giữ server nội bộ nằm ngoài mạng công cộng",
           "Phụ trách triển khai và vận hành production bằng PM2 cùng shell script start / stop tự viết",
+          "Chẩn đoán và sửa hai lỗi production — xung đột gửi tin nhắn chéo schema và lệch badge thông báo — đồng thời gắn cờ một endpoint broadcast không xác thực là rủi ro bảo mật",
+          "Thiết kế lại client trình duyệt quanh một SharedWorker để mọi tab dùng chung một kết nối thay vì mỗi tab mở riêng, giảm khoảng 90% số kết nối SSE đồng thời và xoá bỏ giới hạn kết nối từng gặp phải",
           "Viết script kiểm tra chạy bằng CLI phủ các REST endpoint, CQN callback, luồng SSE và registry kết nối"
         ],
         "metrics": [
           { "value": "~1 tháng", "caption": "từ con số không tới production, làm một mình" },
-          { "value": "20+", "caption": "người dùng mỗi ngày" },
-          { "value": "200+", "caption": "tin nhắn mỗi ngày" },
+          { "value": "30+", "caption": "khách hàng ERP bên ngoài dùng hằng ngày" },
+          { "value": "~90%", "caption": "giảm số kết nối SSE đồng thời sau khi chuyển sang SharedWorker" },
           { "value": "08/2026", "caption": "bắt đầu chạy production" }
         ]
       },
@@ -119,27 +178,51 @@
         "title": "Ứng dụng quản lý tài chính cá nhân",
         "tagline": "Một file chạy duy nhất phục vụ cả API lẫn ứng dụng React gọi vào nó",
         "context": "Dự án cá nhân · lập trình viên duy nhất",
-        "description": "Ứng dụng quản lý tài chính cá nhân — thu chi, hạn mức ngân sách theo từng danh mục, và một trang tổng quan đọc ngược các con số đó ra. Thứ đáng làm ở đây là hình dạng của bản triển khai: một file thực thi Go phục vụ cả JSON API lẫn bản React đã build, nên chỉ có đúng một thứ để đem đi deploy thay vì một backend và một frontend phải giữ cho khớp nhau.",
+        "description": "Ứng dụng quản lý tài chính cá nhân, biến thu nhập, chi phí cố định và mục tiêu tiết kiệm thành một con số \"an toàn để chi\" mỗi ngày, để bạn luôn biết còn được chi bao nhiêu mà không cần mở bảng tính.",
         "responsibilities": [
           "Xây API bằng Go và Gin: đăng ký, đăng nhập với mật khẩu băm bcrypt và JWT HS256, mọi bản ghi đều giới hạn theo đúng người đang đăng nhập",
           "Gộp về một file chạy phục vụ cả /api/* lẫn bản SPA đã build kèm fallback history-mode, nên cả ứng dụng deploy như một sản phẩm duy nhất",
+          "Thêm con số \"an toàn để chi\" — thu nhập trừ chi phí cố định, mục tiêu tiết kiệm và số đã chi, chia cho số ngày còn lại của một chu kỳ ngân sách cấu hình được — tính lại sau mỗi giao dịch",
+          "Kích hoạt cảnh báo theo ngưỡng ngân sách (70/90/100% hạn mức một danh mục) ngay trong cùng transaction database với giao dịch vừa vượt ngưỡng, hiển thị thành banner có thể ẩn trên dashboard",
           "Viết client React và TypeScript — trang tổng quan, bảng giao dịch, ngân sách — với state gánh bằng React Context thay vì một thư viện quản lý state",
-          "Làm tài khoản dùng thử bấm một nút, có sẵn dữ liệu mẫu thật, để người xem dự án ngó quanh được mà không phải đăng ký",
+          "Cho epic ngân sách này đi qua một vòng review theo hướng spec, bắt được lỗi thật trước khi phát hành: một phép chia âm thầm phá vỡ cam kết \"không bao giờ âm\", một lỗi múi giờ ở ranh giới ngày, và một giao dịch bị đếm trùng khi phát hiện ngưỡng",
           "Dịch toàn bộ giao diện sang tiếng Anh và tiếng Việt, kể cả mười danh mục mặc định sinh ra lúc đăng ký",
           "Đóng gói bằng Docker multi-stage và một file Compose gồm ứng dụng lẫn database, kèm giới hạn tần suất cho endpoint đăng nhập và CORS cấu hình được"
         ],
         "metrics": [
-          { "value": "14", "caption": "REST endpoint cho xác thực, giao dịch, danh mục và ngân sách" },
+          { "value": "21", "caption": "REST endpoint cho xác thực, giao dịch, ngân sách, chi phí cố định và cài đặt chu kỳ" },
           { "value": "1", "caption": "file chạy phục vụ cả JSON API lẫn ứng dụng React" },
           { "value": "2", "caption": "ngôn ngữ xuyên suốt, tới cả tên danh mục mặc định" },
-          { "value": "6 tuần", "caption": "từ commit đầu tiên tới bản build deploy được" }
+          { "value": "3", "caption": "ngưỡng cảnh báo ngân sách (70/90/100%), thực thi trong cùng transaction với giao dịch" }
+        ]
+      },
+      "debtCrusher": {
+        "title": "Debt Crusher",
+        "tagline": "Ba chiến lược trả nợ so sánh song song, từ chối chiếu ra một kế hoạch không bao giờ kết thúc",
+        "context": "Dự án cá nhân · lập trình viên duy nhất",
+        "description": "Ứng dụng lập kế hoạch trả nợ, dành cho ai đang ôm nhiều khoản vay hoặc thẻ tín dụng cùng lúc mà chưa biết nên trả khoản nào trước. Nó chiếu ra lộ trình trả nợ đầy đủ theo ba chiến lược (avalanche, snowball, trả tối thiểu) để người dùng so sánh và chọn cách nào hết nợ nhanh nhất — và từ chối hiển thị một kế hoạch mà thực chất không bao giờ trả hết được.",
+        "responsibilities": [
+          "Chia backend thành năm module Maven theo DDD — domain, infrastructure, application, controller, start — giữ phần tính toán trả nợ độc lập với Spring và JPA",
+          "Cài ba chiến lược trả nợ avalanche, snowball, minimum-only đứng sau một interface và một factory, dùng chung một bộ tính khấu hao để /payoff/compare trả về cả ba trong một lần gọi",
+          "Thêm PayoffNeverCompletesException để một kế hoạch mà khoản trả tối thiểu không vượt qua lãi phát sinh bị từ chối thay vì trả về một lịch trả nợ chạy vô hạn",
+          "Xây đăng ký/đăng nhập bằng JWT, giới hạn tần suất bằng Resilience4j trên cả hai endpoint để chặn brute-force",
+          "Mô hình hoá bảy loại lỗi nghiệp vụ (không tìm thấy, không có quyền, yêu cầu không hợp lệ, không có khoản nợ nào đang hoạt động, tài khoản đã tồn tại...) để tầng API ánh xạ lỗi nghiệp vụ thành response HTTP thay vì để lộ lỗi từ tầng lưu trữ",
+          "Viết luồng đăng nhập demo tự sinh 20 khoản nợ mẫu ngay lần đầu backend khởi động, để người xem thử được app mà không cần đăng ký hay tự nhập dữ liệu",
+          "Viết client React và TypeScript — đăng nhập, danh sách nợ, so sánh kế hoạch trả nợ — song ngữ Anh/Việt, gọi API qua Axios",
+          "Dựng môi trường phát triển bằng Docker Compose cho MySQL, viết riêng tài liệu deploy production kèm mẫu biến môi trường"
+        ],
+        "metrics": [
+          { "value": "3", "caption": "chiến lược trả nợ (avalanche, snowball, minimum-only) so sánh từ một endpoint duy nhất" },
+          { "value": "9", "caption": "REST endpoint cho xác thực, quản lý nợ và lập kế hoạch trả nợ" },
+          { "value": "5", "caption": "module Maven chia theo Domain-Driven Design" },
+          { "value": "20", "caption": "khoản nợ mẫu tự sinh cho luồng demo dùng thử không cần đăng ký" }
         ]
       },
       "heartRisk": {
         "title": "Heart Risk Estimator",
         "tagline": "Công cụ sàng lọc mà validation là đường duy nhất đi tới model",
         "context": "Dự án cá nhân · lập trình viên duy nhất",
-        "description": "Công cụ sàng lọc nguy cơ bệnh tim. API Django dựng sao cho validation là đường duy nhất đi tới model, còn client React tự render từ schema do server gửi xuống — không hard-code tên field, khoảng giá trị hay lựa chọn nào ở phía trình duyệt.",
+        "description": "Công cụ sàng lọc ước tính nguy cơ bệnh tim từ một vài chỉ số lâm sàng — một bước kiểm tra nhanh trước khi quyết định có nên đi khám hay không.",
         "responsibilities": [
           "Huấn luyện mô hình AdaBoost trên tập UCI Heart Disease, đo lại với baseline một decision stump, và xuất mô hình bằng joblib",
           "Xây API Django sao cho view bind JSON body vào form và chỉ đưa dữ liệu đã làm sạch tới classifier",
@@ -155,20 +238,21 @@
         ]
       },
       "localAi": {
-        "title": "LLM self-hosted kèm tìm kiếm RAG",
-        "tagline": "Mô hình ngôn ngữ chạy trên máy công ty, không GPU và không dữ liệu nào rời khỏi toà nhà",
-        "context": "Gia Cát Technology Solutions · sản phẩm nội bộ · lập trình viên duy nhất",
-        "description": "Giao diện hỏi-đáp kiểu RAG chạy trên mô hình Qwen 3.5 self-hosted, để người dùng ERP hỏi về quy trình nghiệp vụ bằng ngôn ngữ tự nhiên thay vì lục qua từng màn hình. Tự khảo sát, thiết kế và xây trọn vẹn, dùng Claude Code làm workflow phát triển chính.",
+        "title": "Trợ lý AI On-Premise cho ERP",
+        "tagline": "Một pipeline agentic đọc dữ liệu ERP hoặc sửa nó — không bao giờ làm cả hai mà không hỏi trước",
+        "context": "Gia Cát Technology Solutions · tính năng ERP nội bộ, khách hàng bên ngoài sử dụng · lập trình viên duy nhất",
+        "description": "Một trợ lý ngôn ngữ tự nhiên gắn thẳng vào ERP của công ty, để khách hàng bên ngoài tra cứu và sửa dữ liệu của họ bằng ngôn ngữ tự nhiên thay vì gửi ticket hỗ trợ. Mọi thao tác ghi dữ liệu đều cần xác nhận rõ ràng và được ghi vào audit log trước, để khách hàng tự mày mò dữ liệu của mình mà không lỡ tay làm hỏng gì. Tự khởi xướng, tự khảo sát và xây trọn vẹn với Claude Code cùng quy trình BMAD-METHOD.",
         "responsibilities": [
-          "Self-host Qwen 3.5 qua Ollama trên server chỉ có CPU (không GPU) và tinh chỉnh để đạt thời gian phản hồi khoảng 40 giây",
-          "Xây các package PL/SQL dịch ngôn ngữ tự nhiên sang SQL, kèm logic kiểm tra chống truy vấn không an toàn",
-          "Lập chỉ mục dữ liệu ERP thành vector embedding bằng DBMS_VECTOR, viết test cho logic truy hồi và tích hợp",
-          "Xây pipeline RAG và kho tri thức tài liệu cho một chatbot nội bộ, kèm giao diện web gọn nhẹ dùng để đo tốc độ phản hồi và độ chính xác câu trả lời"
+          "Thiết kế kiến trúc dual-pipeline dạng agentic: bộ định tuyến ý định gửi yêu cầu đọc tới pipeline RAG (embedding bge-m3, tìm kiếm vector HNSW) và yêu cầu ghi tới luồng Natural-Language-to-SQL có gác chắn kèm xác nhận, audit log và rollback",
+          "Truy vết một sự cố độ trễ nghiêm trọng trên hạ tầng chỉ có CPU về một security token đang phá vỡ prefix cache của Ollama, bằng packet capture — rồi thiết kế lại luồng thành một lệnh gọi duy nhất để loại bỏ nó",
+          "Đánh giá luồng Natural-Language-to-SQL với 12 câu hỏi tiếng Việt (đúng 100%) và 4 lần thử SQL injection trước khi cho nó chạm vào dữ liệu thật",
+          "Lập chỉ mục dữ liệu ERP thành vector embedding trong Oracle AI Database 26ai và viết các package PL/SQL mà cả luồng tra cứu lẫn luồng ghi cùng gọi tới"
         ],
         "metrics": [
-          { "value": "10+", "caption": "nhân viên nội bộ dùng hằng ngày để tra cứu ERP" },
-          { "value": "~20%", "caption": "giảm thời gian tra cứu thủ công" },
-          { "value": "~40s", "caption": "thời gian phản hồi trên phần cứng chỉ có CPU, không GPU" }
+          { "value": "153s → 40s", "caption": "thời gian phản hồi trung bình, sau khi thiết kế lại quanh lỗi prefix cache" },
+          { "value": "20+", "caption": "khách hàng ERP bên ngoài dùng hằng ngày" },
+          { "value": "30%", "caption": "giảm lượng câu hỏi hỗ trợ gửi về" },
+          { "value": "20%", "caption": "giảm thời gian tra cứu dữ liệu" }
         ]
       },
       "erpWarehouse": {
@@ -189,7 +273,7 @@
       },
       "erpProduction": {
         "title": "Phân hệ Sản xuất ERP",
-        "tagline": "Phân hệ Sản xuất xây từ con số không, từ lược đồ dữ liệu tới xưởng máy",
+        "tagline": "Xây từ con số không, thay thế quy trình Excel thủ công trên xưởng máy",
         "context": "Gia Cát Technology Solutions · khách hàng ngành sản xuất · lập trình viên chính",
         "description": "Xây phân hệ Sản xuất từ đầu cho một hệ ERP ngành sản xuất và thiết kế lược đồ dữ liệu của nó từ yêu cầu khách hàng, sau đó làm tiếp trên phần còn lại của hệ thống để xử lý lỗi.",
         "responsibilities": [
@@ -207,10 +291,11 @@
         "title": "Phân hệ đánh giá KPI nhà cung cấp",
         "tagline": "Tiếp nhận một phân hệ dang dở và đưa tới bản phát hành — hai năm sau vẫn chạy",
         "context": "Gia Cát Technology Solutions · kỳ thực tập · khách hàng ngành xây dựng · đội 2 người",
-        "description": "Tiếp nhận một phân hệ đánh giá nhà cung cấp còn dang dở và đưa nó tới bản phát hành. Tiêu chí chấm điểm được khai báo trên một trang riêng thay vì hard-code, nên bộ phận nghiệp vụ đổi được thứ cần đo mà không phải sửa code.",
+        "description": "Tiếp nhận một phân hệ đánh giá nhà cung cấp còn dang dở cho khách hàng ngành xây dựng và đưa nó tới bản phát hành.",
         "responsibilities": [
-          "Tiếp nhận một phân hệ dang dở và đưa tới bản phát hành",
-          "Thiết kế và xây các trang mới cả frontend lẫn backend, và xử lý dứt điểm các lỗi còn tồn"
+          "Tiếp nhận phân hệ giữa chừng, phần lớn phạm vi còn chưa làm, và thiết kế nốt các trang còn thiếu cả frontend lẫn backend",
+          "Khai báo tiêu chí chấm điểm trên một trang riêng thay vì hard-code, nên bộ phận nghiệp vụ đổi được thứ cần đo mà không phải sửa code",
+          "Xử lý dứt điểm các lỗi còn tồn trong phân hệ dang dở trước khi phát hành"
         ],
         "metrics": [
           { "value": "500+", "caption": "phiếu đánh giá đã ghi nhận, tới nay vẫn đang dùng" },
@@ -236,8 +321,8 @@
     "title": "Giới thiệu",
     "paragraphs": [
       "Tôi vào Gia Cát Technology Solutions năm 2024 với vị trí thực tập back-end rồi ở lại làm full stack developer. Công việc là hệ thống nghiệp vụ nội bộ — nền tảng ERP cho các đội xây dựng, sản xuất và kế toán — nơi một tính năng chỉ coi là xong khi người ở xưởng hoặc ở phòng kế toán thực sự dùng được nó.",
-      "Phần lớn việc tôi làm nằm ở chỗ nối giữa các hệ thống. Kéo hoá đơn nhà cung cấp về từ API bên thứ ba, mở dữ liệu tồn kho ra ngoài qua REST, đẩy thay đổi dưới database lên một service Node.js theo thời gian thực. Bài toán thú vị thường nằm đúng ở các mối nối.",
-      "Tôi cũng là người trong nhóm được giao khảo sát công nghệ mới rồi đưa vào hệ thống: push notification, thông báo thời gian thực, nền tảng chat real-time, và gần đây nhất là một LLM self-hosted kèm tìm kiếm truy hồi — tự khảo sát và xây trọn vẹn với Claude Code là workflow chính. Cả bốn thứ đều đang được dùng hằng ngày."
+      "Phần lớn việc tôi làm nằm ở chỗ nối giữa hệ thống ERP và thế giới bên ngoài nó. Kéo hoá đơn nhà cung cấp về từ API bên thứ ba, mở dữ liệu tồn kho của ERP ra ngoài qua REST, đẩy thay đổi dưới database lên một service Node.js theo thời gian thực. Bài toán thú vị thường nằm đúng ở các mối nối.",
+      "Tôi cũng là người trong nhóm được giao khảo sát công nghệ mới rồi đưa vào hệ thống: push notification, thông báo thời gian thực, nền tảng chat real-time, và — tự khởi xướng — một trợ lý AI chạy on-premise, cho khách hàng ERP bên ngoài tra cứu và sửa dữ liệu bằng ngôn ngữ tự nhiên. Xây trọn vẹn với Claude Code và quy trình BMAD-METHOD, hiện được 20+ khách hàng dùng hằng ngày và giảm 30% lượng câu hỏi hỗ trợ gửi về."
     ],
     "educationTitle": "Học vấn",
     "education": {
@@ -252,7 +337,7 @@
         "role": "Full Stack Developer",
         "company": "Gia Cát Technology Solutions",
         "period": "01/2025 — nay",
-        "summary": "Làm nền tảng ERP cho khách hàng ngành sản xuất, kế toán và kho vận, cùng hai sản phẩm nội bộ xây trọn vẹn từ đầu: hệ chat thời gian thực và LLM self-hosted."
+        "summary": "Xây trọn vẹn hai sản phẩm nội bộ từ đầu — trợ lý AI on-premise dùng LLM self-hosted, và nền tảng chat thời gian thực — cùng các phần việc tích hợp hệ thống khác cho khách hàng ngành sản xuất, kế toán và kho vận."
       },
       {
         "role": "Thực tập sinh Back-End Developer",

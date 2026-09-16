@@ -3,13 +3,14 @@
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import { profile } from "@/data/profile";
 import { locales, localeLabels, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { Container } from "@/components/ui/Container";
 
-// Client Component vì menu điện thoại cần state đóng/mở. Chữ nhận qua props
-// để hai file JSON ngôn ngữ không bị gói vào bundle gửi xuống trình duyệt.
+// Thanh điều hướng nổi: bo góc, đổ bóng nhẹ, kính mờ — cách một khoảng với
+// mép trên thay vì dính liền, cho cảm giác "floating nav" của các trang SaaS.
+// Vẫn là Client Component vì menu điện thoại cần state đóng/mở.
 export function Header({
   locale,
   nav,
@@ -37,41 +38,41 @@ export function Header({
   }));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rule-ink bg-paper">
-      <Container>
-        <div className="flex h-16 items-center justify-between gap-6">
+    <header className="sticky top-0 z-50 px-3 pt-3 sm:top-4 sm:px-6">
+      <div className="mx-auto max-w-[var(--content)] rounded-2xl border border-border bg-surface/90 shadow-sm backdrop-blur-md">
+        <div className="flex h-16 items-center justify-between gap-6 px-4 sm:px-6">
           <Link
             href={`/${locale}`}
-            className="font-mono text-[0.8125rem] font-medium uppercase tracking-[0.2em] text-ink"
+            className="text-base font-extrabold tracking-tight text-text"
           >
-            Huy Nguyen<span className="text-accent">.</span>
+            Huy Nguyen<span className="gradient-text">.</span>
           </Link>
 
           <nav
             aria-label={nav.mainNavigation}
-            className="hidden items-center gap-9 md:flex"
+            className="hidden items-center gap-1 md:flex"
           >
             {links.map((link) => (
               <SectionLink
                 key={link.href}
                 href={link.href}
                 samePage={onHome}
-                className="label underline-grow text-ink-2 hover:text-ink"
+                className="rounded-full px-3.5 py-2 text-sm font-medium text-text-2 transition-colors hover:bg-surface-2 hover:text-text"
               >
                 {link.label}
               </SectionLink>
             ))}
           </nav>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 sm:gap-4">
             <LanguageSwitch locale={locale} label={nav.switchLanguage} />
 
             <a
               href={profile.cvPath}
               download
-              className="label underline-grow hidden text-accent sm:inline-block"
+              className="hidden items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-primary-2 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-primary/30 transition hover:shadow-md hover:shadow-primary/40 sm:inline-flex"
             >
-              {nav.downloadCv} ↓
+              {nav.downloadCv}
             </a>
 
             <button
@@ -79,36 +80,38 @@ export function Header({
               onClick={() => setOpen((value) => !value)}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="label text-ink md:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full text-text transition-colors hover:bg-surface-2 md:hidden"
             >
-              {open ? nav.close : nav.menu}
+              <span className="sr-only">{open ? nav.close : nav.menu}</span>
+              {open ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-      </Container>
 
-      {/*
-        Menu luôn nằm trong DOM để trượt ra có chuyển động thật, nhưng khi đóng
-        thì gắn `inert` — thuộc tính này gỡ toàn bộ phần tử bên trong khỏi thứ
-        tự tab và khỏi trình đọc màn hình. Chỉ dùng `opacity: 0` thì link vẫn
-        bấm được bằng phím Tab dù mắt không thấy.
-      */}
-      <div
-        id="mobile-menu"
-        inert={!open}
-        className={`overflow-hidden border-t border-rule bg-paper transition-[max-height,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <Container>
-          <nav aria-label={nav.mainNavigation} className="flex flex-col py-2">
+        {/*
+          Menu luôn nằm trong DOM để trượt ra có chuyển động thật, nhưng khi
+          đóng thì gắn `inert` — thuộc tính này gỡ toàn bộ phần tử bên trong
+          khỏi thứ tự tab và khỏi trình đọc màn hình. Chỉ dùng `opacity: 0`
+          thì link vẫn bấm được bằng phím Tab dù mắt không thấy.
+        */}
+        <div
+          id="mobile-menu"
+          inert={!open}
+          className={`overflow-hidden border-t border-border transition-[max-height,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
+            open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <nav
+            aria-label={nav.mainNavigation}
+            className="flex flex-col gap-1 p-3"
+          >
             {links.map((link) => (
               <SectionLink
                 key={link.href}
                 href={link.href}
                 samePage={onHome}
                 onClick={() => setOpen(false)}
-                className="display-sm border-b border-rule py-4 text-ink"
+                className="rounded-xl px-4 py-3 text-base font-semibold text-text transition-colors hover:bg-surface-2"
               >
                 {link.label}
               </SectionLink>
@@ -117,12 +120,12 @@ export function Header({
               href={profile.cvPath}
               download
               onClick={() => setOpen(false)}
-              className="label py-5 text-accent"
+              className="mt-1 inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-primary to-primary-2 px-4 py-3 text-base font-semibold text-white shadow-sm"
             >
-              {nav.downloadCv} ↓
+              {nav.downloadCv}
             </a>
           </nav>
-        </Container>
+        </div>
       </div>
     </header>
   );
@@ -167,27 +170,25 @@ function LanguageSwitch({ locale, label }: { locale: Locale; label: string }) {
   const rest = pathname.replace(/^\/[^/]*/, "");
 
   return (
-    <div role="group" aria-label={label} className="label flex items-center">
-      {locales.map((code, position) => (
-        <span key={code} className="flex items-center">
-          {position > 0 ? (
-            <span aria-hidden="true" className="px-1.5 text-ink-3">
-              /
-            </span>
-          ) : null}
-          <Link
-            href={`/${code}${rest}`}
-            hrefLang={code}
-            aria-current={code === locale ? "page" : undefined}
-            className={
-              code === locale
-                ? "text-ink"
-                : "text-ink-3 transition-colors hover:text-ink"
-            }
-          >
-            {localeLabels[code]}
-          </Link>
-        </span>
+    <div
+      role="group"
+      aria-label={label}
+      className="flex items-center gap-0.5 rounded-full bg-surface-2 p-1 text-xs font-semibold"
+    >
+      {locales.map((code) => (
+        <Link
+          key={code}
+          href={`/${code}${rest}`}
+          hrefLang={code}
+          aria-current={code === locale ? "page" : undefined}
+          className={`rounded-full px-2.5 py-1 uppercase transition-colors ${
+            code === locale
+              ? "bg-surface text-text shadow-sm"
+              : "text-text-3 hover:text-text-2"
+          }`}
+        >
+          {localeLabels[code]}
+        </Link>
       ))}
     </div>
   );

@@ -1,9 +1,12 @@
+import { Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { Container } from "@/components/ui/Container";
 import { profile } from "@/data/profile";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-// Chỗ duy nhất trên trang đảo màu: mực làm nền, giấy làm chữ.
+// Dải tối duy nhất trên trang — làm điểm kết bằng gradient thương hiệu thay
+// vì đen phẳng, để tông màu vẫn nối với phần còn lại của site.
 export function Footer({
   footer,
   contact,
@@ -22,44 +25,56 @@ export function Footer({
       value: profile.email,
       href: `mailto:${profile.email}`,
       external: false,
+      icon: Mail,
     },
     {
       label: contact.githubLabel,
       value: `github.com/${profile.githubUser}`,
       href: profile.githubUrl,
       external: true,
+      icon: GithubIcon,
     },
     {
       label: contact.linkedinLabel,
       value: "linkedin.com/in/huy-nqg",
       href: profile.linkedinUrl,
       external: true,
+      icon: LinkedinIcon,
     },
   ];
 
   return (
-    <footer className="border-t border-rule-ink bg-ink text-paper">
+    <footer className="mt-24 rounded-t-[2.5rem] bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 text-white">
       <Container>
         <div className="grid gap-12 py-16 lg:grid-cols-[1fr_auto] lg:gap-20">
           <div>
-            <p className="display-sm text-paper">{name}</p>
-            {/* accent-light chứ không phải accent: nền ở đây là mực, mà nâu
-                gốc trên mực chỉ đạt 3,35:1. Xem --accent-light trong
-                globals.css. */}
-            <p className="label mt-4 text-accent-light">{footer.availability}</p>
+            <p className="text-2xl font-bold tracking-tight text-white">
+              {name}
+            </p>
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-emerald-200">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              {footer.availability}
+            </p>
           </div>
 
           <ul className="grid gap-6 sm:grid-cols-3 lg:grid-cols-1">
             {links.map((link) => (
               <li key={link.label}>
-                <span className="label block text-paper/50">{link.label}</span>
                 <a
                   href={link.href}
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noreferrer" : undefined}
-                  className="underline-grow mt-2 inline-block text-sm text-paper"
+                  className="group flex items-center gap-3 text-sm text-white/90 transition-colors hover:text-white"
                 >
-                  {link.value}
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-white/20">
+                    <link.icon size={16} />
+                  </span>
+                  <span>
+                    <span className="block text-xs text-white/50">
+                      {link.label}
+                    </span>
+                    {link.value}
+                  </span>
                 </a>
               </li>
             ))}
@@ -67,13 +82,13 @@ export function Footer({
         </div>
       </Container>
 
-      <div className="border-t border-paper/15">
+      <div className="border-t border-white/10">
         <Container>
-          <div className="flex flex-col gap-2 py-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="label text-paper/50">
+          <div className="flex flex-col gap-2 py-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+            <p>
               © {year} {profile.fullName}
             </p>
-            <p className="text-xs text-paper/50">{footer.builtWith}</p>
+            <p>{footer.builtWith}</p>
           </div>
         </Container>
       </div>

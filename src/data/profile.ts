@@ -20,8 +20,9 @@ export const profile = {
 
   linkedinUrl: "https://www.linkedin.com/in/huy-nqg",
 
-  /** Bản công khai, không có số điện thoại — bản đầy đủ chỉ nộp trực tiếp. */
-  cvPath: "/cv/HuyNguyen_FullStackDeveloper_Resume.pdf",
+  /** Bản công khai, không có số điện thoại — bản đầy đủ chỉ nộp trực tiếp.
+   *  Bản AI Focus (09/2026), thay cho bản Go focus cũ. */
+  cvPath: "/cv/HuyNguyen_FullStackEngineer_AIFocus_Resume.pdf",
 
   /** Mốc bắt đầu tính kinh nghiệm: 07/2024, gồm cả kỳ thực tập. */
   experienceStart: "2024-07",

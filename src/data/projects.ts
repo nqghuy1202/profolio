@@ -32,8 +32,21 @@ export interface Project {
   highlightTech: string[];
   tech: { layer: TechLayer; items: string[] }[];
   links?: { repo?: string; demo?: string };
-  /** Tên sơ đồ SVG vẽ kèm ở trang chi tiết, thay cho ảnh chụp màn hình. */
-  diagram?: "chat";
+  /** Ảnh chụp thật, chỉ có ở dự án cho xem được giao diện — đường dẫn trong
+   *  public/projects/. Ưu tiên hơn diagram khi liệt kê ở trang chủ. */
+  image?: { src: string; width: number; height: number };
+  /** Ảnh phụ, hiện dưới ảnh/sơ đồ chính ở trang chi tiết — dùng cho bằng
+   *  chứng trực quan không phải ảnh giao diện (ví dụ confusion matrix). */
+  secondaryImage?: { src: string; width: number; height: number };
+  /** Tên sơ đồ SVG vẽ kèm ở trang chi tiết, thay cho ảnh chụp màn hình.
+   *  "chat" và "aiAssistant" dùng component sơ đồ riêng; các dự án còn lại
+   *  dùng FlowDiagram chung với dữ liệu boxes/edges trong work.diagrams. */
+  diagram?:
+    | "chat"
+    | "aiAssistant"
+    | "erpWarehouse"
+    | "erpProduction"
+    | "kpiSupplier";
 }
 
 export const projects: Project[] = [
@@ -44,13 +57,14 @@ export const projects: Project[] = [
     featured: true,
     status: "production",
     diagram: "chat",
-    highlightTech: ["Node.js", "Server-Sent Events", "Oracle CQN"],
+    highlightTech: ["Node.js", "Server-Sent Events", "SharedWorker"],
     tech: [
       {
         layer: "frontend",
         items: [
           "Hand-written JavaScript (ES6)",
           "EventSource / SSE client",
+          "SharedWorker (one connection per browser, not per tab)",
           "jQuery",
           "AJAX",
         ],
@@ -63,7 +77,7 @@ export const projects: Project[] = [
           "Server-Sent Events",
           "Long-polling",
           "REST API",
-          "Token-based authentication",
+          "HMAC-SHA256 token authentication",
         ],
       },
       {
@@ -90,10 +104,11 @@ export const projects: Project[] = [
     slug: "personal-finance-manager",
     kind: "openSource",
     featured: true,
+    image: { src: "/projects/personal-finance-manager.png", width: 1600, height: 900 },
     highlightTech: ["Go 1.26", "React 19", "MySQL 8"],
     links: {
       repo: "https://github.com/nqghuy1202/financal_management",
-      demo: "https://financalmanagement-production.up.railway.app",
+      demo: "https://finance.hlcompany.id.vn",
     },
     tech: [
       {
@@ -117,6 +132,7 @@ export const projects: Project[] = [
           "JWT (HS256)",
           "bcrypt",
           "REST API",
+          "Transactional budget-threshold alerts",
         ],
       },
       {
@@ -135,10 +151,61 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "debtCrusher",
+    slug: "debt-crusher",
+    kind: "openSource",
+    featured: true,
+    image: { src: "/projects/debt-crusher.png", width: 1600, height: 900 },
+    secondaryImage: { src: "/projects/debt-crusher-compare.png", width: 1600, height: 1336 },
+    highlightTech: ["Java 26", "Spring Boot 4", "React 19"],
+    links: {
+      repo: "https://github.com/nqghuy1202/debt-crusher",
+      demo: "https://balance.hlcompany.id.vn",
+    },
+    tech: [
+      {
+        layer: "frontend",
+        items: [
+          "React 19",
+          "TypeScript",
+          "Vite",
+          "Tailwind CSS 4",
+          "React Router 7",
+          "Axios",
+        ],
+      },
+      {
+        layer: "backend",
+        items: [
+          "Java 26",
+          "Spring Boot 4",
+          "Maven multi-module (DDD)",
+          "JWT authentication",
+          "Resilience4j rate limiting",
+          "Strategy + Factory pattern",
+        ],
+      },
+      {
+        layer: "database",
+        items: ["MySQL", "Spring Data JPA"],
+      },
+      {
+        layer: "infrastructure",
+        items: ["Docker Compose", "Separate deploy docs"],
+      },
+    ],
+  },
+  {
     id: "heartRisk",
     slug: "heart-risk-estimator",
     kind: "openSource",
     featured: true,
+    image: { src: "/projects/heart-risk-estimator.png", width: 1600, height: 900 },
+    secondaryImage: {
+      src: "/projects/heart-risk-confusion-matrix.png",
+      width: 960,
+      height: 720,
+    },
     highlightTech: ["React 19", "TypeScript", "Django 5.2"],
     links: {
       repo: "https://github.com/nqghuy1202/heart_risk_estimator",
@@ -175,26 +242,34 @@ export const projects: Project[] = [
     id: "localAi",
     slug: "self-hosted-llm",
     kind: "professional",
-    featured: false,
+    featured: true,
     status: "production",
-    highlightTech: ["Ollama", "Qwen 3.5", "RAG"],
+    diagram: "aiAssistant",
+    highlightTech: ["Agentic RAG + NL→SQL", "Ollama", "Oracle AI Database 26ai"],
     tech: [
       {
         layer: "backend",
-        items: ["Ollama", "Qwen 3.5 (local LLM)", "RAG pipeline"],
+        items: [
+          "Ollama (qwen2.5:3b-instruct)",
+          "Agentic intent routing",
+          "RAG pipeline",
+          "Guarded Natural-Language-to-SQL",
+          "PL/SQL",
+        ],
       },
       {
         layer: "database",
         items: [
-          "Oracle Database 26ai",
+          "Oracle AI Database 26ai",
           "DBMS_VECTOR",
-          "Vector Search",
+          "HNSW vector indexing",
+          "bge-m3 embeddings",
           "PL/SQL",
         ],
       },
       {
         layer: "infrastructure",
-        items: ["Oracle Linux 8", "nginx", "CPU-only inference"],
+        items: ["Oracle Linux 8", "nginx", "CPU-only inference", "Packet capture (tcpdump)"],
       },
     ],
   },
@@ -203,6 +278,7 @@ export const projects: Project[] = [
     slug: "erp-warehouse-integration",
     kind: "professional",
     featured: false,
+    diagram: "erpWarehouse",
     highlightTech: ["ORDS REST", "UTL_HTTP", "PL/SQL"],
     tech: [
       { layer: "frontend", items: ["JavaScript", "AJAX"] },
@@ -226,6 +302,7 @@ export const projects: Project[] = [
     slug: "erp-production-module",
     kind: "professional",
     featured: false,
+    diagram: "erpProduction",
     highlightTech: ["Oracle APEX", "PL/SQL", "Schema design"],
     tech: [
       { layer: "frontend", items: ["JavaScript", "jQuery", "AJAX"] },
@@ -241,6 +318,7 @@ export const projects: Project[] = [
     kind: "professional",
     featured: false,
     status: "live",
+    diagram: "kpiSupplier",
     highlightTech: ["Oracle APEX", "PL/SQL", "Oracle Database"],
     tech: [
       { layer: "frontend", items: ["JavaScript"] },

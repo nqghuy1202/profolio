@@ -1,12 +1,17 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { Reveal } from "@/components/ui/Reveal";
+import { ProjectCover } from "@/components/sections/ProjectCover";
 import { projects } from "@/data/projects";
+import { toneAt } from "@/lib/palette";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { Locale } from "@/i18n/config";
 
-// Mỗi dự án một hàng, không phải một thẻ: quét nhanh hơn, phần dài nằm ở
-// trang riêng của từng dự án.
+// Lưới thẻ có ảnh bìa: mỗi dự án là một case study nhỏ để lướt qua, phần dài
+// nằm ở trang riêng của từng dự án. Thẻ bo góc, đổ bóng, nổi lên khi hover —
+// khác hẳn hàng kẻ chỉ phẳng của bản trước.
 export function WorkIndex({
   work,
   locale,
@@ -17,85 +22,75 @@ export function WorkIndex({
   return (
     <Section id="work" index="01" label={work.title}>
       <Container>
-        <div className="max-w-[var(--measure)] pt-10 pb-2">
-          <p className="text-base leading-[1.7] text-ink-2">{work.lead}</p>
+        <div className="pt-6 pb-10">
+          <p className="text-base leading-[1.7] text-text-2">{work.lead}</p>
         </div>
-      </Container>
 
-      <div className="mt-8 border-t border-rule-ink">
-        {projects.map((project, index) => {
-          const copy = work.items[project.id as keyof typeof work.items];
+        <div className="grid grid-cols-1 gap-6 pb-16 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => {
+            const copy = work.items[project.id as keyof typeof work.items];
+            const tone = toneAt(index);
 
-          // Những gì đáng nói về dự án ở mức danh sách, xếp theo thứ tự người
-          // đọc quan tâm: bấm xem được ngay quan trọng hơn đọc được code, và
-          // cả hai đều quan trọng hơn việc nó thuộc loại nào.
-          const marks = [work.kinds[project.kind]];
-          if (project.status) marks.push(work.status[project.status]);
-          if (project.links?.demo) marks.push(work.labels.hasDemo);
-          if (project.links?.repo) marks.push(work.labels.hasCode);
+            // Những gì đáng nói về dự án ở mức danh sách, xếp theo thứ tự
+            // người đọc quan tâm: bấm xem được ngay quan trọng hơn đọc được
+            // code, và cả hai đều quan trọng hơn việc nó thuộc loại nào.
+            const marks = [work.kinds[project.kind]];
+            if (project.status) marks.push(work.status[project.status]);
+            if (project.links?.demo) marks.push(work.labels.hasDemo);
+            if (project.links?.repo) marks.push(work.labels.hasCode);
 
-          return (
-            <Link
-              key={project.id}
-              href={`/${locale}/work/${project.slug}`}
-              className="row-invert block border-b border-rule"
-            >
-              <Container>
-                <div className="grid gap-x-8 gap-y-4 py-8 sm:py-10 lg:grid-cols-[3.5rem_minmax(0,1fr)_16rem_1.5rem] lg:items-start">
-                  {/* Dạng "01/06" bằng chữ mono, KHÔNG dùng .numeral serif
-                      nghiêng màu nhấn. Kiểu đó đang dành riêng cho số thứ tự
-                      section, mà section ngay phía trên cũng mang số 01 — hai
-                      chữ 01 giống hệt nhau cách nhau một quãng ngắn thì người
-                      đọc không biết cái nào đếm cái gì. Thêm mẫu số cũng nói
-                      luôn danh sách có bao nhiêu mục. */}
-                  <span aria-hidden="true" className="row-mute label">
-                    {String(index + 1).padStart(2, "0")}/
-                    {String(projects.length).padStart(2, "0")}
-                  </span>
+            return (
+              <Reveal key={project.id} delay={(index % 3) * 60}>
+                <Link
+                  href={`/${locale}/work/${project.slug}`}
+                  className="group block h-full overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <ProjectCover
+                    project={project}
+                    index={index + 1}
+                    kindLabel={work.kinds[project.kind]}
+                  />
 
-                  <div className="min-w-0">
-                    <h3 className="display-sm">{copy.title}</h3>
-                    <p className="row-mute mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed">
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold tracking-tight text-text">
+                      {copy.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-text-2">
                       {copy.tagline}
                     </p>
-                  </div>
 
-                  <div className="min-w-0">
-                    <p className="row-mute label leading-[1.9]">
-                      {project.highlightTech.join(" · ")}
-                    </p>
-
-                    {/* Câu dẫn ngay trên danh sách hứa "dự án mã nguồn mở là
-                        nơi bạn đọc được code" — nếu hàng nào cũng trông như
-                        nhau thì người đọc phải bấm thử từng cái mới biết là
-                        cái nào. Dấu gạch chéo là chữ trang trí nên để
-                        aria-hidden; trình đọc màn hình đọc liền các mục. */}
-                    <p className="row-accent label mt-3 leading-[1.9]">
-                      {marks.map((mark, markIndex) => (
-                        <span key={mark}>
-                          {markIndex > 0 ? (
-                            <span aria-hidden="true" className="row-mute px-1.5">
-                              /
-                            </span>
-                          ) : null}
-                          {mark}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {project.highlightTech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full bg-surface-2 px-2.5 py-1 text-xs font-medium text-text-2"
+                        >
+                          {tech}
                         </span>
                       ))}
-                    </p>
-                  </div>
+                    </div>
 
-                  <span
-                    aria-hidden="true"
-                    className="row-arrow hidden text-xl leading-none lg:block"
-                  >
-                    →
-                  </span>
-                </div>
-              </Container>
-            </Link>
-          );
-        })}
-      </div>
+                    <div className="mt-5 flex items-center justify-between gap-4 border-t border-border pt-4">
+                      <span
+                        className={`rounded-full px-2.5 py-1 text-xs font-semibold ${tone.chip}`}
+                      >
+                        {marks.join(" · ")}
+                      </span>
+
+                      <span
+                        aria-hidden="true"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-2 text-text-2 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-primary-2 group-hover:text-white"
+                      >
+                        <ArrowUpRight size={16} />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
+            );
+          })}
+        </div>
+      </Container>
     </Section>
   );
 }

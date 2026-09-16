@@ -28,10 +28,11 @@ export default async function OpengraphImage({
 
   // Satori không đọc được var(), nên màu ở đây viết thẳng giá trị.
   // Đổi token trong globals.css thì nhớ đổi cả ở đây.
-  const paper = "#fbfaf8";
-  const ink = "#14110f";
-  const inkFaint = "#857e76";
-  const accent = "#a0522d";
+  const canvas = "#f8fafc";
+  const text = "#0f172a";
+  const textFaint = "#94a3b8";
+  const primary = "#0284c7";
+  const primary2 = "#059669";
 
   return new ImageResponse(
     (
@@ -42,8 +43,8 @@ export default async function OpengraphImage({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: paper,
-          color: ink,
+          backgroundColor: canvas,
+          color: text,
           padding: "64px 72px",
         }}
       >
@@ -52,18 +53,22 @@ export default async function OpengraphImage({
             style={{
               display: "flex",
               fontSize: 22,
-              letterSpacing: "0.18em",
-              color: accent,
+              fontWeight: 600,
+              letterSpacing: "0.02em",
+              color: primary,
+              backgroundColor: "#ecfdf5",
+              padding: "8px 20px",
+              borderRadius: 999,
             }}
           >
-            {dict.hero.role.toUpperCase()}
+            {dict.hero.role}
           </div>
           <div
             style={{
               display: "flex",
               fontSize: 22,
-              letterSpacing: "0.18em",
-              color: inkFaint,
+              letterSpacing: "0.1em",
+              color: textFaint,
             }}
           >
             {locale === "vi" ? "TP. HỒ CHÍ MINH" : "HO CHI MINH CITY"}
@@ -73,35 +78,41 @@ export default async function OpengraphImage({
         <div
           style={{
             display: "flex",
-            fontSize: 108,
-            fontWeight: 700,
+            fontSize: 104,
+            fontWeight: 800,
             letterSpacing: "-0.03em",
             lineHeight: 1,
-            textTransform: "uppercase",
             maxWidth: 1000,
           }}
         >
           {name}
         </div>
 
-        {/* Đường kẻ chỉ chạy hết bề ngang — chi tiết định hình của cả trang */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", height: 1, backgroundColor: ink }} />
+          <div
+            style={{
+              display: "flex",
+              height: 6,
+              width: 160,
+              borderRadius: 999,
+              backgroundImage: `linear-gradient(90deg, ${primary}, ${primary2})`,
+            }}
+          />
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
               paddingTop: 24,
               fontSize: 22,
-              letterSpacing: "0.14em",
-              color: inkFaint,
+              letterSpacing: "0.06em",
+              color: textFaint,
             }}
           >
             <div style={{ display: "flex" }}>
-              ORACLE · PL/SQL · NODE.JS · REACT
+              Oracle AI Database · Python · React · Go
             </div>
             <div style={{ display: "flex" }}>
-              GITHUB.COM/{profile.githubUser.toUpperCase()}
+              github.com/{profile.githubUser}
             </div>
           </div>
         </div>

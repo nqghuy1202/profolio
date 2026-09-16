@@ -47,9 +47,9 @@ Content and code are kept apart on purpose. Everything that reads as a sentence 
 
 ## Design
 
-The visual language is print editorial: paper background, ink text, one accent colour, structure carried by hairline rules and whitespace. Three rules hold it together — **no rounded corners, no drop shadows, and the accent is used to mark, never to fill.** Section rules run to the edge of the viewport while text stays inside the measure; that contrast is what makes a page read as typeset rather than assembled from cards.
+The visual language is a modern, colourful SaaS look: light canvas background, rounded cards with soft shadows that lift on hover, and a brand gradient (sky blue → emerald — chosen to suit the site owner's mệnh Mộc, since Thủy "sinh" Mộc in ngũ hành) used throughout for CTAs, section markers and diagram accents. A six-tone rotation (`src/lib/palette.ts`, all in the emerald/sky/teal/blue family) gives project cards and skill groups their own colour without needing a design decision per component. The one earlier print-editorial rule that survives is content vs. code staying apart — everything else (hairline-only rules, no rounded corners, uppercase display type) was deliberately replaced.
 
-Type is split three ways: Archivo for everything readable, IBM Plex Mono for labels and technical strings, and Instrument Serif italic for numerals only — the serif needs no Vietnamese diacritics because it never sets anything but digits.
+Type is Geist for everything readable and Geist Mono for labels, tags and technical strings — Vercel's own font pairing, self-hosted via the `geist` package rather than fetched from Google Fonts. Both need the Vietnamese-diacritics support Geist added in v1.6.0; confirm that before upgrading the package.
 
 ## Engineering notes
 

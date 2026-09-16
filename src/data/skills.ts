@@ -44,10 +44,11 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "databases",
     items: [
-      "Oracle Database 26ai",
+      "Oracle AI Database 26ai",
       "PL/SQL packages",
       "Oracle CQN",
-      "DBMS_VECTOR / Vector Search",
+      "DBMS_VECTOR",
+      "HNSW vector indexing",
       "DBLink",
       "Connection pooling",
       "MySQL 8",
@@ -56,9 +57,12 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "ai",
     items: [
-      "Ollama",
-      "Self-hosted LLM",
-      "RAG",
+      "Agentic pipeline design (intent routing)",
+      "RAG (bge-m3 embeddings)",
+      "Guarded Natural-Language-to-SQL",
+      "Ollama (self-hosted LLM)",
+      "MCP servers",
+      "BMAD-METHOD (spec-driven multi-agent workflow)",
       "Machine Learning (AdaBoost, scikit-learn)",
     ],
   },
@@ -67,10 +71,12 @@ export const skillGroups: SkillGroup[] = [
     items: [
       "Git",
       "Docker",
+      "Linux server administration",
       "Oracle Linux 8",
       "nginx",
       "PM2",
       "Shell scripting",
+      "Packet capture (tcpdump)",
       "testcontainers-go",
     ],
   },

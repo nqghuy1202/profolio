@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#fbfaf8",
+  themeColor: "#f8fafc",
 };
 
 export default async function LocaleLayout({
@@ -89,7 +89,7 @@ export default async function LocaleLayout({
           />
         </noscript>
       </head>
-      <body className="flex min-h-full flex-col bg-paper text-ink">
+      <body className="flex min-h-full flex-col bg-canvas text-text">
         <a href="#main" className="skip-link">
           {dict.meta.skipToContent}
         </a>

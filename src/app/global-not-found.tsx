@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import "./globals.css";
 
 import { fontVariables } from "./fonts";
@@ -21,36 +22,40 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fbfaf8",
+  themeColor: "#f8fafc",
 };
 
 export default function GlobalNotFound() {
   return (
     <html lang={localeTags[locales[0]]} className={`${fontVariables} h-full`}>
-      <body className="flex min-h-full flex-col bg-paper text-ink">
+      <body className="flex min-h-full flex-col bg-canvas text-text">
         <main className="flex-1">
           <Container>
-            <div className="max-w-[var(--measure)] py-20 sm:py-28">
-              <p className="numeral text-6xl leading-none text-accent">404</p>
+            <div className="max-w-[var(--measure)] py-24 sm:py-32">
+              <p className="gradient-text text-7xl font-extrabold tracking-tight">
+                404
+              </p>
 
-              <div className="mt-10 border-t border-rule-ink">
+              <div className="mt-10 space-y-6">
                 {locales.map((locale) => {
                   const copy = getDictionary(locale).notFound;
 
                   return (
-                    <div key={locale} className="border-b border-rule py-8">
-                      <p className="label text-ink-3">{localeTags[locale]}</p>
+                    <div
+                      key={locale}
+                      className="rounded-2xl border border-border bg-surface p-6 shadow-sm"
+                    >
+                      <p className="font-mono text-xs font-semibold tracking-wide text-text-3 uppercase">
+                        {localeTags[locale]}
+                      </p>
 
-                      <h1
-                        lang={localeTags[locale]}
-                        className="display-sm mt-4 text-ink"
-                      >
+                      <h1 lang={localeTags[locale]} className="mt-3 text-2xl font-bold text-text">
                         {copy.title}
                       </h1>
 
                       <p
                         lang={localeTags[locale]}
-                        className="mt-4 text-base leading-[1.7] text-ink-2"
+                        className="mt-3 text-base leading-[1.7] text-text-2"
                       >
                         {copy.lead}
                       </p>
@@ -59,9 +64,10 @@ export default function GlobalNotFound() {
                         href={`/${locale}`}
                         hrefLang={locale}
                         lang={localeTags[locale]}
-                        className="label underline-grow mt-6 inline-block text-accent"
+                        className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-deep hover:underline"
                       >
-                        {copy.backHome} →
+                        {copy.backHome}
+                        <ArrowRight size={14} />
                       </Link>
                     </div>
                   );

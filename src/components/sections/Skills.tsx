@@ -2,41 +2,47 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { skillGroups } from "@/data/skills";
+import { toneAt } from "@/lib/palette";
 import type { Dictionary } from "@/i18n/dictionaries";
 
-// Danh sách định nghĩa hai cột thay vì chip: 6 nhóm × 7 công nghệ là 40 cái
-// hộp, mắt phải xử lý từng cái.
+// Mỗi nhóm kỹ năng một thẻ bo góc với sắc thái riêng, công nghệ hiển thị
+// thành chip thay vì danh sách chữ nối bằng dấu chấm giữa.
 export function Skills({ skills }: { skills: Dictionary["skills"] }) {
   return (
     <Section id="skills" index="02" label={skills.title}>
       <Container>
-        <div className="max-w-[var(--measure)] pt-10">
-          <p className="text-base leading-[1.7] text-ink-2">{skills.lead}</p>
+        <div className="pt-6 pb-10">
+          <p className="text-base leading-[1.7] text-text-2">{skills.lead}</p>
         </div>
 
-        <dl className="mt-10 border-t border-rule-ink">
-          {skillGroups.map((group, index) => (
-            <Reveal key={group.id} delay={index * 60}>
-              <div className="grid gap-2 border-b border-rule py-6 sm:grid-cols-[13rem_1fr] sm:gap-8">
-                <dt className="label pt-1 text-accent">
-                  {skills.groups[group.id as keyof typeof skills.groups]}
-                </dt>
-                <dd className="text-[0.9375rem] leading-[1.9] text-ink">
-                  {group.items.map((item, itemIndex) => (
-                    <span key={item}>
-                      {itemIndex > 0 ? (
-                        <span aria-hidden="true" className="px-2 text-ink-3">
-                          ·
-                        </span>
-                      ) : null}
-                      {item}
-                    </span>
-                  ))}
-                </dd>
-              </div>
-            </Reveal>
-          ))}
-        </dl>
+        <div className="grid gap-4 pb-16 sm:grid-cols-2">
+          {skillGroups.map((group, index) => {
+            const tone = toneAt(index);
+
+            return (
+              <Reveal key={group.id} delay={index * 60}>
+                <div className="h-full rounded-2xl border border-border bg-surface p-6 shadow-sm">
+                  <span
+                    className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${tone.chip}`}
+                  >
+                    {skills.groups[group.id as keyof typeof skills.groups]}
+                  </span>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full bg-surface-2 px-3 py-1.5 text-sm text-text-2"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
       </Container>
     </Section>
   );

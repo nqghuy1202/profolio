@@ -1,31 +1,20 @@
-import { Archivo, IBM_Plex_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
-// Archivo cho chữ đọc, IBM Plex Mono cho nhãn và số. Cả hai phải nạp subset
-// `vietnamese`, nếu không dấu tiếng Việt rơi sang font dự phòng của hệ điều
-// hành.
+// Geist — font riêng của Vercel, tự host qua next/font/local (không gọi ra
+// Google Fonts lúc build). Từ bản 1.6.0 của gói `geist` đã hỗ trợ đầy đủ dấu
+// tiếng Việt, xác nhận trước khi chọn: https://github.com/vercel/geist-font.
 //
 // Khai báo ở file riêng vì có hai chỗ dựng thẻ <html>: layout theo ngôn ngữ và
-// trang 404 toàn cục. Gọi next/font hai lần với cùng tham số vẫn ra hai biến
-// CSS khác nhau, nên phải dùng chung đúng một khai báo.
+// trang 404 toàn cục. Import hai lần vẫn ra cùng một font-face (khác Google
+// Fonts, không tạo biến CSS mới mỗi lần gọi), nhưng dùng chung một khai báo
+// cho gọn.
 //
-// Từng có Instrument Serif ở đây, chỉ để đặt chữ số thứ tự. Một bộ chữ 15,7KB
-// cho khoảng mười ký tự là cái giá không đáng, nên chữ số nay dùng Georgia —
-// có sẵn trên máy người xem, cũng là serif, cũng nghiêng được.
+// Trước đây ở đây là Archivo + IBM Plex Mono. Đổi sang Geist vì đây là hướng
+// người dùng chọn cho bản redesign kiểu SaaS hiện đại.
 
-export const archivo = Archivo({
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  variable: "--font-archivo",
-  display: "swap",
-});
-
-// Chỉ nạp độ đậm 500. Đây là độ đậm của .label, tức gần như mọi chữ mono trên
-// trang. Nạp thêm 400 tốn thêm ba file (~22,9KB) cho đúng một dòng GPA.
-export const plexMono = IBM_Plex_Mono({
-  weight: "500",
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  variable: "--font-plex-mono",
-  display: "swap",
-});
+export const geistSans = GeistSans;
+export const geistMono = GeistMono;
 
 /** Chuỗi class gắn vào thẻ <html> để hai biến font có hiệu lực toàn trang. */
-export const fontVariables = `${archivo.variable} ${plexMono.variable}`;
+export const fontVariables = `${geistSans.variable} ${geistMono.variable}`;
