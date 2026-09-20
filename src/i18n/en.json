@@ -18,7 +18,7 @@
   "hero": {
     "role": "Full Stack Developer",
     "portraitAlt": "Portrait of Huy Nguyen Quoc Gia",
-    "intro": "Two years building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules. Most recently, built an on-premise AI assistant that lets ERP customers query and modify data in plain language — a pipeline now used by 20+ customers daily, cutting inbound support questions by 30%. Deepest on Oracle, from PL/SQL to vector search. Claude Code and the BMAD-METHOD workflow are part of how I build now. Side projects include Debt Crusher, a Spring Boot app comparing three debt-payoff strategies (avalanche, snowball, minimum payments) through one shared amortization engine.",
+    "intro": "Two years building web-based ERP systems for construction, manufacturing and accounting teams, across 10+ business modules — deepest on Oracle, from PL/SQL to vector search. Most recently, built an on-premise AI assistant that lets ERP customers query and modify data in plain language, now used by 20+ customers daily and cutting inbound support questions by 30%, with Claude Code and the BMAD-METHOD workflow behind how I build it. Side projects include Debt Crusher, a Spring Boot app comparing three debt-payoff strategies (avalanche, snowball, minimum payments) through one shared amortization engine.",
     "ctaWork": "See the work",
     "ctaContact": "Get in touch",
     "meta": [

@@ -209,7 +209,9 @@ export const projects: Project[] = [
     highlightTech: ["React 19", "TypeScript", "Django 5.2"],
     links: {
       repo: "https://github.com/nqghuy1202/heart_risk_estimator",
-      demo: "https://heart-risk-estimator.vercel.app",
+      // Bản deploy thật đã đổi sang thương hiệu "HL Care" (đổi logo 16/09/2026),
+      // link Vercel cũ không còn là bản đang chạy — trỏ lại đúng domain.
+      demo: "https://care.hlcompany.id.vn",
     },
     tech: [
       {

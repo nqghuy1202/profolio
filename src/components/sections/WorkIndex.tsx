@@ -52,7 +52,7 @@ export function WorkIndex({
                   />
 
                   <div className="p-6">
-                    <h3 className="text-lg font-bold tracking-tight text-text">
+                    <h3 className="text-lg font-semibold tracking-tight text-text">
                       {copy.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-text-2">

@@ -18,7 +18,7 @@
   "hero": {
     "role": "Full Stack Developer",
     "portraitAlt": "Ảnh chân dung Nguyễn Quốc Gia Huy",
-    "intro": "Hai năm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ. Gần đây nhất, xây một trợ lý AI on-premise cho khách hàng ERP tra cứu và sửa dữ liệu bằng ngôn ngữ tự nhiên — một pipeline hiện được 20+ khách hàng dùng hằng ngày, giảm 30% lượng câu hỏi hỗ trợ gửi về. Mạnh nhất ở Oracle, từ PL/SQL tới vector search. Claude Code và quy trình BMAD-METHOD là một phần trong cách tôi xây dựng hiện nay. Dự án cá nhân có Debt Crusher, một ứng dụng Spring Boot so sánh ba chiến lược trả nợ (avalanche, snowball, trả tối thiểu) qua cùng một bộ tính khấu hao.",
+    "intro": "Hai năm xây hệ thống ERP nền web cho các đội xây dựng, sản xuất và kế toán, trải trên hơn 10 phân hệ nghiệp vụ — mạnh nhất ở Oracle, từ PL/SQL tới vector search. Gần đây nhất, xây một trợ lý AI on-premise cho khách hàng ERP tra cứu và sửa dữ liệu bằng ngôn ngữ tự nhiên, hiện được 20+ khách hàng dùng hằng ngày và giảm 30% lượng câu hỏi hỗ trợ gửi về, dùng Claude Code và quy trình BMAD-METHOD để xây. Dự án cá nhân có Debt Crusher, một ứng dụng Spring Boot so sánh ba chiến lược trả nợ (avalanche, snowball, trả tối thiểu) qua cùng một bộ tính khấu hao.",
     "ctaWork": "Xem dự án",
     "ctaContact": "Liên hệ",
     "meta": [

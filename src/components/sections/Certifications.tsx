@@ -34,7 +34,7 @@ export function Certifications({
                 <Award size={20} />
               </span>
               <div>
-                <p className="text-base font-bold text-text">{cert.name}</p>
+                <p className="text-base font-semibold text-text">{cert.name}</p>
                 <p className="mt-0.5 text-sm text-text-3">{cert.issuer}</p>
                 <p className="mt-1 font-mono text-xs font-semibold tracking-wide text-text-3 uppercase">
                   {cert.date}

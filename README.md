@@ -49,7 +49,7 @@ Content and code are kept apart on purpose. Everything that reads as a sentence 
 
 The visual language is a modern, colourful SaaS look: light canvas background, rounded cards with soft shadows that lift on hover, and a brand gradient (sky blue → emerald — chosen to suit the site owner's mệnh Mộc, since Thủy "sinh" Mộc in ngũ hành) used throughout for CTAs, section markers and diagram accents. A six-tone rotation (`src/lib/palette.ts`, all in the emerald/sky/teal/blue family) gives project cards and skill groups their own colour without needing a design decision per component. The one earlier print-editorial rule that survives is content vs. code staying apart — everything else (hairline-only rules, no rounded corners, uppercase display type) was deliberately replaced.
 
-Type is Geist for everything readable and Geist Mono for labels, tags and technical strings — Vercel's own font pairing, self-hosted via the `geist` package rather than fetched from Google Fonts. Both need the Vietnamese-diacritics support Geist added in v1.6.0; confirm that before upgrading the package.
+Type is Plus Jakarta Sans for everything readable, self-hosted via `next/font/google` with the `vietnamese` subset enabled, and Geist Mono for labels, tags and technical strings, self-hosted via the `geist` package. Geist Mono needs the Vietnamese-diacritics support it added in v1.6.0; confirm that before upgrading the package.
 
 ## Engineering notes
 

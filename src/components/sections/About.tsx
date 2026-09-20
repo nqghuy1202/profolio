@@ -37,7 +37,7 @@ export function About({ about }: { about: Dictionary["about"] }) {
                       {job.period}
                     </p>
                     <div>
-                      <p className="text-base font-bold text-text">
+                      <p className="text-base font-semibold text-text">
                         {job.role}
                       </p>
                       <p className="mt-0.5 text-sm text-text-3">
@@ -66,7 +66,7 @@ export function About({ about }: { about: Dictionary["about"] }) {
               <p className="font-mono text-xs font-semibold tracking-wide text-text-3 uppercase">
                 {about.education.year}
               </p>
-              <p className="mt-1 text-base font-bold text-text">
+              <p className="mt-1 text-base font-semibold text-text">
                 {about.education.degree}
               </p>
               <p className="mt-0.5 text-sm text-text-3">
